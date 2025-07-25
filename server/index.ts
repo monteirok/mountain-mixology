@@ -1,15 +1,19 @@
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
-import { setupVite, serveStatic, log } from "./vite";
 import { networkInterfaces } from "os";
+import path from "path";
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+function log(message: string) {
+  console.log(message);
+}
+
 app.use((req, res, next) => {
   const start = Date.now();
-  const path = req.path;
+  const reqPath = req.path;
   let capturedJsonResponse: Record<string, any> | undefined = undefined;
 
   const originalResJson = res.json;
@@ -20,8 +24,8 @@ app.use((req, res, next) => {
 
   res.on("finish", () => {
     const duration = Date.now() - start;
-    if (path.startsWith("/api")) {
-      let logLine = `${req.method} ${path} ${res.statusCode} in ${duration}ms`;
+    if (reqPath.startsWith("/api")) {
+      let logLine = `${req.method} ${reqPath} ${res.statusCode} in ${duration}ms`;
       if (capturedJsonResponse) {
         logLine += ` :: ${JSON.stringify(capturedJsonResponse)}`;
       }
@@ -48,22 +52,19 @@ app.use((req, res, next) => {
     throw err;
   });
 
-  // importantly only setup vite in development and after
-  // setting up all the other routes so the catch-all route
-  // doesn't interfere with the other routes
-  if (app.get("env") === "development") {
-    await setupVite(app, server);
-  } else {
-    serveStatic(app);
+  // Serve static files from Next.js build in production
+  if (process.env.NODE_ENV === "production") {
+    app.use(express.static(path.join(process.cwd(), ".next/static")));
+    app.use(express.static(path.join(process.cwd(), "public")));
   }
 
-  // Serve the app on port 3000 with a simpler configuration
-  const port = 3000;
+  // Serve the app on port 3001 (Next.js uses 3000)
+  const port = parseInt(process.env.PORT || "3001", 10);
   server.listen(port, '0.0.0.0', () => {
     const localIP = Object.values(networkInterfaces())
       .flat()
       .find(ip => ip?.family === 'IPv4' && !ip?.internal)?.address;
-    log(`Server is running on:`);
+    log(`API Server is running on:`);
     log(`- Local: http://localhost:${port}`);
     log(`- Network: http://${localIP}:${port}`);
   });
