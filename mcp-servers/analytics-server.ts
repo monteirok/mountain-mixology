@@ -125,8 +125,8 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       // Analyze patterns
       const analysis = {
         totalLeads: filteredSubmissions.length,
-        eventTypeBreakdown: {},
-        budgetDistribution: {},
+        eventTypeBreakdown: {} as Record<string, number>,
+        budgetDistribution: {} as Record<string, number>,
         averageGuestCount: 0,
         conversionMetrics: {
           highValue: 0,
@@ -184,7 +184,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         includeForecasting?: boolean; 
       };
       
-      const report = {
+      const report: any = {
         period,
         generatedAt: new Date().toISOString(),
         summary: {
@@ -194,11 +194,11 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
           ).length,
         },
         trends: {
-          popularEventTypes: {},
-          seasonalPatterns: {},
-          budgetTrends: {},
+          popularEventTypes: {} as Record<string, number>,
+          seasonalPatterns: {} as Record<string, number>,
+          budgetTrends: {} as Record<string, number>,
         },
-        recommendations: [],
+        recommendations: [] as string[],
       };
 
       // Analyze trends
@@ -219,7 +219,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 
       // Generate recommendations
       const topEventType = Object.entries(report.trends.popularEventTypes)
-        .sort(([,a], [,b]) => b - a)[0]?.[0];
+        .sort(([,a], [,b]) => (b as number) - (a as number))[0]?.[0];
       
       if (topEventType) {
         report.recommendations.push(
@@ -228,7 +228,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       }
 
       const topSeason = Object.entries(report.trends.seasonalPatterns)
-        .sort(([,a], [,b]) => b - a)[0]?.[0];
+        .sort(([,a], [,b]) => (b as number) - (a as number))[0]?.[0];
       
       if (topSeason) {
         report.recommendations.push(

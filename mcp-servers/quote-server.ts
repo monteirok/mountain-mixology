@@ -27,7 +27,7 @@ const PRICING = {
     corporate: 120,
     private: 100,
     destination: 200,
-  },
+  } as Record<string, number>,
   guestMultipliers: {
     '1-25': 1.0,
     '26-50': 0.9,

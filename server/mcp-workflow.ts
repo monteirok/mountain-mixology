@@ -227,7 +227,7 @@ export class MCPWorkflowOrchestrator {
       errors.push(`Email sequence error: ${error instanceof Error ? error.message : String(error)}`);
     }
 
-    const success = errors.length === 0 || (results.email?.welcomeEmailSent || results.crm?.contactSynced);
+    const success = errors.length === 0 || Boolean(results.email?.welcomeEmailSent || results.crm?.contactSynced);
     
     console.log(`MCP workflow completed for submission ${submission.id}. Success: ${success}, Errors: ${errors.length}`);
 

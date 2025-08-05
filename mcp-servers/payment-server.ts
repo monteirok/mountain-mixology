@@ -114,7 +114,7 @@ function calculateEventPricing(guestCount: number, eventType: string, packageTie
   const guestsAboveMinimum = Math.max(0, guestCount - tier.minimumGuests);
   totalPrice += guestsAboveMinimum * perGuestRate;
 
-  const eventMultipliers = {
+  const eventMultipliers: Record<string, number> = {
     'wedding': 1.2,
     'corporate': 1.1,
     'private': 1.0,
