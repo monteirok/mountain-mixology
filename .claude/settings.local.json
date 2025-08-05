@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(rm:*)",
+      "Bash(npm install:*)",
+      "Bash(sudo npm install @modelcontextprotocol/sdk stripe googleapis nodemailer @hubspot/api-client @slack/web-api cloudinary dotenv)",
+      "Bash(ls:*)",
+      "Bash(sudo chown:*)",
+      "Bash(npm cache clean:*)",
+      "Bash(npm config:*)",
+      "Bash(npm run check:*)",
+      "Bash(npx tsc:*)",
+      "Bash(npm run dev:*)"
+    ],
+    "deny": []
+  }
+}

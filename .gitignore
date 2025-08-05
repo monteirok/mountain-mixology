@@ -6,3 +6,5 @@ vite.config.ts.*
 *.tar.gz
 .vscode
 .next
+mountain-mixology-complete-specification.txt
+suggested-mcp-servers.txt

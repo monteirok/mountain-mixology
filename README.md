@@ -74,6 +74,7 @@ mountmix-vite/
 
 ## 🛠️ Development
 
+
 ### Available Scripts
 
 - `npm run dev` - Start development server
@@ -82,7 +83,45 @@ mountmix-vite/
 - `npm run lint` - Run ESLint
 - `npm run type-check` - Run TypeScript type checking
 
-### Code Style
+### __Test individual servers__
+
+npm run mcp:contact
+npm run mcp:quote
+npm run mcp:calendar
+npm run mcp:content
+
+### __Test all servers__
+
+**1) Use tsx**
+
+```
+# install tsx if needed
+sudo npm install -g tsx
+
+# test servers with tsx
+tsx mcp-servers/test-servers.ts
+```
+
+**2) Use npx (or npm exec)**
+
+```
+npm run mcp:test:all
+# or
+npm exec tsx mcp-servers/test-servers.ts
+# or
+npx tsx mcp-servers/test-servers.ts
+```
+
+This will automatically look in `node_modules/.bin` and run the right version of tsx.
+
+### __Start the full application__
+
+```
+npm run dev      # Next.js frontend
+npm run server:dev  # Express backend
+npm run mcp:dev     # All MCP servers
+```
+
 
 - Follow TypeScript best practices
 - Use functional components with hooks
