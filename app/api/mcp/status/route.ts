@@ -1,27 +1,23 @@
 import { NextResponse } from 'next/server';
 
-const EXPRESS_SERVER_URL = process.env.EXPRESS_SERVER_URL || 'http://localhost:3001';
-
 export async function GET() {
   try {
-    // Forward the request to the Express backend
-    const response = await fetch(`${EXPRESS_SERVER_URL}/api/mcp/status`, {
-      method: 'GET',
+    // Return MCP server status (demo mode)
+    return NextResponse.json({
+      status: "demo",
+      servers: {
+        contact: { enabled: true, description: "Contact form handling and lead scoring" },
+        email: { enabled: false, description: "Automated email sequences (demo mode)" },
+        crm: { enabled: false, description: "HubSpot CRM integration (demo mode)" },
+        calendar: { enabled: false, description: "Google Calendar integration (demo mode)" },
+        payment: { enabled: false, description: "Stripe payment processing (demo mode)" },
+      },
+      lastUpdated: new Date().toISOString(),
+      note: "Running in demo mode - configure API keys for full functionality",
     });
-
-    if (!response.ok) {
-      const errorText = await response.text();
-      return NextResponse.json(
-        { error: errorText || 'Failed to get MCP status' },
-        { status: response.status }
-      );
-    }
-
-    const data = await response.json();
-    return NextResponse.json(data);
     
   } catch (error) {
-    console.error('MCP status proxy error:', error);
+    console.error('MCP status error:', error);
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }

@@ -10,7 +10,10 @@
       "Bash(npm config:*)",
       "Bash(npm run check:*)",
       "Bash(npx tsc:*)",
-      "Bash(npm run dev:*)"
+      "Bash(npm run dev:*)",
+      "Bash(npm run server:dev:*)",
+      "Bash(curl:*)",
+      "Bash(sudo rm:*)"
     ],
     "deny": []
   }
