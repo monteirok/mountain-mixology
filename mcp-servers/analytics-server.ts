@@ -68,7 +68,15 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
   switch (name) {
     case 'trackFormSubmission': {
       // In a real implementation, this would store tracking data
-      const { submissionId, source = 'direct', userAgent = 'unknown' } = args;
+      if (!args || typeof args.submissionId !== 'number') {
+        throw new Error('submissionId is required and must be a number');
+      }
+      
+      const { submissionId, source = 'direct', userAgent = 'unknown' } = args as {
+        submissionId: number;
+        source?: string;
+        userAgent?: string;
+      };
       
       const trackingData = {
         submissionId,
@@ -90,7 +98,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 
     case 'analyzeLeadQuality': {
       const submissions = await storage.getContactSubmissions();
-      const { timeframe = 'month' } = args;
+      const { timeframe = 'month' } = (args || {}) as { timeframe?: string };
       
       // Filter by timeframe
       const now = new Date();
@@ -171,7 +179,10 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 
     case 'generateBusinessReport': {
       const submissions = await storage.getContactSubmissions();
-      const { period = 'monthly', includeForecasting = false } = args;
+      const { period = 'monthly', includeForecasting = false } = (args || {}) as { 
+        period?: string; 
+        includeForecasting?: boolean; 
+      };
       
       const report = {
         period,
