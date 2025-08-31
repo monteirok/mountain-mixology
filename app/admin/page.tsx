@@ -15,7 +15,6 @@ import {
   Database,
   CheckCircle,
   XCircle,
-  Clock,
   TrendingUp,
   AlertTriangle,
   RefreshCw
