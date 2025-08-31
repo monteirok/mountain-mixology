@@ -1,21 +1,11 @@
 "use client"
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ThemeToggle } from "@/components/theme-toggle";
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -66,7 +56,6 @@ export default function Navigation() {
             >
               Gallery
             </button>
-            <ThemeToggle />
             <button
               onClick={() => scrollToSection("contact")}
               className="bg-mountain-gold text-white px-6 py-2 rounded-full hover:bg-copper transition-all duration-300 hover-lift"
@@ -76,8 +65,7 @@ export default function Navigation() {
           </div>
 
           {/* Mobile Menu Toggle */}
-          <div className="md:hidden flex items-center space-x-2">
-            <ThemeToggle />
+          <div className="md:hidden flex items-center">
             <button
               className="text-forest dark:text-mountain-gold"
               onClick={() => setIsOpen(!isOpen)}

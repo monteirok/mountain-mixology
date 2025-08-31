@@ -1,0 +1,43 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+.next/
+dist/
+build/
+
+# Logs
+*.log
+
+# Database
+*.db
+*.sqlite
+
+# Environment files
+.env*
+!.env.example
+
+# IDE files
+.vscode/
+.idea/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Package files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Cache directories
+.cache/
+.parcel-cache/
+
+# Generated files
+*.tsbuildinfo
+
+# Documentation (preserve formatting)
+CHANGELOG.md
+SECURITY_LOG.md
+LICENSE

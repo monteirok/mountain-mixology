@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button Contrast Test - Mountain Mixology</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Mountain Mixology Color Variables */
+        :root {
+            --mountain-gold: hsl(45, 86%, 48%);
+            --charcoal: hsl(210, 24%, 16%);
+            --copper: hsl(30, 50%, 40%);
+        }
+        
+        .dark {
+            --mountain-gold: hsl(45, 86%, 65%);
+            --copper: hsl(30, 50%, 58%);
+        }
+        
+        .bg-mountain-gold { background-color: var(--mountain-gold); }
+        .bg-charcoal { background-color: var(--charcoal); }
+        .bg-copper { background-color: var(--copper); }
+        .text-mountain-gold { color: var(--mountain-gold); }
+        .text-charcoal { color: var(--charcoal); }
+        
+        /* Improved Glass Button Styles */
+        .glass-button {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+            color: rgb(51, 65, 85);
+            font-weight: 600;
+        }
+        
+        .glass-button:hover {
+            background: rgba(255, 255, 255, 0.35);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+            color: rgb(30, 41, 59);
+        }
+        
+        .dark .glass-button {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            color: rgb(248, 250, 252);
+        }
+        
+        .dark .glass-button:hover {
+            background: rgba(255, 255, 255, 0.25);
+            color: rgb(255, 255, 255);
+        }
+    </style>
+</head>
+<body class="p-8 bg-gradient-to-br from-blue-900 to-purple-900 min-h-screen">
+    <h1 class="text-white text-3xl font-bold mb-8">Button Contrast Test - Mountain Mixology</h1>
+    
+    <div class="space-y-6">
+        <!-- Primary Buttons -->
+        <div class="space-y-4">
+            <h2 class="text-white text-xl font-semibold">Primary Buttons (High Contrast)</h2>
+            <div class="flex gap-4 flex-wrap">
+                <button class="bg-mountain-gold text-white px-6 py-3 rounded-full font-semibold hover:bg-copper transition-all">
+                    Book Your Event
+                </button>
+                <button class="bg-charcoal text-white px-6 py-3 rounded-full font-semibold hover:bg-gray-700 transition-all">
+                    Learn More
+                </button>
+                <button class="bg-copper text-white px-6 py-3 rounded-full font-semibold hover:bg-orange-600 transition-all">
+                    Contact Us
+                </button>
+            </div>
+        </div>
+        
+        <!-- Glass Buttons -->
+        <div class="space-y-4">
+            <h2 class="text-white text-xl font-semibold">Glass Buttons (Improved Contrast)</h2>
+            <div class="flex gap-4 flex-wrap">
+                <button class="glass-button px-6 py-3 rounded-full">
+                    View Services
+                </button>
+                <button class="glass-button px-6 py-3 rounded-full">
+                    Gallery
+                </button>
+                <button class="glass-button px-6 py-3 rounded-full">
+                    About Us
+                </button>
+            </div>
+        </div>
+        
+        <!-- Dark Mode Test -->
+        <div class="dark bg-gray-900 p-6 rounded-lg space-y-4">
+            <h2 class="text-white text-xl font-semibold">Dark Mode Test</h2>
+            <div class="flex gap-4 flex-wrap">
+                <button class="bg-mountain-gold text-charcoal px-6 py-3 rounded-full font-semibold hover:bg-copper transition-all">
+                    Primary Dark
+                </button>
+                <button class="glass-button px-6 py-3 rounded-full">
+                    Glass Dark
+                </button>
+                <button class="border-2 border-white/30 bg-transparent text-white px-6 py-3 rounded-full font-semibold hover:bg-white/15 transition-all">
+                    Outline Dark
+                </button>
+            </div>
+        </div>
+        
+        <!-- Contrast Analysis -->
+        <div class="bg-white/10 p-6 rounded-lg">
+            <h2 class="text-white text-xl font-semibold mb-4">Contrast Analysis</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                <div class="bg-white/10 p-4 rounded">
+                    <h3 class="font-semibold text-mountain-gold mb-2">Improvements Made:</h3>
+                    <ul class="text-white space-y-1">
+                        <li>• Mountain Gold: Darkened from 52% to 48% lightness</li>
+                        <li>• Copper: Darkened from 45% to 40% lightness</li>
+                        <li>• Glass buttons: Increased opacity from 0.2 to 0.25</li>
+                        <li>• Text: Using slate-700/800 instead of pure black</li>
+                        <li>• Focus states: Added visible focus rings</li>
+                    </ul>
+                </div>
+                <div class="bg-white/10 p-4 rounded">
+                    <h3 class="font-semibold text-mountain-gold mb-2">Dark Mode Improvements:</h3>
+                    <ul class="text-white space-y-1">
+                        <li>• Mountain Gold: Brightened to 65% lightness</li>
+                        <li>• Copper: Brightened to 58% lightness</li>
+                        <li>• Glass buttons: Using slate-50 text color</li>
+                        <li>• Higher opacity backgrounds for better contrast</li>
+                        <li>• Pure white on hover for maximum readability</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="mt-8 text-center">
+        <button onclick="document.documentElement.classList.toggle('dark')" 
+                class="bg-gray-700 text-white px-4 py-2 rounded hover:bg-gray-600">
+            Toggle Dark Mode
+        </button>
+    </div>
+</body>
+</html>

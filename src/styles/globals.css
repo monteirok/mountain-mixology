@@ -28,10 +28,10 @@
 
   /* Custom Mountain Mixology Colors */
   --forest: hsl(148, 42%, 22%);
-  --mountain-gold: hsl(45, 86%, 52%);
+  --mountain-gold: hsl(45, 86%, 48%); /* Slightly darker for better contrast */
   --charcoal: hsl(210, 24%, 16%);
   --cream: hsl(45, 29%, 97%);
-  --copper: hsl(30, 50%, 45%);
+  --copper: hsl(30, 50%, 40%); /* Darker copper for better contrast */
   --ice-blue: hsl(174, 42%, 92%);
 }
 
@@ -59,10 +59,10 @@
 
   /* Custom Mountain Mixology Dark Colors */
   --forest: hsl(148, 42%, 35%);
-  --mountain-gold: hsl(45, 86%, 62%);
+  --mountain-gold: hsl(45, 86%, 65%); /* Brighter for dark mode contrast */
   --charcoal: hsl(210, 24%, 8%);
   --cream: hsl(45, 29%, 15%);
-  --copper: hsl(30, 50%, 55%);
+  --copper: hsl(30, 50%, 58%); /* Brighter copper for dark mode */
   --ice-blue: hsl(174, 42%, 25%);
 }
 
@@ -112,29 +112,47 @@
   }
 
   .glass-button {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.25);
     backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
     transition: all 0.3s ease;
+    color: rgb(51, 65, 85); /* slate-700 for better contrast */
+    font-weight: 600;
   }
 
   .glass-button:hover {
-    background: rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.35);
     transform: translateY(-2px);
-    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+    color: rgb(30, 41, 59); /* slate-800 for even better contrast on hover */
+  }
+
+  .glass-button:focus-visible {
+    outline: 2px solid rgb(234, 179, 8); /* mountain-gold focus ring */
+    outline-offset: 2px;
+    background: rgba(255, 255, 255, 0.35);
   }
 
   .dark .glass-button {
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    color: rgb(248, 250, 252); /* slate-50 for high contrast */
+    font-weight: 600;
   }
 
   .dark .glass-button:hover {
-    background: rgba(0, 0, 0, 0.4);
-    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.5);
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.6);
+    color: rgb(255, 255, 255); /* pure white on hover */
+  }
+
+  .dark .glass-button:focus-visible {
+    outline: 2px solid rgb(234, 179, 8); /* mountain-gold focus ring */
+    outline-offset: 2px;
+    background: rgba(255, 255, 255, 0.25);
   }
 
   .glass-input {

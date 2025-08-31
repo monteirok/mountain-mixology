@@ -30,7 +30,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // Get contact submissions (for admin purposes)
-  app.get("/api/contact", async (req, res) => {
+  app.get("/api/contact", async (_req, res) => {
     try {
       const submissions = await storage.getContactSubmissions();
       res.json(submissions);
@@ -75,7 +75,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // Get MCP workflow status for debugging
-  app.get("/api/mcp/status", async (req, res) => {
+  app.get("/api/mcp/status", async (_req, res) => {
     try {
       res.json({
         status: "active",
@@ -99,13 +99,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
   return httpServer;
 }
 
-function validateRequest(schema: any) {
-  return (req: any, res: any, next: any) => {
-    try {
-      schema.parse(req.body);
-      next();
-    } catch (error) {
-      res.status(400).json({ error: "Validation failed" });
-    }
-  };
-}
+// TODO: Implement request validation middleware
+// function validateRequest(schema: any) {
+//   return (req: any, res: any, next: any) => {
+//     try {
+//       schema.parse(req.body);
+//       next();
+//     } catch (error) {
+//       res.status(400).json({ error: "Validation failed" });
+//     }
+//   };
+// }

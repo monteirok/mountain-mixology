@@ -14,7 +14,11 @@
       "Bash(npm run server:dev:*)",
       "Bash(curl:*)",
       "Bash(sudo rm:*)",
-      "Bash(npm run build:*)"
+      "Bash(npm run build:*)",
+      "Bash(node:*)",
+      "Bash(mkdir:*)",
+      "Bash(sudo npm install bcrypt @types/bcrypt)",
+      "Bash(npm audit:*)"
     ],
     "deny": []
   }

@@ -1,8 +1,6 @@
 'use client';
 
 import { motion } from "framer-motion";
-import { Wine, Sparkles } from "lucide-react";
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "../ui/card";
 
 export default function Hero() {
   const scrollToSection = (sectionId: string) => {
@@ -67,7 +65,7 @@ export default function Hero() {
       </div>
 
       {/* Floating Elements */}
-      <motion.div
+      {/* <motion.div
         animate={{ y: [0, -20, 0] }}
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
         className="absolute bottom-20 left-10 hidden lg:block"
@@ -85,7 +83,7 @@ export default function Hero() {
         <div className="glass-card p-6">
           <Sparkles className="text-mountain-gold text-2xl" size={32} />
         </div>
-      </motion.div>
+      </motion.div> */}
     </section>
   );
 }

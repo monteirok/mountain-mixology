@@ -24,9 +24,15 @@
     "mcp:calendar": "NODE_ENV=development tsx mcp-servers/calendar-server.ts",
     "mcp:content": "NODE_ENV=development tsx mcp-servers/content-server.ts",
     "mcp:inventory": "NODE_ENV=development tsx mcp-servers/inventory-server.ts",
-    "mcp:seo": "NODE_ENV=development tsx mcp-servers/seo-server.ts"
+    "mcp:seo": "NODE_ENV=development tsx mcp-servers/seo-server.ts",
+    "bootstrap:admin": "tsx scripts/bootstrap-admin.ts",
+    "generate:secret": "node scripts/generate-secret.js",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint:fix": "next lint --fix"
   },
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "@hookform/resolvers": "^3.10.0",
     "@hubspot/api-client": "^13.0.0",
     "@jridgewell/trace-mapping": "^0.3.25",
@@ -102,6 +108,7 @@
   "devDependencies": {
     "@next/eslint-plugin-next": "^15.4.4",
     "@tailwindcss/typography": "^0.5.15",
+    "@types/bcrypt": "^5.0.2",
     "@types/connect-pg-simple": "^7.0.3",
     "@types/express": "4.17.21",
     "@types/express-session": "^1.18.0",
@@ -116,6 +123,10 @@
     "drizzle-kit": "^0.31.1",
     "esbuild": "^0.25.0",
     "eslint": "^9.31.0",
+    "eslint-plugin-import": "^2.30.0",
+    "@typescript-eslint/eslint-plugin": "^8.17.0",
+    "@typescript-eslint/parser": "^8.17.0",
+    "prettier": "^3.4.2",
     "eslint-config-next": "^15.4.4",
     "postcss": "^8.4.47",
     "tailwindcss": "^3.4.17",

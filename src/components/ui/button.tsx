@@ -21,26 +21,22 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: `
-          dark:border-white/5 dark:bg-gradient-to-br dark:from-white/3 dark:to-white/1
+          dark:border-white/20 dark:bg-gradient-to-br dark:from-white/15 dark:to-white/8
           dark:text-white dark:hover:shadow-xl dark:hover:shadow-black/20 dark:hover:before:opacity-100
-          dark:hover:bg-gradient-to-br dark:hover:from-white/5 dark:hover:to-white/2
-          dark:hover:border-white/10
-          border-black/5 bg-gradient-to-br from-black/3 to-black/1
-          text-black hover:shadow-xl hover:shadow-black/20 hover:before:opacity-100
-          hover:bg-gradient-to-br hover:from-black/5 hover:to-black/2
-          hover:border-black/10
+          dark:hover:bg-gradient-to-br dark:hover:from-white/25 dark:hover:to-white/15
+          dark:hover:border-white/30
+          border-black/20 bg-gradient-to-br from-black/15 to-black/8
+          text-white hover:shadow-xl hover:shadow-black/20 hover:before:opacity-100
+          hover:bg-gradient-to-br hover:from-black/25 hover:to-black/15
+          hover:border-black/30
         `,
         primary: `
-          dark:border-mountain-gold/10 dark:bg-gradient-to-br dark:from-mountain-gold/5 dark:to-mountain-gold/2
-          dark:text-mountain-gold dark:hover:shadow-xl dark:hover:shadow-mountain-gold/20 dark:hover:before:opacity-100
-          dark:hover:bg-gradient-to-br dark:hover:from-mountain-gold/8 dark:hover:to-mountain-gold/4
-          dark:hover:border-mountain-gold/20
-          dark:after:bg-gradient-to-tr dark:after:from-mountain-gold/2 dark:after:via-white/2 dark:after:to-mountain-gold/3
-          border-mountain-gold/10 bg-gradient-to-br from-mountain-gold/5 to-mountain-gold/2
-          text-mountain-gold hover:shadow-xl hover:shadow-mountain-gold/20 hover:before:opacity-100
-          hover:bg-gradient-to-br hover:from-mountain-gold/8 hover:to-mountain-gold/4
-          hover:border-mountain-gold/20
-          after:bg-gradient-to-tr after:from-mountain-gold/2 after:via-black/2 after:to-mountain-gold/3
+          dark:border-mountain-gold/30 dark:bg-mountain-gold dark:text-charcoal
+          dark:hover:shadow-xl dark:hover:shadow-mountain-gold/30 dark:hover:before:opacity-100
+          dark:hover:bg-copper dark:hover:border-copper/30
+          border-mountain-gold bg-mountain-gold text-white font-semibold
+          hover:shadow-xl hover:shadow-mountain-gold/30 hover:before:opacity-100
+          hover:bg-copper hover:border-copper
         `,
         glow: `
           dark:border-cyan-400/10 dark:bg-gradient-to-br dark:from-cyan-400/3 dark:to-purple-400/1
@@ -53,24 +49,22 @@ const buttonVariants = cva(
           after:bg-gradient-to-tr after:from-cyan-400/2 after:via-black/2 after:to-purple-400/2
         `,
         outline: `
-          dark:border-white/10 dark:bg-transparent dark:text-white
+          dark:border-white/30 dark:bg-transparent dark:text-white
           dark:hover:shadow-xl dark:hover:shadow-black/20 dark:hover:before:opacity-100
-          dark:hover:bg-gradient-to-br dark:hover:from-white/3 dark:hover:to-white/1
-          dark:hover:border-white/20
-          border-black/10 bg-transparent text-black
+          dark:hover:bg-white/15 dark:hover:border-white/40
+          border-charcoal/40 bg-transparent text-charcoal font-semibold
           hover:shadow-xl hover:shadow-black/20 hover:before:opacity-100
-          hover:bg-gradient-to-br hover:from-black/3 hover:to-black/1
-          hover:border-black/20
+          hover:bg-charcoal/10 hover:border-charcoal/60
         `,
         ghost: `
           dark:border-transparent dark:bg-transparent dark:text-white
-          dark:hover:bg-white/3 dark:hover:before:opacity-100
-          border-transparent bg-transparent text-black
-          hover:bg-black/3 hover:before:opacity-100
+          dark:hover:bg-white/15 dark:hover:before:opacity-100
+          border-transparent bg-transparent text-charcoal font-medium
+          hover:bg-charcoal/10 hover:before:opacity-100
         `,
         link: `
-          dark:text-white dark:hover:text-white/80 dark:underline-offset-4 dark:hover:underline
-          text-black hover:text-black/80 underline-offset-4 hover:underline
+          dark:text-white dark:hover:text-mountain-gold dark:underline-offset-4 dark:hover:underline
+          text-charcoal hover:text-mountain-gold underline-offset-4 hover:underline font-medium
           border-transparent bg-transparent shadow-none hover:shadow-none
         `,
       },

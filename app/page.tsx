@@ -15,10 +15,7 @@ import Footer from "@/components/sections/footer";
 
 export default function Home() {
   return (
-    <ThemeProvider
-      defaultTheme="light"
-      storageKey="mountain-mixology-theme"
-    >
+    <ThemeProvider>
       <QueryClientProvider>
         <TooltipProvider>
           <div className="min-h-screen">
