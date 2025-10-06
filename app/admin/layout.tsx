@@ -1,8 +1,19 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
+
 import { Button } from '@/components/ui/button'
+
+type AdminUser = {
+  email: string
+  role?: string
+}
+
+type AuthResponse = {
+  authenticated: boolean
+  user?: AdminUser
+}
 
 function AdminLayoutClient({
   children,
@@ -10,27 +21,27 @@ function AdminLayoutClient({
   children: React.ReactNode;
 }) {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null)
-  const [user, setUser] = useState<any>(null)
+  const [user, setUser] = useState<AdminUser | null>(null)
   const router = useRouter()
 
-  useEffect(() => {
-    checkAuth()
-  }, [])
-
-  const checkAuth = async () => {
+  const checkAuth = useCallback(async () => {
     try {
       const response = await fetch('/api/auth/me')
       if (response.ok) {
-        const data = await response.json()
+        const data: AuthResponse = await response.json()
         setIsAuthenticated(data.authenticated)
-        setUser(data.user)
+        setUser(data.user ?? null)
       } else {
         setIsAuthenticated(false)
       }
-    } catch (error) {
+    } catch (_error) {
       setIsAuthenticated(false)
     }
-  }
+  }, [])
+
+  useEffect(() => {
+    void checkAuth()
+  }, [checkAuth])
 
   const handleLogout = async () => {
     await fetch('/api/auth/logout', { method: 'POST' })

@@ -7,7 +7,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({
       authenticated: true,
       user: {
-        email: process.env.ADMIN_EMAIL || 'admin@mountainmixology.com',
+        email: process.env.ADMIN_EMAIL ?? 'admin@mountainmixology.com',
         role: 'admin'
       }
     })

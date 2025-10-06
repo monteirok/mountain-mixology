@@ -1,11 +1,25 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 
-// Simple in-memory storage for demo purposes
-let contactId = 1;
-const contacts: any[] = [];
+interface ContactSubmission {
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone?: string;
+  eventType: string;
+  guestCount?: string;
+  eventDate?: string;
+  budget?: string;
+  location?: string;
+  message: string;
+  newsletter?: string;
+  createdAt: string;
+}
 
-// Contact form validation schema
+let contactId = 1;
+const contacts: ContactSubmission[] = [];
+
 const contactSchema = z.object({
   firstName: z.string().min(1, "First name is required"),
   lastName: z.string().min(1, "Last name is required"),
@@ -23,45 +37,37 @@ const contactSchema = z.object({
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    
-    // Validate the contact form data
     const validatedData = contactSchema.parse(body);
-    
-    // Create contact submission
-    const submission = {
+
+    const submission: ContactSubmission = {
       id: contactId++,
       ...validatedData,
       createdAt: new Date().toISOString(),
     };
-    
-    // Store in memory (in production, this would go to a database)
+
     contacts.push(submission);
-    
-    console.log(`New contact submission received: ${submission.firstName} ${submission.lastName} (ID: ${submission.id})`);
-    
-    // In a full implementation, this would trigger:
-    // - Welcome email automation
-    // - Lead scoring and CRM sync
-    // - Calendar availability check
-    // - Team notifications
+
+    console.log(
+      `New contact submission received: ${submission.firstName} ${submission.lastName} (ID: ${submission.id})`
+    );
     console.log('MCP Workflow would be triggered here (demo mode)');
-    
+
     return NextResponse.json({
       success: true,
       id: submission.id,
       message: "Thank you for your inquiry! We'll be in touch within 24 hours."
     });
-    
+
   } catch (error) {
     console.error('Contact form submission error:', error);
-    
+
     if (error instanceof z.ZodError) {
       return NextResponse.json(
         { error: 'Validation failed', details: error.errors },
         { status: 400 }
       );
     }
-    
+
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }
@@ -71,11 +77,10 @@ export async function POST(request: NextRequest) {
 
 export async function GET() {
   try {
-    // Return stored contacts for admin dashboard
-    return NextResponse.json(contacts.sort((a, b) => 
-      new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-    ));
-    
+    return NextResponse.json([
+      ...contacts
+    ].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()));
+
   } catch (error) {
     console.error('Get contacts error:', error);
     return NextResponse.json(

@@ -1,10 +1,12 @@
 'use client';
 
 import { motion } from "framer-motion";
-import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { CheckCircle, Clock, Instagram, Mail, MapPin } from "lucide-react";
+
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -13,17 +15,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
-import { 
-  MapPin, 
-  Phone, 
-  Mail, 
-  Clock, 
-  CheckCircle,
-  Instagram,
-  Facebook,
-  Linkedin
-} from "lucide-react";
-
 const contactSchema = z.object({
   firstName: z.string().min(1, "First name is required"),
   lastName: z.string().min(1, "Last name is required"),

@@ -2,11 +2,17 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+
+import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Alert, AlertDescription } from '@/components/ui/alert'
+
+type LoginResponse = {
+  error?: string
+  success?: boolean
+}
 
 export default function LoginPage() {
   const [email, setEmail] = useState('')
@@ -15,8 +21,8 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false)
   const router = useRouter()
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault()
     setLoading(true)
     setError('')
 
@@ -29,14 +35,14 @@ export default function LoginPage() {
         body: JSON.stringify({ email, password }),
       })
 
-      const data = await response.json()
+      const data: LoginResponse = await response.json()
 
       if (response.ok) {
         router.push('/admin')
       } else {
-        setError(data.error || 'Login failed')
+        setError(data.error ?? 'Login failed')
       }
-    } catch (err) {
+    } catch (_error) {
       setError('An error occurred during login')
     } finally {
       setLoading(false)
@@ -65,7 +71,7 @@ export default function LoginPage() {
                 id="email"
                 type="email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(event) => setEmail(event.target.value)}
                 required
                 disabled={loading}
               />
@@ -76,7 +82,7 @@ export default function LoginPage() {
                 id="password"
                 type="password"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(event) => setPassword(event.target.value)}
                 required
                 disabled={loading}
               />

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-const EXPRESS_SERVER_URL = process.env.EXPRESS_SERVER_URL || 'http://localhost:3001';
+const EXPRESS_SERVER_URL = process.env.EXPRESS_SERVER_URL ?? 'http://localhost:3001';
 
 export async function POST(
   _request: NextRequest,
@@ -20,7 +20,7 @@ export async function POST(
     if (!response.ok) {
       const errorText = await response.text();
       return NextResponse.json(
-        { error: errorText || 'Failed to trigger workflow' },
+        { error: errorText ?? 'Failed to trigger workflow' },
         { status: response.status }
       );
     }

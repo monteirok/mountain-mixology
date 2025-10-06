@@ -1,24 +1,25 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import {
+  Activity,
+  AlertTriangle,
+  Calendar,
+  CheckCircle,
+  Clock,
+  CreditCard,
+  Database,
+  Mail,
+  RefreshCw,
+  TrendingUp,
+  Users,
+} from 'lucide-react';
+
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/hooks/use-toast';
-import { 
-  Activity, 
-  Users, 
-  Mail, 
-  Calendar, 
-  CreditCard, 
-  Database,
-  CheckCircle,
-  XCircle,
-  TrendingUp,
-  AlertTriangle,
-  RefreshCw
-} from 'lucide-react';
 
 interface ContactSubmission {
   id: number;
@@ -42,7 +43,12 @@ interface MCPStatus {
   lastUpdated: string;
 }
 
-interface WorkflowResult {
+type WorkflowCalendarResult = {
+  availabilityChecked: boolean;
+  conflicts?: unknown[];
+};
+
+type WorkflowResult = {
   success: boolean;
   submissionId: number;
   workflow: {
@@ -50,12 +56,12 @@ interface WorkflowResult {
     results: {
       email?: { welcomeEmailSent: boolean; messageId?: string };
       crm?: { contactSynced: boolean; hubspotContactId?: string; leadScore?: number };
-      calendar?: { availabilityChecked: boolean; conflicts?: any[] };
+      calendar?: WorkflowCalendarResult;
       communication?: { slackNotificationSent: boolean };
     };
     errors: string[];
   };
-}
+};
 
 export default function AdminDashboard() {
   const [submissions, setSubmissions] = useState<ContactSubmission[]>([]);
@@ -64,25 +70,19 @@ export default function AdminDashboard() {
   const [triggering, setTriggering] = useState<number | null>(null);
   const { toast } = useToast();
 
-  useEffect(() => {
-    loadData();
-  }, []);
-
-  const loadData = async () => {
+  const loadData = useCallback(async () => {
     try {
       setLoading(true);
-      
-      // Load contact submissions
+
       const submissionsResponse = await fetch('/api/contact');
       if (submissionsResponse.ok) {
-        const submissionsData = await submissionsResponse.json();
+        const submissionsData: ContactSubmission[] = await submissionsResponse.json();
         setSubmissions(submissionsData);
       }
 
-      // Load MCP status
       const statusResponse = await fetch('/api/mcp/status');
       if (statusResponse.ok) {
-        const statusData = await statusResponse.json();
+        const statusData: MCPStatus = await statusResponse.json();
         setMcpStatus(statusData);
       }
     } catch (error) {
@@ -95,22 +95,30 @@ export default function AdminDashboard() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [toast]);
+
+  useEffect(() => {
+    void loadData();
+  }, [loadData]);
 
   const triggerWorkflow = async (submissionId: number) => {
     try {
       setTriggering(submissionId);
-      
+
       const response = await fetch(`/api/contact/${submissionId}/workflow`, {
         method: 'POST',
       });
-      
+
       if (response.ok) {
         const result: WorkflowResult = await response.json();
-        
+
         toast({
           title: 'Workflow Triggered',
-          description: `MCP workflow completed for submission ${submissionId}. ${result.workflow.errors.length > 0 ? `${result.workflow.errors.length} errors occurred.` : 'No errors.'}`,
+          description: `MCP workflow completed for submission ${submissionId}. ${
+            result.workflow.errors.length > 0
+              ? `${result.workflow.errors.length} errors occurred.`
+              : 'No errors.'
+          }`,
           variant: result.workflow.success ? 'default' : 'destructive',
         });
       } else {
@@ -130,25 +138,47 @@ export default function AdminDashboard() {
 
   const getServerIcon = (serverName: string) => {
     switch (serverName) {
-      case 'email': return <Mail className="h-4 w-4" />;
-      case 'crm': return <Users className="h-4 w-4" />;
-      case 'calendar': return <Calendar className="h-4 w-4" />;
-      case 'payment': return <CreditCard className="h-4 w-4" />;
-      case 'contact': return <Database className="h-4 w-4" />;
-      default: return <Activity className="h-4 w-4" />;
+      case 'email':
+        return <Mail className="h-4 w-4" />;
+      case 'crm':
+        return <Users className="h-4 w-4" />;
+      case 'calendar':
+        return <Calendar className="h-4 w-4" />;
+      case 'payment':
+        return <CreditCard className="h-4 w-4" />;
+      case 'contact':
+        return <Database className="h-4 w-4" />;
+      default:
+        return <Activity className="h-4 w-4" />;
     }
   };
 
-  const recentSubmissions = submissions
-    .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
-    .slice(0, 10);
-
-  const todaySubmissions = submissions.filter(
-    s => new Date(s.createdAt).toDateString() === new Date().toDateString()
+  const recentSubmissions = useMemo(
+    () =>
+      [...submissions]
+        .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+        .slice(0, 10),
+    [submissions]
   );
 
-  const highValueLeads = submissions.filter(
-    s => s.budget && (s.budget.includes('$5,000') || s.budget.includes('$10,000') || s.budget.includes('over-10000'))
+  const todaySubmissions = useMemo(
+    () =>
+      submissions.filter(
+        (submission) => new Date(submission.createdAt).toDateString() === new Date().toDateString()
+      ),
+    [submissions]
+  );
+
+  const highValueLeads = useMemo(
+    () =>
+      submissions.filter(
+        (submission) =>
+          submission.budget &&
+          (submission.budget.includes('$5,000') ||
+            submission.budget.includes('$10,000') ||
+            submission.budget.includes('over-10000'))
+      ),
+    [submissions]
   );
 
   if (loading) {
@@ -182,7 +212,6 @@ export default function AdminDashboard() {
           </Button>
         </div>
 
-        {/* Stats Overview */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -191,9 +220,7 @@ export default function AdminDashboard() {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{submissions.length}</div>
-              <p className="text-xs text-muted-foreground">
-                {todaySubmissions.length} today
-              </p>
+              <p className="text-xs text-muted-foreground">{todaySubmissions.length} today</p>
             </CardContent>
           </Card>
 
@@ -204,184 +231,129 @@ export default function AdminDashboard() {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{highValueLeads.length}</div>
-              <p className="text-xs text-muted-foreground">
-                $5K+ budget inquiries
-              </p>
+              <p className="text-xs text-muted-foreground">Potential premium events</p>
             </CardContent>
           </Card>
 
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">MCP Servers</CardTitle>
-              <Activity className="h-4 w-4 text-muted-foreground" />
+              <CardTitle className="text-sm font-medium">Active Servers</CardTitle>
+              <CheckCircle className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">
-                {mcpStatus ? Object.keys(mcpStatus.servers).length : 0}
+                {mcpStatus ? Object.values(mcpStatus.servers).filter((server) => server.enabled).length : 0}
               </div>
-              <p className="text-xs text-muted-foreground">
-                Active integrations
-              </p>
+              <p className="text-xs text-muted-foreground">Out of {mcpStatus ? Object.keys(mcpStatus.servers).length : 0}</p>
             </CardContent>
           </Card>
 
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">System Status</CardTitle>
-              {mcpStatus?.status === 'active' ? (
-                <CheckCircle className="h-4 w-4 text-green-500" />
-              ) : (
-                <XCircle className="h-4 w-4 text-red-500" />
-              )}
+              <CardTitle className="text-sm font-medium">Last Synced</CardTitle>
+              <Clock className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">
-                {mcpStatus?.status === 'active' ? 'Online' : 'Offline'}
+                {mcpStatus ? new Date(mcpStatus.lastUpdated).toLocaleString() : 'No data'}
               </div>
-              <p className="text-xs text-muted-foreground">
-                Last updated: {mcpStatus ? new Date(mcpStatus.lastUpdated).toLocaleTimeString() : 'N/A'}
-              </p>
+              <p className="text-xs text-muted-foreground">System status</p>
             </CardContent>
           </Card>
         </div>
 
         <Tabs defaultValue="submissions" className="space-y-6">
           <TabsList>
-            <TabsTrigger value="submissions">Contact Submissions</TabsTrigger>
+            <TabsTrigger value="submissions">Recent Submissions</TabsTrigger>
             <TabsTrigger value="servers">MCP Servers</TabsTrigger>
-            <TabsTrigger value="workflows">Workflows</TabsTrigger>
           </TabsList>
-
-          <TabsContent value="submissions" className="space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>Recent Inquiries</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {recentSubmissions.map((submission) => (
-                    <div key={submission.id} className="flex items-center justify-between p-4 border rounded-lg">
-                      <div className="flex-1">
-                        <div className="flex items-center gap-3 mb-2">
-                          <h3 className="font-semibold">
-                            {submission.firstName} {submission.lastName}
-                          </h3>
-                          <Badge variant="outline">
-                            {submission.eventType}
-                          </Badge>
-                          {submission.budget && (
-                            <Badge variant={submission.budget.includes('$5,000') || submission.budget.includes('$10,000') || submission.budget.includes('over-10000') ? 'default' : 'secondary'}>
-                              {submission.budget}
-                            </Badge>
-                          )}
-                        </div>
-                        <p className="text-sm text-gray-600 dark:text-gray-400">
-                          {submission.email} • {submission.phone}
-                        </p>
-                        <p className="text-sm text-gray-500 mt-1">
-                          {submission.message.substring(0, 100)}...
-                        </p>
-                        <p className="text-xs text-gray-400 mt-2">
-                          {new Date(submission.createdAt).toLocaleString()}
-                        </p>
-                      </div>
-                      <div className="flex gap-2">
-                        <Button
-                          size="sm"
-                          variant="outline"
-                          onClick={() => triggerWorkflow(submission.id)}
-                          disabled={triggering === submission.id}
-                          className="gap-2"
-                        >
-                          {triggering === submission.id ? (
-                            <RefreshCw className="h-3 w-3 animate-spin" />
-                          ) : (
-                            <Activity className="h-3 w-3" />
-                          )}
-                          Trigger Workflow
-                        </Button>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-
-          <TabsContent value="servers" className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {mcpStatus && Object.entries(mcpStatus.servers).map(([serverName, server]) => (
-                <Card key={serverName}>
-                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-medium capitalize flex items-center gap-2">
-                      {getServerIcon(serverName)}
-                      {serverName} Server
+          <TabsContent value="submissions" className="space-y-4">
+            {recentSubmissions.map((submission) => (
+              <Card key={submission.id}>
+                <CardHeader className="flex flex-row items-start justify-between space-y-0">
+                  <div>
+                    <CardTitle className="text-xl">
+                      {submission.firstName} {submission.lastName}
                     </CardTitle>
-                    {server.enabled ? (
-                      <CheckCircle className="h-4 w-4 text-green-500" />
-                    ) : (
-                      <XCircle className="h-4 w-4 text-red-500" />
-                    )}
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">
-                      {server.description}
-                    </p>
-                    <Badge variant={server.enabled ? 'default' : 'destructive'} className="mt-2">
-                      {server.enabled ? 'Active' : 'Inactive'}
+                    <p className="text-sm text-muted-foreground">{submission.email}</p>
+                  </div>
+                  <Badge variant="outline">{submission.eventType}</Badge>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div>
+                    <h4 className="text-sm font-semibold">Event Details</h4>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm text-muted-foreground">
+                      <div>Guest Count: {submission.guestCount ?? 'Not specified'}</div>
+                      <div>Event Date: {submission.eventDate ?? 'Not specified'}</div>
+                      <div>Budget: {submission.budget ?? 'Not specified'}</div>
+                      <div>Location: {submission.location ?? 'Not specified'}</div>
+                    </div>
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-semibold">Message</h4>
+                    <p className="text-sm text-muted-foreground">{submission.message}</p>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <Badge variant="secondary">
+                      Submitted {new Date(submission.createdAt).toLocaleString()}
                     </Badge>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+                    <Button
+                      variant="outline"
+                      onClick={() => triggerWorkflow(submission.id)}
+                      disabled={triggering === submission.id}
+                      className="gap-2"
+                    >
+                      <RefreshCw className="h-4 w-4" />
+                      {triggering === submission.id ? 'Running...' : 'Trigger MCP Workflow'}
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
           </TabsContent>
-
-          <TabsContent value="workflows" className="space-y-6">
+          <TabsContent value="servers">
             <Card>
               <CardHeader>
-                <CardTitle>MCP Workflow Overview</CardTitle>
+                <CardTitle>MCP Server Status</CardTitle>
+                <p className="text-sm text-muted-foreground">
+                  Last updated: {mcpStatus ? new Date(mcpStatus.lastUpdated).toLocaleString() : 'No data available'}
+                </p>
               </CardHeader>
               <CardContent>
-                <div className="space-y-4">
-                  <div className="flex items-center gap-3 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-                    <Mail className="h-5 w-5 text-blue-500" />
-                    <div>
-                      <h4 className="font-medium">Email Automation</h4>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">
-                        Sends welcome emails and nurture sequences automatically
-                      </p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {mcpStatus ? (
+                    Object.entries(mcpStatus.servers).map(([key, value]) => (
+                      <div
+                        key={key}
+                        className="rounded-lg border p-4 flex items-start justify-between"
+                      >
+                        <div className="flex items-start gap-3">
+                          <div className={`flex h-10 w-10 items-center justify-center rounded-full ${
+                            value.enabled ? 'bg-emerald-100 text-emerald-700' : 'bg-rose-100 text-rose-700'
+                          }`}>
+                            {getServerIcon(key)}
+                          </div>
+                          <div>
+                            <p className="text-sm font-semibold uppercase tracking-wide">{key}</p>
+                            <p className="text-sm text-muted-foreground">{value.description}</p>
+                          </div>
+                        </div>
+                        {value.enabled ? (
+                          <Badge className="bg-emerald-100 text-emerald-700" variant="outline">
+                            <CheckCircle className="mr-1 h-3.5 w-3.5" /> Active
+                          </Badge>
+                        ) : (
+                          <Badge className="bg-rose-100 text-rose-700" variant="outline">
+                            <AlertTriangle className="mr-1 h-3.5 w-3.5" /> Issue
+                          </Badge>
+                        )}
+                      </div>
+                    ))
+                  ) : (
+                    <div className="col-span-full text-center text-muted-foreground">
+                      No server status available.
                     </div>
-                  </div>
-                  
-                  <div className="flex items-center gap-3 p-3 bg-green-50 dark:bg-green-900/20 rounded-lg">
-                    <Users className="h-5 w-5 text-green-500" />
-                    <div>
-                      <h4 className="font-medium">CRM Integration</h4>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">
-                        Syncs contacts to HubSpot with lead scoring and deal creation
-                      </p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-center gap-3 p-3 bg-purple-50 dark:bg-purple-900/20 rounded-lg">
-                    <Calendar className="h-5 w-5 text-purple-500" />
-                    <div>
-                      <h4 className="font-medium">Calendar Integration</h4>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">
-                        Checks availability and provides seasonal pricing
-                      </p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-center gap-3 p-3 bg-orange-50 dark:bg-orange-900/20 rounded-lg">
-                    <AlertTriangle className="h-5 w-5 text-orange-500" />
-                    <div>
-                      <h4 className="font-medium">Team Notifications</h4>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">
-                        Sends Slack notifications for high-priority leads
-                      </p>
-                    </div>
-                  </div>
+                  )}
                 </div>
               </CardContent>
             </Card>

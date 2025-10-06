@@ -8,3 +8,4 @@ vite.config.ts.*
 .next
 mountain-mixology-complete-specification.txt
 suggested-mcp-servers.txt
+.vercel
