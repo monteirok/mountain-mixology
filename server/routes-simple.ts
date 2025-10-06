@@ -67,10 +67,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       console.log(`Workflow triggered for submission ${submissionId} (simulated)`);
       
-      res.json(workflowResult);
+      return res.json(workflowResult);
     } catch (error) {
       console.error("Workflow trigger error:", error);
-      res.status(500).json({ error: "Failed to trigger workflow" });
+      return res.status(500).json({ error: "Failed to trigger workflow" });
     }
   });
 

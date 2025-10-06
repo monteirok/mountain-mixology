@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from "framer-motion";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -57,7 +56,6 @@ export default function Contact() {
     register,
     handleSubmit,
     setValue,
-    watch,
     reset,
     formState: { errors, isSubmitting }
   } = useForm<ContactForm>({
@@ -83,7 +81,7 @@ export default function Contact() {
       reset();
       queryClient.invalidateQueries({ queryKey: ["/api/contact"] });
     },
-    onError: (error: any) => {
+    onError: () => {
       toast({
         title: "Error",
         description: "There was an error submitting your form. Please try again.",

@@ -44,7 +44,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // Get contact submissions (for admin purposes)
-  app.get("/api/contact", async (req, res) => {
+  app.get("/api/contact", async (_req, res) => {
     try {
       const submissions = await storage.getContactSubmissions();
       res.json(submissions);
@@ -68,19 +68,19 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       const workflowResult = await mcpWorkflow.executeContactWorkflow(submission);
       
-      res.json({
+      return res.json({
         success: true,
         submissionId,
         workflow: workflowResult,
       });
     } catch (error) {
       console.error("Manual workflow execution failed:", error);
-      res.status(500).json({ error: "Workflow execution failed" });
+      return res.status(500).json({ error: "Workflow execution failed" });
     }
   });
 
   // Get MCP workflow status for debugging
-  app.get("/api/mcp/status", async (req, res) => {
+  app.get("/api/mcp/status", async (_req, res) => {
     try {
       res.json({
         status: "active",
@@ -102,13 +102,3 @@ export async function registerRoutes(app: Express): Promise<Server> {
   return httpServer;
 }
 
-function validateRequest(schema: any) {
-  return (req: any, res: any, next: any) => {
-    try {
-      schema.parse(req.body);
-      next();
-    } catch (error) {
-      res.status(400).json({ error: "Validation failed" });
-    }
-  };
-}

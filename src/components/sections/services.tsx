@@ -3,7 +3,6 @@ import {
   Wine, 
   Users, 
   Home, 
-  GraduationCap, 
   Mountain, 
   Utensils,
   Check

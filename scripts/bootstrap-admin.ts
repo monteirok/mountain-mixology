@@ -18,6 +18,7 @@
 import crypto from 'crypto';
 import fs from 'fs';
 import path from 'path';
+import bcrypt from 'bcrypt';
 // NOTE: bcrypt will be installed during setup
 // import bcrypt from 'bcrypt';
 import { config } from 'dotenv';
@@ -107,7 +108,6 @@ function validateEnvironment(): void {
  * Hashes password using bcrypt
  */
 async function hashPassword(password: string): Promise<string> {
-  const bcrypt = await import('bcrypt');
   const saltRounds = 12; // 2025 security standard
   return bcrypt.hash(password, saltRounds);
 }

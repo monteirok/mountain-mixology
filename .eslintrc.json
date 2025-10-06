@@ -1,7 +1,6 @@
 {
   "extends": [
-    "next/core-web-vitals",
-    "@next/eslint-plugin-next/recommended"
+    "next/core-web-vitals"
   ],
   "rules": {
     // Security-focused rules

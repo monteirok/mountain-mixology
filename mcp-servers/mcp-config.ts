@@ -169,7 +169,7 @@ export const externalServiceConfig: ExternalServiceConfig = {
 
 export function getEnabledServers(): string[] {
   return Object.keys(mcpServerConfigs).filter(
-    (serverName) => mcpServerConfigs[serverName].enabled
+    (serverName) => mcpServerConfigs[serverName]?.enabled
   );
 }
 
