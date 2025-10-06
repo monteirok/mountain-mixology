@@ -42,7 +42,7 @@ export default function LoginPage() {
       } else {
         setError(data.error ?? 'Login failed')
       }
-    } catch (_error) {
+    } catch {
       setError('An error occurred during login')
     } finally {
       setLoading(false)

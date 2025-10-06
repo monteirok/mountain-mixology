@@ -34,7 +34,7 @@ function AdminLayoutClient({
       } else {
         setIsAuthenticated(false)
       }
-    } catch (_error) {
+    } catch {
       setIsAuthenticated(false)
     }
   }, [])

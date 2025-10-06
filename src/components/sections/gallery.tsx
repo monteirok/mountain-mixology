@@ -123,7 +123,7 @@ export default function Gallery() {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className={`relative group cursor-pointer overflow-hidden rounded-xl hover-lift ${image.span || ""}`}
+              className={`relative group cursor-pointer overflow-hidden rounded-xl hover-lift ${image.span ?? ""}`}
             >
               <img
                 src={image.src}

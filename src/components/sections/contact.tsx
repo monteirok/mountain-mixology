@@ -15,6 +15,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
+
 const contactSchema = z.object({
   firstName: z.string().min(1, "First name is required"),
   lastName: z.string().min(1, "Last name is required"),
@@ -84,6 +85,8 @@ export default function Contact() {
   const onSubmit = (data: ContactForm) => {
     submitMutation.mutate(data);
   };
+
+  const isBusy = submitMutation.isPending ? true : isSubmitting;
 
   return (
     <section id="contact" className="py-20 bg-ice-blue/20 dark:bg-ice-blue/10">
@@ -277,10 +280,10 @@ export default function Contact() {
 
                   <Button
                     type="submit"
-                    disabled={isSubmitting || submitMutation.isPending}
+                    disabled={isBusy}
                     className="w-full bg-mountain-gold hover:bg-copper text-white py-4 text-lg font-semibold transition-all duration-300 hover-lift"
                   >
-                    {isSubmitting || submitMutation.isPending ? "Sending..." : "Get My Custom Quote"}
+                    {isBusy ? "Sending..." : "Get My Custom Quote"}
                   </Button>
                 </form>
               </CardContent>
@@ -387,6 +390,7 @@ export default function Contact() {
                   <a
                     href="https://instagram.com/mountain.mixology"
                     target="_blank"
+                    rel="noreferrer"
                     className="w-12 h-12 bg-mountain-gold/20 rounded-full flex items-center justify-center hover:bg-mountain-gold hover:text-white transition-all duration-300"
                   >
                     <Instagram size={20} />

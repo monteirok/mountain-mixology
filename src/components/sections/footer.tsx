@@ -1,4 +1,4 @@
-import { Instagram, Facebook, Linkedin } from "lucide-react";
+import { Instagram } from "lucide-react";
 
 export default function Footer() {
   const scrollToSection = (sectionId: string) => {
@@ -24,7 +24,7 @@ export default function Footer() {
               Elevating your celebrations with exceptional service and unforgettable drinks.
             </p>
             <div className="flex space-x-4">
-              <a href="https://instagram.com/mountain.mixology" target="_blank" className="text-mountain-gold hover:text-white transition-colors">
+              <a href="https://instagram.com/mountain.mixology" target="_blank" rel="noreferrer" className="text-mountain-gold hover:text-white transition-colors">
                 <Instagram size={24} />
               </a>
               {/* <a href="#" className="text-mountain-gold hover:text-white transition-colors">
