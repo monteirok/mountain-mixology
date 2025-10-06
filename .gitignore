@@ -9,3 +9,4 @@ vite.config.ts.*
 mountain-mixology-complete-specification.txt
 suggested-mcp-servers.txt
 .vercel
+.env

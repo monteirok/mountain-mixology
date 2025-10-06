@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { motion } from "framer-motion";
 
 export default function About() {
@@ -69,10 +70,13 @@ export default function About() {
             viewport={{ once: true }}
             className="glass-card p-4"
           >
-            <img
+            <Image
               src="https://images.unsplash.com/photo-1551538827-9c037cb4f32a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
               alt="Professional mixologist crafting premium cocktails"
-              className="rounded-xl shadow-2xl hover-lift w-full"
+              width={800}
+              height={600}
+              className="w-full rounded-xl shadow-2xl hover-lift"
+              sizes="(min-width: 1024px) 480px, 100vw"
             />
           </motion.div>
         </div>

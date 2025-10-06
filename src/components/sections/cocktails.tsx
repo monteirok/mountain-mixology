@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Leaf, Palette, Award } from "lucide-react";
 
@@ -101,10 +102,13 @@ export default function Cocktails() {
             >
               <div className="glass-card hover-lift group h-full">
                 <div className="p-6">
-                  <img
+                  <Image
                     src={cocktail.image}
                     alt={cocktail.name}
-                    className="w-full h-48 object-cover rounded-xl mb-4 group-hover:scale-105 transition-transform duration-300"
+                    width={400}
+                    height={400}
+                    className="mb-4 h-48 w-full rounded-xl object-cover transition-transform duration-300 group-hover:scale-105"
+                    sizes="(min-width: 1280px) 250px, (min-width: 768px) 45vw, 100vw"
                   />
                   <h3 className="text-xl font-playfair font-semibold mb-2 text-white">
                     {cocktail.name}

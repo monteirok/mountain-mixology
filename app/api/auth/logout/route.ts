@@ -1,9 +1,9 @@
-import { NextResponse } from 'next/server'
+import { NextResponse } from 'next/server';
+import { destroyAdminSession } from '@/lib/auth';
+
+export const dynamic = 'force-dynamic';
 
 export async function POST() {
-  const response = NextResponse.json({ success: true })
-  
-  response.cookies.delete('auth')
-
-  return response
+  await destroyAdminSession();
+  return NextResponse.json({ success: true });
 }

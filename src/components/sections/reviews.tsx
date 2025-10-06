@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Star } from "lucide-react";
 
@@ -71,10 +72,12 @@ export default function Reviews() {
               <div className="glass-card hover-lift h-full">
                 <div className="p-8">
                   <div className="flex items-center mb-6">
-                    <img
+                    <Image
                       src={review.image}
                       alt={`${review.name} client testimonial`}
-                      className="w-16 h-16 rounded-full object-cover mr-4"
+                      width={100}
+                      height={100}
+                      className="mr-4 h-16 w-16 rounded-full object-cover"
                     />
                     <div>
                       <h4 className="font-semibold text-lg text-charcoal dark:text-white">{review.name}</h4>

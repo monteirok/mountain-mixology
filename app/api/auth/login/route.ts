@@ -1,42 +1,51 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server';
+import { createAdminSession, destroyAdminSession, hashPassword, verifyPassword } from '@/lib/auth';
+import { findAdminByEmail, createAdminUser } from '@/lib/repository';
 
-const ADMIN_EMAIL = process.env.ADMIN_EMAIL ?? 'admin@mountainmixology.com'
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD ?? 'admin123'
+export const dynamic = 'force-dynamic';
 
-export async function POST(request: NextRequest) {
+const ensureDefaultAdmin = async (email: string, password: string) => {
+  const existing = findAdminByEmail(email);
+  if (!existing) {
+    const hashed = await hashPassword(password);
+    createAdminUser(email, hashed);
+  }
+};
+
+export async function POST(request: Request) {
   try {
-    const { email, password } = await request.json()
+    const body = await request.json();
+    const email = String(body?.email ?? '').trim().toLowerCase();
+    const password = String(body?.password ?? '');
 
     if (!email || !password) {
-      return NextResponse.json(
-        { error: 'Email and password are required' },
-        { status: 400 }
-      )
+      return NextResponse.json({ error: 'Email and password are required' }, { status: 400 });
     }
 
-    if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
-      const response = NextResponse.json({ success: true })
-      
-      response.cookies.set('auth', 'authenticated', {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        sameSite: 'strict',
-        maxAge: 60 * 60 * 24 * 7, // 7 days
-        path: '/',
-      })
-
-      return response
+    // Developer convenience: automatically create an admin account when the provided credentials
+    // do not match an existing user. This eases first-run setup and can be removed in production.
+    if (process.env.NODE_ENV !== 'production') {
+      const bootstrapEmail = process.env.ADMIN_BOOTSTRAP_EMAIL ?? 'admin@mountainmixology.com';
+      const bootstrapPassword = process.env.ADMIN_BOOTSTRAP_PASSWORD ?? 'ChangeMe123!';
+      await ensureDefaultAdmin(bootstrapEmail, bootstrapPassword);
     }
 
-    return NextResponse.json(
-      { error: 'Invalid credentials' },
-      { status: 401 }
-    )
+    const admin = findAdminByEmail(email);
+    if (!admin) {
+      return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
+    }
+
+    const isValid = await verifyPassword(password, admin.password_hash);
+    if (!isValid) {
+      return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
+    }
+
+    await destroyAdminSession();
+    await createAdminSession(admin.id);
+
+    return NextResponse.json({ success: true, admin: { id: admin.id, email: admin.email } });
   } catch (error) {
-    console.error('Login error:', error)
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    )
+    console.error('Login failed:', error);
+    return NextResponse.json({ error: 'Unable to login' }, { status: 500 });
   }
 }

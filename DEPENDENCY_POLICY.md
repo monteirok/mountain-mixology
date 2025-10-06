@@ -69,7 +69,6 @@ Non-critical packages that enhance functionality:
 ### Range Versioning for Utilities
 ```json
 {
-  "zod": "^3.24.2",
   "clsx": "^2.1.1"
 }
 ```

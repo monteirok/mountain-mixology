@@ -6,7 +6,11 @@ export class MCPClient {
     this.baseUrl = baseUrl;
   }
 
-  async callTool(server: string, tool: string, args?: any) {
+  async callTool<TResponse = unknown>(
+    server: string,
+    tool: string,
+    args?: Record<string, unknown> | unknown[]
+  ): Promise<TResponse> {
     const response = await fetch(this.baseUrl, {
       method: 'POST',
       headers: {
@@ -23,10 +27,13 @@ export class MCPClient {
       throw new Error(`MCP call failed: ${response.statusText}`);
     }
 
-    return response.json();
+    return response.json() as Promise<TResponse>;
   }
 
-  async getResource(server: string, resource: string) {
+  async getResource<TResponse = unknown>(
+    server: string,
+    resource: string
+  ): Promise<TResponse> {
     const response = await fetch(
       `${this.baseUrl}?server=${server}&resource=${encodeURIComponent(resource)}`
     );
@@ -35,17 +42,17 @@ export class MCPClient {
       throw new Error(`MCP resource fetch failed: ${response.statusText}`);
     }
 
-    return response.json();
+    return response.json() as Promise<TResponse>;
   }
 
-  async getServerStatuses() {
+  async getServerStatuses<TResponse = unknown>(): Promise<TResponse> {
     const response = await fetch(this.baseUrl);
     
     if (!response.ok) {
       throw new Error(`MCP status fetch failed: ${response.statusText}`);
     }
 
-    return response.json();
+    return response.json() as Promise<TResponse>;
   }
 }
 
