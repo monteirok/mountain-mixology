@@ -120,9 +120,12 @@ export default function Contact() {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
+            whileHover={{ y: -12, transition: { type: "spring", stiffness: 220, damping: 18 } }}
+            className="rounded-2xl"
           >
-            <Card className="bg-white dark:bg-charcoal rounded-2xl shadow-lg">
-              <CardContent className="p-8">
+            <Card className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/95 shadow-xl transition-all duration-500 hover:shadow-[0_28px_60px_rgba(15,23,42,0.28)] dark:border-white/5 dark:bg-charcoal/95">
+              <span className="form-card-glow pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+              <CardContent className="relative z-10 p-8">
                 <h3 className="text-2xl font-playfair font-semibold mb-6 text-charcoal dark:text-white">Get Your Custom Quote</h3>
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                   <div className="grid md:grid-cols-2 gap-6">

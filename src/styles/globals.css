@@ -111,6 +111,20 @@
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
   }
 
+  .form-card-glow {
+    background: linear-gradient(135deg,
+      rgba(234, 179, 8, 0) 0%,
+      rgba(234, 179, 8, 0.18) 48%,
+      rgba(234, 179, 8, 0.08) 100%);
+  }
+
+  .dark .form-card-glow {
+    background: linear-gradient(135deg,
+      rgba(234, 179, 8, 0.05) 0%,
+      rgba(234, 179, 8, 0.30) 55%,
+      rgba(234, 179, 8, 0.12) 100%);
+  }
+
   .glass-button {
     background: rgba(255, 255, 255, 0.25);
     backdrop-filter: blur(15px);
