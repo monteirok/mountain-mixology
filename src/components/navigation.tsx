@@ -101,15 +101,15 @@ export default function Navigation() {
           >
             Cocktails
           </button>
-          <button
+          {/* <button
             onClick={() => scrollToSection("gallery")}
             className="text-white/80 transition-colors duration-300 hover:text-white"
           >
             Gallery
-          </button>
+          </button> */}
           <button
             onClick={() => scrollToSection("contact")}
-            className="hover-lift rounded-full bg-mountain-gold px-6 py-2 text-sm font-semibold text-charcoal transition-all duration-300 hover:bg-copper"
+            className="rounded-full bg-mountain-gold px-6 py-2 text-sm font-semibold text-charcoal transition-all duration-300 hover:bg-copper"
           >
             Book Event
           </button>
@@ -158,12 +158,12 @@ export default function Navigation() {
                 >
                   Cocktails
                 </button>
-                <button
+                {/* <button
                   onClick={() => scrollToSection("gallery")}
                   className="block w-full text-left text-white/80 transition-colors duration-300 hover:text-white"
                 >
                   Gallery
-                </button>
+                </button> */}
                 <button
                   onClick={() => scrollToSection("contact")}
                   className="mt-4 w-full rounded-full bg-mountain-gold px-6 py-2 text-center font-semibold text-charcoal transition-all duration-300 hover:bg-copper"
