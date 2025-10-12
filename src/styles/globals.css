@@ -201,7 +201,7 @@
     overflow: hidden;
     background: rgba(15, 23, 42, 0.55);
     backdrop-filter: blur(18px);
-    border: 1px solid rgba(255, 255, 255, 0.18);
+    border: none;
     box-shadow: 0 25px 48px rgba(15, 23, 42, 0.22);
   }
 
@@ -233,7 +233,7 @@
 
   .dark .liquid-glass {
     background: rgba(15, 23, 42, 0.72);
-    border: 1px solid rgba(148, 163, 184, 0.25);
+    border: none;
     box-shadow: 0 28px 56px rgba(2, 6, 23, 0.58);
   }
 
