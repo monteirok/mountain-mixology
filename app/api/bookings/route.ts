@@ -100,7 +100,13 @@ export async function POST(request: Request) {
       return NextResponse.json({ error }, { status: 400 });
     }
 
-    const bookingId = createBooking(value);
+    let bookingId: string | number | undefined;
+
+    try {
+      bookingId = createBooking(value);
+    } catch (dbError) {
+      console.warn('Booking persistence failed, continuing with email only:', dbError);
+    }
 
     try {
       await sendBookingNotification({ id: bookingId, ...value });
@@ -109,7 +115,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Unable to submit booking request' }, { status: 500 });
     }
 
-    return NextResponse.json({ success: true, id: bookingId });
+    return NextResponse.json({ success: true, id: bookingId ?? null, persisted: Boolean(bookingId) });
   } catch (error) {
     console.error('Booking submission failed:', error);
     return NextResponse.json({ error: 'Unable to submit booking request' }, { status: 500 });
@@ -122,6 +128,13 @@ export async function GET() {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  const bookings = listBookings().map(mapBookingRow);
+  let bookings: ReturnType<typeof mapBookingRow>[] = [];
+
+  try {
+    bookings = listBookings().map(mapBookingRow);
+  } catch (dbError) {
+    console.warn('Unable to read bookings from database:', dbError);
+  }
+
   return NextResponse.json({ bookings, admin: { id: admin.id, email: admin.email } });
 }
