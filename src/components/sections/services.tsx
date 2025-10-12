@@ -10,6 +10,16 @@ import {
 
 const services = [
   {
+    icon: Home,
+    title: "Private Parties",
+    description: "Intimate cocktail experiences for birthdays, anniversaries, and special celebrations in your home or venue.",
+    features: [
+      "Personalized menu consultation",
+      "Mobile bar setup",
+      "Flexible service packages"
+    ]
+  },
+  {
     icon: Wine,
     title: "Wedding Cocktail Service",
     description: "Signature cocktail menus, professional bartending, and elegant presentation for your special day in the mountains.",
@@ -27,16 +37,6 @@ const services = [
       "Scalable service options",
       "Brand-customized cocktails",
       "Event coordination support"
-    ]
-  },
-  {
-    icon: Home,
-    title: "Private Parties",
-    description: "Intimate cocktail experiences for birthdays, anniversaries, and special celebrations in your home or venue.",
-    features: [
-      "Personalized menu consultation",
-      "Mobile bar setup",
-      "Flexible service packages"
     ]
   },
   // {

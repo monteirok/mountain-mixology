@@ -92,7 +92,8 @@ export default function Cocktails() {
         </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-          {cocktails.map((cocktail, index) => (
+          {/* TODO: Update cocktails menu */}
+          {/* {cocktails.map((cocktail, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 30 }}
@@ -122,7 +123,7 @@ export default function Cocktails() {
                 </div>
               </div>
             </motion.div>
-          ))}
+          ))} */}
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">

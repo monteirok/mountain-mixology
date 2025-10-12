@@ -12,25 +12,19 @@ export default function Hero() {
 
   return (
     <section
-      id="hero"
       className="relative flex min-h-screen items-center bg-black/20 bg-fixed bg-cover bg-center"
+      id="hero"
       style={{
         backgroundImage:
           "url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080')",
         backgroundPosition: "center top",
       }}
     >
+      {/* Background Overlay */}
       <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/20" />
 
-      <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col items-start gap-8 px-6 py-32 text-white md:px-12 lg:px-16">
-        <motion.span
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.1 }}
-          className="tracking-[0.4em] text-xs uppercase text-slate-100 md:text-sm"
-        >
-          Mountain Mixology
-        </motion.span>
+      {/* HEADING */}
+      <div className="flex flex-col items-center gap-12 relative z-10 w-full max-w-6xl mx-auto px-6 md:px-12 lg:px-16 py-32 text-white">
         <motion.h1
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
@@ -39,9 +33,10 @@ export default function Hero() {
         >
           Elevated Cocktails,
           <br />
-          <span className="text-mountain-gold">Mountain Views</span>
+          <span className="text-mountain-gold">Memorable Events</span>
         </motion.h1>
 
+        {/* SUBHEADING */}
         <motion.p
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -52,11 +47,12 @@ export default function Hero() {
           Transform your event with our signature mixology experience.
         </motion.p>
 
+        {/* BUTTONS (x2) */}
         <motion.div
+          className="flex flex-col gap-4 sm:flex-row"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.6 }}
-          className="flex flex-col gap-4 sm:flex-row"
         >
           <button
             onClick={() => scrollToSection("contact")}
@@ -72,27 +68,6 @@ export default function Hero() {
           </button>
         </motion.div>
       </div>
-
-      {/* Floating Elements */}
-      {/* <motion.div
-        animate={{ y: [0, -20, 0] }}
-        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute bottom-20 left-10 hidden lg:block"
-      >
-        <div className="glass-card p-6">
-          <Wine className="text-mountain-gold text-2xl" size={32} />
-        </div>
-      </motion.div>
-
-      <motion.div
-        animate={{ y: [0, -20, 0] }}
-        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-        className="absolute top-40 right-20 hidden lg:block"
-      >
-        <div className="glass-card p-6">
-          <Sparkles className="text-mountain-gold text-2xl" size={32} />
-        </div>
-      </motion.div> */}
     </section>
   );
 }

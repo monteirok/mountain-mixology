@@ -1,8 +1,10 @@
 'use client'
 
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import Logo from "../components/ui/logo";
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
@@ -76,8 +78,21 @@ export default function Navigation() {
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
         >
-          <button className="text-[1.4rem] font-playfair font-bold text-mountain-gold" onClick={() => scrollToSection("hero")}>
-            Mountain Mixology
+          <button
+            className="flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mountain-gold focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+            onClick={() => scrollToSection("hero")}
+            aria-label="Go to top of page"
+          >
+            {/* <Image
+              src="/logo.png"
+              alt="Mountain Mixology"
+              width={180}
+              height={60}
+              priority
+              className="h-12 w-auto"
+            /> */}
+
+            <Logo />
           </button>
         </motion.div>
 

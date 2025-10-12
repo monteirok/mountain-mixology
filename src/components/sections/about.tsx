@@ -17,8 +17,8 @@ export default function About() {
               Crafting Memorable Moments
             </h2>
             <p className="text-lg mb-6 leading-relaxed text-charcoal dark:text-white">
-              Founded in the breathtaking mountain town of Canmore, Mountain Mixology brings together
-              the artistry of craft cocktails with the stunning backdrop of the Canadian Rockies.
+              Founded in the breathtaking mountain town of Canmore, Mountain Mixology brings
+              the artistry of craft cocktails to any event.
               Our passion for premium ingredients and innovative techniques creates unforgettable
               beverage experiences for your most important celebrations.
             </p>
@@ -29,8 +29,10 @@ export default function About() {
               that are as beautiful as they are delicious.
             </p>
 
-            <div className="grid grid-cols-3 gap-8 text-center">
-              <motion.div
+            {/* TODO: Update back to "grid-cols-3" */}
+            <div className="grid grid-cols-2 gap-8 text-center">
+              {/* TODO: Update # of events catered with real data */}
+              {/* <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
@@ -39,7 +41,7 @@ export default function About() {
               >
                 <div className="text-3xl font-bold text-mountain-gold mb-2">200+</div>
                 <div className="text-sm uppercase tracking-wider text-charcoal dark:text-white">Events Catered</div>
-              </motion.div>
+              </motion.div> */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}

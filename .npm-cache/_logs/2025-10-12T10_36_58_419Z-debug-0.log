@@ -7,7 +7,13 @@
 6 silly config load:file:/usr/local/etc/npmrc
 7 verbose title npm run dev
 8 verbose argv "run" "dev"
-9 verbose logfile logs-max:10 dir:/Users/karstenmonteiro/Dev/mountmix/mountain-mixology/.npm-cache/_logs/2025-10-12T05_56_36_272Z-
-10 verbose logfile /Users/karstenmonteiro/Dev/mountmix/mountain-mixology/.npm-cache/_logs/2025-10-12T05_56_36_272Z-debug-0.log
+9 verbose logfile logs-max:10 dir:/Users/karstenmonteiro/Dev/mountmix/mountain-mixology/.npm-cache/_logs/2025-10-12T10_36_58_419Z-
+10 verbose logfile /Users/karstenmonteiro/Dev/mountmix/mountain-mixology/.npm-cache/_logs/2025-10-12T10_36_58_419Z-debug-0.log
 11 silly logfile start cleaning logs, removing 1 files
 12 silly logfile done cleaning log files
+13 verbose cwd /Users/karstenmonteiro/Dev/mountmix/mountain-mixology
+14 verbose os Darwin 25.1.0
+15 verbose node v22.16.0
+16 verbose npm  v11.6.1
+17 verbose exit 0
+18 info ok

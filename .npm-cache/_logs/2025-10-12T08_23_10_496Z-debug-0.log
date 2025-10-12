@@ -5,15 +5,15 @@
 4 silly config load:file:/Users/karstenmonteiro/Dev/mountmix/mountain-mixology/.npmrc
 5 silly config load:file:/Users/karstenmonteiro/.npmrc
 6 silly config load:file:/usr/local/etc/npmrc
-7 verbose title npm run check
-8 verbose argv "run" "check"
-9 verbose logfile logs-max:10 dir:/Users/karstenmonteiro/Dev/mountmix/mountain-mixology/.npm-cache/_logs/2025-10-12T05_56_34_783Z-
-10 verbose logfile /Users/karstenmonteiro/Dev/mountmix/mountain-mixology/.npm-cache/_logs/2025-10-12T05_56_34_783Z-debug-0.log
+7 verbose title npm run dev
+8 verbose argv "run" "dev"
+9 verbose logfile logs-max:10 dir:/Users/karstenmonteiro/Dev/mountmix/mountain-mixology/.npm-cache/_logs/2025-10-12T08_23_10_496Z-
+10 verbose logfile /Users/karstenmonteiro/Dev/mountmix/mountain-mixology/.npm-cache/_logs/2025-10-12T08_23_10_496Z-debug-0.log
 11 silly logfile start cleaning logs, removing 1 files
 12 silly logfile done cleaning log files
 13 verbose cwd /Users/karstenmonteiro/Dev/mountmix/mountain-mixology
 14 verbose os Darwin 25.1.0
 15 verbose node v22.16.0
 16 verbose npm  v11.6.1
-17 verbose exit 2
-18 verbose code 2
+17 verbose exit 0
+18 info ok
