@@ -70,7 +70,7 @@ const insertBookingStmt = db.prepare(
   ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
 );
 
-const selectBookingsStmt = db.prepare<[], Booking[]>(
+const selectBookingsStmt = db.prepare<[], Booking>(
   `SELECT * FROM bookings ORDER BY created_at DESC`
 );
 

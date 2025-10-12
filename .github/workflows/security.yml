@@ -166,14 +166,42 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0  # Full history for secret scanning
+
+      - name: Determine scan range
+        id: trufflehog-range
+        shell: bash
+        run: |
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            BASE_SHA="${{ github.event.pull_request.base.sha }}"
+          else
+            BASE_SHA="${{ github.event.before }}"
+          fi
+
+          if [[ -z "$BASE_SHA" || "$BASE_SHA" == "${{ github.sha }}" || "$BASE_SHA" == "0000000000000000000000000000000000000000" ]]; then
+            if git rev-parse HEAD^ >/dev/null 2>&1; then
+              BASE_SHA="$(git rev-parse HEAD^)"
+            else
+              BASE_SHA=""
+            fi
+          fi
+
+          echo "base=$BASE_SHA" >> "$GITHUB_OUTPUT"
           
-      - name: TruffleHog OSS
+      - name: TruffleHog OSS (diff)
+        if: steps.trufflehog-range.outputs.base != ''
         uses: trufflesecurity/trufflehog@main
         with:
           path: ./
-          base: main
-          head: HEAD
+          base: ${{ steps.trufflehog-range.outputs.base }}
+          head: ${{ github.sha }}
           extra_args: --debug --only-verified
+
+      - name: TruffleHog OSS (full repository)
+        if: steps.trufflehog-range.outputs.base == ''
+        uses: trufflesecurity/trufflehog@main
+        with:
+          path: ./
+          extra_args: --debug --only-verified --no-history
 
   security-summary:
     name: Security Summary

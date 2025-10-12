@@ -1,4 +1,6 @@
 /** @type {import('next').NextConfig} */
+const shouldBuildStandalone = process.env.NEXT_BUILD_STANDALONE === 'true';
+
 const nextConfig = {
   transpilePackages: ['lucide-react'],
   images: {
@@ -15,7 +17,7 @@ const nextConfig = {
     dangerouslyAllowSVG: false,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
-  output: 'standalone',
+  ...(shouldBuildStandalone ? { output: 'standalone' } : {}),
   
   // Security headers
   async headers() {

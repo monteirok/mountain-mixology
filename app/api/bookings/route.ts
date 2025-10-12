@@ -30,14 +30,27 @@ function validateBookingPayload(body: unknown): { value?: BookingPayload; error?
     firstName: String(value.firstName ?? '').trim(),
     lastName: String(value.lastName ?? '').trim(),
     email: String(value.email ?? '').trim(),
-    phone: value.phone ? String(value.phone).trim() : undefined,
-    eventType: value.eventType ? String(value.eventType).trim() : undefined,
-    guestCount: value.guestCount ? String(value.guestCount).trim() : undefined,
-    eventDate: value.eventDate ? String(value.eventDate).trim() : undefined,
-    budget: value.budget ? String(value.budget).trim() : undefined,
-    location: value.location ? String(value.location).trim() : undefined,
     message: String(value.message ?? '').trim(),
   };
+
+  if (value.phone) {
+    payload.phone = String(value.phone).trim();
+  }
+  if (value.eventType) {
+    payload.eventType = String(value.eventType).trim();
+  }
+  if (value.guestCount) {
+    payload.guestCount = String(value.guestCount).trim();
+  }
+  if (value.eventDate) {
+    payload.eventDate = String(value.eventDate).trim();
+  }
+  if (value.budget) {
+    payload.budget = String(value.budget).trim();
+  }
+  if (value.location) {
+    payload.location = String(value.location).trim();
+  }
 
   for (const field of REQUIRED_FIELDS) {
     if (!payload[field]) {

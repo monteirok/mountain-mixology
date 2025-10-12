@@ -5,22 +5,24 @@ import { updateBookingStatus, type Booking } from '@/lib/repository';
 
 export const dynamic = 'force-dynamic';
 
-const ALLOWED_STATUSES = new Set<Booking['status']>(['pending', 'in_progress', 'resolved', 'archived']);
+const STATUS_VALUES = ['pending', 'in_progress', 'resolved', 'archived'] as const;
+const ALLOWED_STATUSES = new Set<Booking['status']>();
+STATUS_VALUES.forEach(status => ALLOWED_STATUSES.add(status as Booking['status']));
 
 function isBookingStatus(value: unknown): value is Booking['status'] {
-  return typeof value === 'string' && ALLOWED_STATUSES.has(value);
+  if (typeof value !== 'string') {
+    return false;
+  }
+  return ALLOWED_STATUSES.has(value as Booking['status']);
 }
-
-type RouteContext = {
-  params?: Promise<Record<string, string | string[] | undefined>>;
-};
 
 export async function PATCH(
   request: NextRequest,
-  context: RouteContext
+  { params }: { params: Promise<Record<string, string | string[] | undefined>> }
 ) {
-  const params = await context.params;
-  const idParam = Array.isArray(params?.id) ? params?.id?.[0] : params?.id;
+  const resolvedParams = await params;
+  const idValue = resolvedParams?.id;
+  const idParam = Array.isArray(idValue) ? idValue[0] : idValue;
   const bookingId = Number(idParam);
 
   const admin = await getCurrentAdmin();

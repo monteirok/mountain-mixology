@@ -1,12 +1,56 @@
 'use client'
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isGlassActive, setIsGlassActive] = useState(false);
+  const navRef = useRef<HTMLElement | null>(null);
 
+  useEffect(() => {
+    let heroElement = document.getElementById("hero");
+
+    const ensureHero = () => {
+      if (heroElement) {
+        return heroElement;
+      }
+      heroElement = document.getElementById("hero");
+      return heroElement;
+    };
+
+    const handleScroll = () => {
+      const hero = ensureHero();
+      const navHeight = navRef.current?.offsetHeight ?? 0;
+      const buffer = 24;
+
+      if (!hero) {
+        const pastFallback = window.scrollY > 120;
+        setIsGlassActive((prev) =>
+          prev === pastFallback ? prev : pastFallback
+        );
+        return;
+      }
+
+      const heroBottom = hero.getBoundingClientRect().bottom;
+      const shouldActivate = heroBottom <= navHeight + buffer;
+
+      setIsGlassActive((prev) =>
+        prev === shouldActivate ? prev : shouldActivate
+      );
+    };
+
+    handleScroll();
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+    };
+  }, []);
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -17,8 +61,17 @@ export default function Navigation() {
   };
 
   return (
-    <nav className="fixed top-0 z-50 w-full bg-gradient-to-b from-black/80 via-black/40 to-transparent transition-all duration-300">
-      <div className="container flex mx-auto items-center justify-between px-6 py-6">
+    <nav
+      ref={navRef}
+      className="fixed top-0 z-50 w-full bg-transparent px-4 transition-all duration-500 ease-out"
+    >
+      <div
+        className={`container mx-auto flex items-center justify-between px-6 transition-all duration-500 ${
+          isGlassActive
+            ? "liquid-glass mt-3 rounded-3xl px-6 py-3 shadow-xl shadow-black/20 md:mt-4"
+            : "py-6"
+        }`}
+      >
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}

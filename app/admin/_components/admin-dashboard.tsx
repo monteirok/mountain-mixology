@@ -163,7 +163,7 @@ export default function AdminDashboard({ adminEmail, initialBookings }: AdminDas
           >
             {isRefreshing ? 'Refreshing…' : 'Refresh'}
           </Button>
-          <Button type="button" variant="secondary" onClick={handleLogout}>
+          <Button type="button" onClick={handleLogout}>
             Sign Out
           </Button>
         </div>
