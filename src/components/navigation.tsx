@@ -4,8 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
-import Logo from "../components/ui/logo";
-
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const [isGlassActive, setIsGlassActive] = useState(false);
@@ -92,7 +90,10 @@ export default function Navigation() {
               className="h-12 w-auto"
             /> */}
 
-            <Logo />
+            {/* <Logo /> */}
+            <span className="font-playfair text-2xl font-bold text-mountain-gold tracking-wide">
+              Mountain Mixology
+            </span>
           </button>
         </motion.div>
 
