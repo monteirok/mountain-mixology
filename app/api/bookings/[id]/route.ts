@@ -11,16 +11,23 @@ function isBookingStatus(value: unknown): value is Booking['status'] {
   return typeof value === 'string' && ALLOWED_STATUSES.has(value);
 }
 
+type RouteContext = {
+  params?: Promise<Record<string, string | string[] | undefined>>;
+};
+
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: RouteContext
 ) {
+  const params = await context.params;
+  const idParam = Array.isArray(params?.id) ? params?.id?.[0] : params?.id;
+  const bookingId = Number(idParam);
+
   const admin = await getCurrentAdmin();
   if (!admin) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  const bookingId = Number(params.id);
   if (Number.isNaN(bookingId)) {
     return NextResponse.json({ error: 'Invalid booking id' }, { status: 400 });
   }
