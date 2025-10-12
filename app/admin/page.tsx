@@ -1,6 +1,8 @@
 import { redirect } from 'next/navigation';
+
 import { getCurrentAdmin } from '@/lib/auth';
 import { listBookings } from '@/lib/repository';
+
 import AdminDashboard, { type DashboardBooking } from './_components/admin-dashboard';
 
 export default async function AdminPage() {

@@ -13,19 +13,14 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative flex min-h-screen items-center overflow-hidden bg-black/20"
+      className="relative flex min-h-screen items-center bg-black/20 bg-fixed bg-cover bg-center"
+      style={{
+        backgroundImage:
+          "url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080')",
+        backgroundPosition: "center top",
+      }}
     >
-      {/* Background Image with Parallax Effect */}
-      <div
-        className="absolute inset-0 parallax-bg"
-        style={{
-          backgroundImage:
-            "url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080')",
-          backgroundPosition: "center top",
-        }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/20" />
-      </div>
+      <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/20" />
 
       <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col items-start gap-8 px-6 py-32 text-white md:px-12 lg:px-16">
         <motion.span

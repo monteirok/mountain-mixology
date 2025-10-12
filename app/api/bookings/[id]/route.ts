@@ -1,10 +1,15 @@
 import { NextResponse } from 'next/server';
+
 import { getCurrentAdmin } from '@/lib/auth';
-import { updateBookingStatus } from '@/lib/repository';
+import { updateBookingStatus, type Booking } from '@/lib/repository';
 
 export const dynamic = 'force-dynamic';
 
-const ALLOWED_STATUSES = new Set(['pending', 'in_progress', 'resolved', 'archived']);
+const ALLOWED_STATUSES = new Set<Booking['status']>(['pending', 'in_progress', 'resolved', 'archived']);
+
+function isBookingStatus(value: unknown): value is Booking['status'] {
+  return typeof value === 'string' && ALLOWED_STATUSES.has(value);
+}
 
 export async function PATCH(
   request: Request,
@@ -21,19 +26,25 @@ export async function PATCH(
   }
 
   try {
-    const body = await request.json();
-    const status: string | undefined = body?.status;
-    const adminNotes: string | null = body?.adminNotes ? String(body.adminNotes) : null;
-    const responded: boolean = Boolean(body?.responded);
+    const body = (await request.json()) as Record<string, unknown>;
+    const status = body.status;
+    const adminNotesRaw = body.adminNotes;
+    const adminNotes =
+      typeof adminNotesRaw === 'string'
+        ? adminNotesRaw || null
+        : adminNotesRaw === null || adminNotesRaw === undefined
+          ? null
+          : String(adminNotesRaw);
+    const responded = Boolean(body.responded);
 
-    if (!status || !ALLOWED_STATUSES.has(status)) {
+    if (!isBookingStatus(status)) {
       return NextResponse.json({ error: 'Invalid status value' }, { status: 400 });
     }
 
     const respondedAt = responded ? Math.floor(Date.now() / 1000) : null;
     const updated = updateBookingStatus(
       bookingId,
-      status as any,
+      status,
       adminNotes,
       respondedAt,
       !responded

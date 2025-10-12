@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+
 import Database from 'better-sqlite3';
 
 const DEFAULT_DB_PATH = path.join(process.cwd(), 'data', 'mountain-mixology.db');
@@ -53,4 +54,3 @@ END;
 `);
 
 export default db;
-

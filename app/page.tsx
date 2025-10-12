@@ -20,7 +20,10 @@ export default function Home() {
           <Hero />
           <About />
           <Services />
-          <Reviews />
+
+          {/* TODO: Update reviews section to use real reviews data */}
+          {/* <Reviews /> */}
+          
           <Cocktails />
           <Gallery />
           <Contact />

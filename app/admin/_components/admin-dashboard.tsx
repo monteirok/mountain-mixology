@@ -1,7 +1,9 @@
 'use client';
 
 import { useMemo, useState } from 'react';
+
 import { useRouter } from 'next/navigation';
+
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Textarea } from '@/components/ui/textarea';
@@ -65,7 +67,7 @@ export default function AdminDashboard({ adminEmail, initialBookings }: AdminDas
       ...booking,
       notesDraft: booking.adminNotes ?? '',
       statusDraft: booking.status,
-      respondedDraft: booking.respondedAt != null,
+      respondedDraft: booking.respondedAt !== null,
     }))
   );
 
@@ -87,7 +89,7 @@ export default function AdminDashboard({ adminEmail, initialBookings }: AdminDas
         ...booking,
         notesDraft: booking.adminNotes ?? '',
         statusDraft: booking.status,
-        respondedDraft: booking.respondedAt != null,
+        respondedDraft: booking.respondedAt !== null,
       }));
       setBookings(refreshed);
       setBanner({ type: 'success', message: 'Bookings updated' });
@@ -128,7 +130,7 @@ export default function AdminDashboard({ adminEmail, initialBookings }: AdminDas
         ...updated,
         notesDraft: updated.adminNotes ?? '',
         statusDraft: updated.status,
-        respondedDraft: updated.respondedAt != null,
+        respondedDraft: updated.respondedAt !== null,
       });
       setBanner({ type: 'success', message: 'Booking updated' });
     } catch (error) {

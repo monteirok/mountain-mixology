@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
+
 import { createAdminSession, destroyAdminSession, hashPassword, verifyPassword } from '@/lib/auth';
-import { findAdminByEmail, createAdminUser } from '@/lib/repository';
+import { createAdminUser, findAdminByEmail } from '@/lib/repository';
 
 export const dynamic = 'force-dynamic';
 

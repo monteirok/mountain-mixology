@@ -1,4 +1,5 @@
 import crypto from 'crypto';
+
 import db from './db';
 
 export interface AdminUser {
@@ -176,4 +177,3 @@ export function updateBookingStatus(
   );
   return selectBookingByIdStmt.get(id) ?? null;
 }
-

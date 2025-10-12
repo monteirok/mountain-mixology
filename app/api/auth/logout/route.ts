@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+
 import { destroyAdminSession } from '@/lib/auth';
 
 export const dynamic = 'force-dynamic';
