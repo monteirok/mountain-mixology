@@ -1,9 +1,9 @@
 'use client'
 
-import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+
 import Logo from "../components/ui/logo";
 
 export default function Navigation() {

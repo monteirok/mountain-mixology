@@ -1,57 +1,5 @@
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { Leaf, Palette, Award } from "lucide-react";
-
-const cocktails = [
-  {
-    name: "Rocky Mountain Old Fashioned",
-    description: "Premium Canadian whiskey, maple syrup, angostura bitters, with a smoked cedar garnish",
-    price: "$16",
-    image: "https://images.unsplash.com/photo-1551538827-9c037cb4f32a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400"
-  },
-  {
-    name: "Alpine Gin Garden",
-    description: "Craft gin, elderflower liqueur, fresh herbs, cucumber, and mountain spring water",
-    price: "$14",
-    image: "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400"
-  },
-  {
-    name: "Sunset Peak Margarita",
-    description: "Premium tequila, fresh lime, agave nectar, blood orange, with Himalayan salt rim",
-    price: "$15",
-    image: "https://images.unsplash.com/photo-1551538827-9c037cb4f32a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400"
-  },
-  {
-    name: "Glacier Fizz",
-    description: "Prosecco, wild berry liqueur, fresh mint, lemon twist, with crystallized sugar rim",
-    price: "$13",
-    image: "https://images.unsplash.com/photo-1470337458703-46ad1756a187?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400"
-  },
-  {
-    name: "Summit Punch",
-    description: "Aged rum, passion fruit, pineapple, lime, with toasted coconut and mountain honey",
-    price: "$15",
-    image: "https://images.unsplash.com/photo-1551538827-9c037cb4f32a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400"
-  },
-  {
-    name: "Winter's Edge Martini",
-    description: "Premium vodka, white chocolate liqueur, vanilla, with candied ginger garnish",
-    price: "$16",
-    image: "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400"
-  },
-  {
-    name: "Campfire Sour",
-    description: "Bourbon, amaretto, lemon juice, egg white, with mesquite smoke and charred orange",
-    price: "$17",
-    image: "https://images.unsplash.com/photo-1551538827-9c037cb4f32a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400"
-  },
-  {
-    name: "Mountain Spring Mocktail",
-    description: "Fresh herb infusion, elderflower, cucumber, lime, sparkling water with mountain minerals",
-    price: "$8",
-    image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400"
-  }
-];
 
 const features = [
   {

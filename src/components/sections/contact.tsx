@@ -4,7 +4,6 @@ import { ChangeEvent, FormEvent, useState } from 'react'
 import { motion } from 'framer-motion'
 import { CheckCircle, Clock, Instagram, Mail, MapPin } from 'lucide-react'
 
-import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
@@ -81,8 +80,12 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="bg-ice-blue/20 py-20 dark:bg-ice-blue/10">
-      <div className="container mx-auto px-6">
+    <section id="contact" className="relative overflow-hidden py-24">
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-[520px] bg-gradient-to-b from-mountain-gold/12 via-transparent to-transparent dark:from-mountain-gold/10" />
+      <div className="pointer-events-none absolute -left-1/2 top-24 h-72 w-72 rounded-full bg-mountain-gold/15 blur-3xl dark:bg-mountain-gold/20" />
+      <div className="pointer-events-none absolute -right-1/3 bottom-24 h-96 w-96 rounded-full bg-forest/12 blur-3xl dark:bg-forest/20" />
+
+      <div className="container relative z-10 mx-auto max-w-6xl px-6">
         <motion.div
           className="mb-16 text-center"
           initial={{ opacity: 0, y: 30 }}
@@ -90,30 +93,37 @@ export default function Contact() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="mb-6 text-4xl font-playfair font-bold text-forest dark:text-mountain-gold md:text-5xl">
+          <h2 className="mb-5 text-4xl font-playfair font-bold text-forest dark:text-mountain-gold md:text-5xl">
             Book Your Event
           </h2>
-          <p className="mx-auto max-w-3xl text-xl leading-relaxed text-charcoal/90 dark:text-white/80">
-            Share your vision and tell us about your celebration. Our team will follow up with availability,
-            curated cocktail ideas, and next steps tailored to your event.
+          <p className="mx-auto max-w-3xl text-lg leading-relaxed text-charcoal/80 dark:text-white/70 md:text-xl">
+            Share your vision and let us know the details. We{"'"}ll respond with availability, curated cocktail concepts,
+            and the next steps to shape an unforgettable celebration.
           </p>
         </motion.div>
 
-        <div className="grid gap-16 lg:grid-cols-2">
+        <div className="grid gap-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,360px)]">
           <motion.div
-            className="space-y-8"
+            className="space-y-10"
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <Card className="rounded-2xl border border-white/10 bg-white/95 shadow-xl backdrop-blur-sm transition-all duration-500 hover:shadow-[0_24px_48px_rgba(15,23,42,0.18)] dark:border-white/5 dark:bg-charcoal/95">
-              <CardContent className="p-8">
-                <h3 className="mb-6 text-2xl font-playfair font-semibold text-charcoal dark:text-white">
-                  Tell Us About Your Event
+            <div className="rounded-[30px] border border-white/50 bg-white/90 shadow-[0_25px_60px_rgba(15,23,42,0.12)] backdrop-blur-xl transition-all duration-500 dark:border-white/10 dark:bg-slate-900/80 dark:shadow-[0_30px_80px_rgba(2,6,23,0.55)]">
+              <div className="border-b border-white/60 px-10 py-8 dark:border-white/10">
+                <h3 className="text-2xl font-playfair font-semibold text-charcoal dark:text-white">
+                  Tell Us About Your Celebration
                 </h3>
-                <form className="space-y-5" onSubmit={handleSubmit}>
-                  <div className="grid gap-5 md:grid-cols-2">
+                <p className="mt-3 max-w-xl text-sm text-charcoal/70 dark:text-white/60">
+                  Provide as much detail as you{"'"}d like—we{"'"}ll tailor a proposal, curated cocktail list,
+                  and timeline that fits your event perfectly.
+                </p>
+              </div>
+
+              <div className="px-10 pb-10 pt-8">
+                <form className="space-y-6" onSubmit={handleSubmit}>
+                  <div className="grid gap-6 md:grid-cols-2">
                     <div>
                       <label className="mb-2 block text-sm font-medium text-charcoal dark:text-white" htmlFor="firstName">
                         First Name *
@@ -122,6 +132,7 @@ export default function Contact() {
                         id="firstName"
                         name="firstName"
                         required
+                        className="h-12 rounded-xl border border-slate-200/80 bg-white/90 px-4 text-base text-charcoal placeholder:text-charcoal/50 shadow-[inset_0_1px_0_rgba(255,255,255,0.4)] focus-visible:border-mountain-gold focus-visible:ring-mountain-gold/40 dark:border-white/10 dark:bg-slate-900/80 dark:text-white dark:placeholder-white/50"
                         value={form.firstName}
                         onChange={handleChange('firstName')}
                       />
@@ -134,6 +145,7 @@ export default function Contact() {
                         id="lastName"
                         name="lastName"
                         required
+                        className="h-12 rounded-xl border border-slate-200/80 bg-white/90 px-4 text-base text-charcoal placeholder:text-charcoal/50 shadow-[inset_0_1px_0_rgba(255,255,255,0.4)] focus-visible:border-mountain-gold focus-visible:ring-mountain-gold/40 dark:border-white/10 dark:bg-slate-900/80 dark:text-white dark:placeholder-white/50"
                         value={form.lastName}
                         onChange={handleChange('lastName')}
                       />
@@ -149,6 +161,7 @@ export default function Contact() {
                       name="email"
                       type="email"
                       required
+                      className="h-12 rounded-xl border border-slate-200/80 bg-white/90 px-4 text-base text-charcoal placeholder:text-charcoal/50 shadow-[inset_0_1px_0_rgba(255,255,255,0.4)] focus-visible:border-mountain-gold focus-visible:ring-mountain-gold/40 dark:border-white/10 dark:bg-slate-900/80 dark:text-white dark:placeholder-white/50"
                       value={form.email}
                       onChange={handleChange('email')}
                     />
@@ -161,12 +174,13 @@ export default function Contact() {
                     <Input
                       id="phone"
                       name="phone"
+                      className="h-12 rounded-xl border border-slate-200/80 bg-white/90 px-4 text-base text-charcoal placeholder:text-charcoal/50 shadow-[inset_0_1px_0_rgba(255,255,255,0.4)] focus-visible:border-mountain-gold focus-visible:ring-mountain-gold/40 dark:border-white/10 dark:bg-slate-900/80 dark:text-white dark:placeholder-white/50"
                       value={form.phone}
                       onChange={handleChange('phone')}
                     />
                   </div>
 
-                  <div className="grid gap-5 md:grid-cols-2">
+                  <div className="grid gap-6 md:grid-cols-2">
                     <div>
                       <label className="mb-2 block text-sm font-medium text-charcoal dark:text-white" htmlFor="eventType">
                         Event Type
@@ -176,7 +190,7 @@ export default function Contact() {
                         name="eventType"
                         value={form.eventType}
                         onChange={handleChange('eventType')}
-                        className="h-11 w-full rounded-md border border-input bg-white px-3 text-sm dark:bg-charcoal dark:text-white"
+                        className="h-12 w-full rounded-xl border border-slate-200/80 bg-white/90 px-4 text-sm text-charcoal shadow-[inset_0_1px_0_rgba(255,255,255,0.4)] focus:border-mountain-gold focus:outline-none focus:ring-2 focus:ring-mountain-gold/40 dark:border-white/10 dark:bg-slate-900/80 dark:text-white"
                       >
                         <option value="">Select an event</option>
                         <option value="wedding">Wedding</option>
@@ -195,7 +209,7 @@ export default function Contact() {
                         name="guestCount"
                         value={form.guestCount}
                         onChange={handleChange('guestCount')}
-                        className="h-11 w-full rounded-md border border-input bg-white px-3 text-sm dark:bg-charcoal dark:text-white"
+                        className="h-12 w-full rounded-xl border border-slate-200/80 bg-white/90 px-4 text-sm text-charcoal shadow-[inset_0_1px_0_rgba(255,255,255,0.4)] focus:border-mountain-gold focus:outline-none focus:ring-2 focus:ring-mountain-gold/40 dark:border-white/10 dark:bg-slate-900/80 dark:text-white"
                       >
                         <option value="">Select guests</option>
                         <option value="1-25">1 - 25 guests</option>
@@ -207,7 +221,7 @@ export default function Contact() {
                     </div>
                   </div>
 
-                  <div className="grid gap-5 md:grid-cols-2">
+                  <div className="grid gap-6 md:grid-cols-2">
                     <div>
                       <label className="mb-2 block text-sm font-medium text-charcoal dark:text-white" htmlFor="eventDate">
                         Preferred Date
@@ -216,6 +230,7 @@ export default function Contact() {
                         id="eventDate"
                         name="eventDate"
                         type="date"
+                        className="h-12 rounded-xl border border-slate-200/80 bg-white/90 px-4 text-sm text-charcoal shadow-[inset_0_1px_0_rgba(255,255,255,0.4)] focus-visible:border-mountain-gold focus-visible:ring-mountain-gold/40 dark:border-white/10 dark:bg-slate-900/80 dark:text-white"
                         value={form.eventDate}
                         onChange={handleChange('eventDate')}
                       />
@@ -229,7 +244,7 @@ export default function Contact() {
                         name="budget"
                         value={form.budget}
                         onChange={handleChange('budget')}
-                        className="h-11 w-full rounded-md border border-input bg-white px-3 text-sm dark:bg-charcoal dark:text-white"
+                        className="h-12 w-full rounded-xl border border-slate-200/80 bg-white/90 px-4 text-sm text-charcoal shadow-[inset_0_1px_0_rgba(255,255,255,0.4)] focus:border-mountain-gold focus:outline-none focus:ring-2 focus:ring-mountain-gold/40 dark:border-white/10 dark:bg-slate-900/80 dark:text-white"
                       >
                         <option value="">Select a range</option>
                         <option value="under-1000">Under $1,000</option>
@@ -249,6 +264,7 @@ export default function Contact() {
                       id="location"
                       name="location"
                       placeholder="e.g., Canmore, Banff, Calgary"
+                      className="h-12 rounded-xl border border-slate-200/80 bg-white/90 px-4 text-base text-charcoal placeholder:text-charcoal/50 shadow-[inset_0_1px_0_rgba(255,255,255,0.4)] focus-visible:border-mountain-gold focus-visible:ring-mountain-gold/40 dark:border-white/10 dark:bg-slate-900/80 dark:text-white dark:placeholder-white/50"
                       value={form.location}
                       onChange={handleChange('location')}
                     />
@@ -265,6 +281,7 @@ export default function Contact() {
                       minLength={10}
                       rows={4}
                       placeholder="Share event details, special requests, or the atmosphere you want to create."
+                      className="rounded-xl border border-slate-200/80 bg-white/90 px-4 py-3 text-base text-charcoal placeholder:text-charcoal/50 shadow-[inset_0_1px_0_rgba(255,255,255,0.4)] focus-visible:border-mountain-gold focus-visible:ring-mountain-gold/40 dark:border-white/10 dark:bg-slate-900/80 dark:text-white dark:placeholder-white/50"
                       value={form.message}
                       onChange={handleChange('message')}
                     />
@@ -272,10 +289,10 @@ export default function Contact() {
 
                   {feedback && (
                     <div
-                      className={`rounded-lg px-4 py-3 text-sm ${
+                      className={`rounded-xl px-4 py-3 text-sm font-medium ${
                         feedback.type === 'success'
-                          ? 'bg-emerald-100 text-emerald-900 dark:bg-emerald-900/30 dark:text-emerald-100'
-                          : 'bg-red-100 text-red-900 dark:bg-red-900/30 dark:text-red-100'
+                          ? 'bg-emerald-100/85 text-emerald-900 shadow-sm dark:bg-emerald-800/45 dark:text-emerald-50'
+                          : 'bg-red-100/80 text-red-900 shadow-sm dark:bg-red-900/50 dark:text-red-100'
                       }`}
                     >
                       {feedback.message}
@@ -285,24 +302,25 @@ export default function Contact() {
                   <Button
                     type="submit"
                     disabled={submitting}
-                    className="w-full bg-mountain-gold text-white hover:bg-copper"
+                    className="group w-full rounded-full bg-mountain-gold px-6 py-3 text-base font-semibold text-charcoal transition-all duration-300 hover:bg-copper hover:text-white disabled:opacity-70"
                   >
                     {submitting ? 'Sending…' : 'Submit Booking Request'}
                   </Button>
                 </form>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
 
-            <Card className="rounded-2xl bg-forest text-white">
-              <CardContent className="space-y-4 p-8">
+            <div className="rounded-[26px] border border-forest/15 bg-forest/90 p-8 shadow-[0_30px_65px_rgba(15,23,42,0.25)] dark:border-forest/20 dark:bg-forest/85">
+              <h3 className="mb-6 text-xl font-playfair font-semibold text-white">Why Hosts Choose Us</h3>
+              <div className="grid gap-4 sm:grid-cols-2">
                 {highlights.map((highlight) => (
-                  <div key={highlight} className="flex items-start">
-                    <CheckCircle className="mr-3 flex-shrink-0 text-mountain-gold" size={20} />
-                    <span className="leading-relaxed text-white/90">{highlight}</span>
+                  <div key={highlight} className="flex items-start gap-3 rounded-xl bg-white/5 p-4 text-white/90 backdrop-blur-sm">
+                    <CheckCircle className="mt-1 flex-shrink-0 text-mountain-gold" size={20} />
+                    <span className="leading-relaxed">{highlight}</span>
                   </div>
                 ))}
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           </motion.div>
 
           <motion.div
@@ -312,74 +330,72 @@ export default function Contact() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <Card className="rounded-2xl bg-white shadow-lg dark:bg-charcoal">
-              <CardContent className="space-y-6 p-8">
-                <h3 className="text-2xl font-playfair font-semibold text-charcoal dark:text-white">
-                  Prefer to reach out directly?
-                </h3>
-                <p className="text-charcoal/80 dark:text-white/70">
-                  We love hearing about new celebrations. Email us the details and our lead mixologist will
-                  respond with availability, curated ideas, and next steps tailored to your event.
-                </p>
-                <div className="space-y-6 text-charcoal/80 dark:text-white/70">
-                  <div className="flex items-start">
-                    <div className="mr-4 flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-mountain-gold/20">
-                      <MapPin className="text-mountain-gold" size={20} />
-                    </div>
-                    <div>
-                      <h4 className="mb-1 font-semibold text-charcoal dark:text-white">Service Area</h4>
-                      <p>Canmore · Banff · Calgary · Rocky Mountain region</p>
-                    </div>
-                  </div>
+            <div className="rounded-[30px] border border-white/35 bg-white/85 p-8 shadow-[0_20px_60px_rgba(15,23,42,0.14)] backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/80 dark:text-white">
+              <h3 className="text-2xl font-playfair font-semibold text-charcoal dark:text-white">
+                Prefer to reach out directly?
+              </h3>
+              <p className="mt-4 text-sm leading-relaxed text-charcoal/70 dark:text-white/70">
+                We love hearing about new celebrations. Share the essentials and our lead mixologist will respond with availability,
+                curated ideas, and next steps tailored to your event.
+              </p>
 
-                  <div className="flex items-start">
-                    <div className="mr-4 flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-mountain-gold/20">
-                      <Mail className="text-mountain-gold" size={20} />
-                    </div>
-                    <div>
-                      <h4 className="mb-1 font-semibold text-charcoal dark:text-white">Email</h4>
-                      <a
-                        className="transition-colors hover:text-mountain-gold"
-                        href="mailto:mountainmixologyca@gmail.com"
-                      >
-                        mountainmixologyca@gmail.com
-                      </a>
-                    </div>
+              <div className="mt-8 space-y-6 text-sm text-charcoal/80 dark:text-white/70">
+                <div className="flex items-start gap-4">
+                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-mountain-gold/20">
+                    <MapPin className="text-mountain-gold" size={20} />
                   </div>
-
-                  <div className="flex items-start">
-                    <div className="mr-4 flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-mountain-gold/20">
-                      <Clock className="text-mountain-gold" size={20} />
-                    </div>
-                    <div>
-                      <h4 className="mb-1 font-semibold text-charcoal dark:text-white">Response Time</h4>
-                      <p>Within 24 hours (same day for urgent requests)</p>
-                    </div>
+                  <div>
+                    <h4 className="mb-1 font-semibold text-charcoal dark:text-white">Service Area</h4>
+                    <p>Canmore · Banff · Calgary · Rocky Mountain region</p>
                   </div>
                 </div>
-              </CardContent>
-            </Card>
 
-            <Card className="rounded-2xl bg-white text-center shadow-lg dark:bg-charcoal">
-              <CardContent className="p-8">
-                <h3 className="mb-4 text-xl font-playfair font-semibold text-charcoal dark:text-white">
-                  Follow Our Craft
-                </h3>
-                <p className="mb-6 text-charcoal/70 dark:text-white/70">
-                  Sneak peeks, new menus, and favourite pours from recent events.
-                </p>
-                <div className="flex justify-center">
-                  <a
-                    className="flex h-12 w-12 items-center justify-center rounded-full bg-mountain-gold/20 transition-all duration-300 hover:bg-mountain-gold hover:text-white"
-                    href="https://instagram.com/mountain.mixology"
-                    rel="noreferrer"
-                    target="_blank"
-                  >
-                    <Instagram size={20} />
-                  </a>
+                <div className="flex items-start gap-4">
+                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-mountain-gold/20">
+                    <Mail className="text-mountain-gold" size={20} />
+                  </div>
+                  <div>
+                    <h4 className="mb-1 font-semibold text-charcoal dark:text-white">Email</h4>
+                    <a
+                      className="text-mountain-gold transition-colors hover:text-copper"
+                      href="mailto:reservations@mountainmixology.ca"
+                    >
+                      reservations@mountainmixology.ca
+                    </a>
+                    <p className="mt-1 text-xs text-charcoal/60 dark:text-white/60">
+                      We aim to reply within 24 hours (same day for urgent requests).
+                    </p>
+                  </div>
                 </div>
-              </CardContent>
-            </Card>
+
+                <div className="flex items-start gap-4">
+                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-mountain-gold/20">
+                    <Clock className="text-mountain-gold" size={20} />
+                  </div>
+                  <div>
+                    <h4 className="mb-1 font-semibold text-charcoal dark:text-white">Best Time to Meet</h4>
+                    <p>Weekdays 10am – 6pm MT · Weekend tastings by appointment</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="rounded-[30px] border border-white/35 bg-white/80 p-8 text-center shadow-[0_15px_45px_rgba(15,23,42,0.12)] backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/80">
+              <h3 className="text-xl font-playfair font-semibold text-charcoal dark:text-white">Follow Our Craft</h3>
+              <p className="mt-3 text-sm leading-relaxed text-charcoal/70 dark:text-white/70">
+                Sneak peeks, new menus, and our favourite pours from recent mountain soirées.
+              </p>
+              <div className="mt-7 flex justify-center">
+                <a
+                  className="flex h-12 w-12 items-center justify-center rounded-full bg-mountain-gold/20 text-charcoal transition-all duration-300 hover:-translate-y-1 hover:bg-mountain-gold hover:text-white"
+                  href="https://instagram.com/mountain.mixology"
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  <Instagram size={20} />
+                </a>
+              </div>
+            </div>
           </motion.div>
         </div>
       </div>

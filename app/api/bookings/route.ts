@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 
 import { getCurrentAdmin } from '@/lib/auth';
+import { sendBookingNotification } from '@/lib/email';
 import { createBooking, listBookings } from '@/lib/repository';
 
 export const dynamic = 'force-dynamic';
@@ -100,6 +101,13 @@ export async function POST(request: Request) {
     }
 
     const bookingId = createBooking(value);
+
+    try {
+      await sendBookingNotification({ id: bookingId, ...value });
+    } catch (emailError) {
+      console.error('Booking email notification failed:', emailError);
+      return NextResponse.json({ error: 'Unable to submit booking request' }, { status: 500 });
+    }
 
     return NextResponse.json({ success: true, id: bookingId });
   } catch (error) {
