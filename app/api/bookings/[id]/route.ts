@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextResponse, type NextRequest } from 'next/server';
 
 import { getCurrentAdmin } from '@/lib/auth';
 import { updateBookingStatus, type Booking } from '@/lib/repository';
@@ -12,7 +12,7 @@ function isBookingStatus(value: unknown): value is Booking['status'] {
 }
 
 export async function PATCH(
-  request: Request,
+  request: NextRequest,
   { params }: { params: { id: string } }
 ) {
   const admin = await getCurrentAdmin();

@@ -1,11 +1,12 @@
 'use client'
+
 import { ThemeProvider } from '@/components/theme-provider'
 import { TooltipProvider } from '@/components/ui/tooltip'
 import Navigation from "@/components/navigation";
 import Hero from "@/components/sections/hero";
 import About from "@/components/sections/about";
 import Services from "@/components/sections/services";
-import Reviews from "@/components/sections/reviews";
+// import Reviews from "@/components/sections/reviews";
 import Cocktails from "@/components/sections/cocktails";
 import Gallery from "@/components/sections/gallery";
 import Contact from "@/components/sections/contact";
