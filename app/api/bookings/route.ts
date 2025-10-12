@@ -109,7 +109,11 @@ export async function POST(request: Request) {
     }
 
     try {
-      await sendBookingNotification({ id: bookingId, ...value });
+      const emailPayload = {
+        ...value,
+        ...(bookingId !== undefined && bookingId !== null ? { id: bookingId } : {}),
+      };
+      await sendBookingNotification(emailPayload);
     } catch (emailError) {
       console.error('Booking email notification failed:', emailError);
       return NextResponse.json({ error: 'Unable to submit booking request' }, { status: 500 });

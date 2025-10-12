@@ -387,12 +387,15 @@ export default function Contact() {
               </p>
               <div className="mt-7 flex justify-center">
                 <a
-                  className="flex h-12 w-12 items-center justify-center rounded-full bg-mountain-gold/20 text-charcoal transition-all duration-300 hover:-translate-y-1 hover:bg-mountain-gold hover:text-white"
+                  className="group flex h-12 w-12 items-center justify-center rounded-full bg-mountain-gold/20 text-mountain-gold transition-all duration-300 hover:-translate-y-1 hover:scale-110 hover:bg-mountain-gold hover:text-white dark:bg-white/10"
                   href="https://instagram.com/mountain.mixology"
                   rel="noreferrer"
                   target="_blank"
                 >
-                  <Instagram size={20} />
+                  <Instagram
+                    size={20}
+                    className="transition-transform duration-300 group-hover:scale-110"
+                  />
                 </a>
               </div>
             </div>
