@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from "react";
+import { MouseEvent, useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
@@ -90,16 +90,40 @@ export default function Navigation() {
     { id: "cocktails", label: "Cocktails" },
   ] as const;
 
-  const handleNavClick = (sectionId: string) => {
-    scrollToSection(sectionId);
-    setIsMenuOpen(false);
-  };
+  const navigateToSection = (
+    sectionId: string,
+    event?: MouseEvent<HTMLElement>
+  ) => {
+    const targetHash = `#${sectionId}`;
+    const targetUrl = `/${targetHash}`;
+    const onHome = window.location.pathname === "/";
+    const element = onHome ? document.getElementById(sectionId) : null;
 
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
+    setIsMenuOpen(false);
+
     if (element) {
-      element.scrollIntoView({ behavior: "smooth", block: "start" });
+      event?.preventDefault();
+
+      const navHeight = navRef.current?.offsetHeight ?? 0;
+      const offset = navHeight + 24;
+      const top =
+        element.getBoundingClientRect().top + window.scrollY - offset;
+
+      window.history.replaceState(null, "", targetHash);
+      window.scrollTo({
+        top: Math.max(top, 0),
+        behavior: "smooth",
+      });
+      return;
     }
+
+    if (!onHome) {
+      event?.preventDefault();
+      window.location.href = targetUrl;
+      return;
+    }
+
+    window.location.hash = targetHash;
   };
 
   return (
@@ -121,7 +145,7 @@ export default function Navigation() {
           >
             <button
               className="flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mountain-gold focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
-              onClick={() => handleNavClick("hero")}
+              onClick={(event) => navigateToSection("hero", event)}
               aria-label="Go to top of page"
             >
               <span className="font-playfair text-2xl font-bold tracking-wide text-mountain-gold">
@@ -135,14 +159,14 @@ export default function Navigation() {
               {navLinks.map((link) => (
                 <button
                   key={link.id}
-                  onClick={() => handleNavClick(link.id)}
+                  onClick={(event) => navigateToSection(link.id, event)}
                   className="appearance-none rounded-full bg-transparent px-3 py-1 text-base font-medium text-white/80 transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mountain-gold focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
                 >
                   {link.label}
                 </button>
               ))}
               <button
-                onClick={() => handleNavClick("contact")}
+                onClick={(event) => navigateToSection("contact", event)}
                 className="rounded-full bg-mountain-gold px-6 py-2 text-base font-semibold text-charcoal transition-all duration-300 hover:bg-copper"
               >
                 Book Event
@@ -185,11 +209,8 @@ export default function Navigation() {
                 {navLinks.map((link) => (
                   <motion.a
                     key={link.id}
-                    href={`#${link.id}`}
-                    onClick={(event) => {
-                      event.preventDefault();
-                      handleNavClick(link.id);
-                    }}
+                    href={`/#${link.id}`}
+                    onClick={(event) => navigateToSection(link.id, event)}
                     className="flex w-full items-center justify-between rounded-xl px-4 py-3 text-sm font-medium text-white/90 transition-colors duration-300 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mountain-gold focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
                     whileTap={{ scale: 0.97 }}
                   >
@@ -197,11 +218,8 @@ export default function Navigation() {
                   </motion.a>
                 ))}
                 <motion.a
-                  href="#contact"
-                  onClick={(event) => {
-                    event.preventDefault();
-                    handleNavClick("contact");
-                  }}
+                  href="/#contact"
+                  onClick={(event) => navigateToSection("contact", event)}
                   className="mt-2 rounded-xl bg-mountain-gold px-4 py-3 text-sm font-semibold text-charcoal transition-all duration-300 hover:bg-copper focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mountain-gold focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
                   whileTap={{ scale: 0.97 }}
                 >

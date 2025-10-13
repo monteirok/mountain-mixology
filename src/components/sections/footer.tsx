@@ -1,11 +1,46 @@
 import { Instagram } from "lucide-react";
 
+const quickLinks = [
+  { id: "about", label: "About Us" },
+  { id: "services", label: "Services" },
+  { id: "cocktails", label: "Our Cocktails" },
+  { id: "contact", label: "Book Event" },
+] as const;
+
 export default function Footer() {
   const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth", block: "start" });
+    if (typeof window === "undefined") {
+      return;
     }
+
+    const targetHash = `#${sectionId}`;
+    const targetUrl = `/${targetHash}`;
+    const onHome = window.location.pathname === "/";
+
+    if (!onHome) {
+      window.location.href = targetUrl;
+      return;
+    }
+
+    const element = document.getElementById(sectionId);
+
+    if (element) {
+      const navElement = document.querySelector("nav");
+      const navHeight =
+        navElement instanceof HTMLElement ? navElement.offsetHeight : 0;
+      const offset = navHeight + 24;
+      const top =
+        element.getBoundingClientRect().top + window.scrollY - offset;
+
+      window.history.replaceState(null, "", targetHash);
+      window.scrollTo({
+        top: Math.max(top, 0),
+        behavior: "smooth",
+      });
+      return;
+    }
+
+    window.location.hash = targetHash;
   };
 
   return (
@@ -40,46 +75,16 @@ export default function Footer() {
           <div>
             <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
             <ul className="space-y-2 opacity-80">
-              <li>
-                <button
-                  onClick={() => scrollToSection("about")}
-                  className="hover:text-mountain-gold transition-colors"
-                >
-                  About Us
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => scrollToSection("services")}
-                  className="hover:text-mountain-gold transition-colors"
-                >
-                  Services
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => scrollToSection("cocktails")}
-                  className="hover:text-mountain-gold transition-colors"
-                >
-                  Our Cocktails
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => scrollToSection("gallery")}
-                  className="hover:text-mountain-gold transition-colors"
-                >
-                  Gallery
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => scrollToSection("contact")}
-                  className="hover:text-mountain-gold transition-colors"
-                >
-                  Book Event
-                </button>
-              </li>
+              {quickLinks.map((link) => (
+                <li key={link.id}>
+                  <button
+                    onClick={() => scrollToSection(link.id)}
+                    className="hover:text-mountain-gold transition-colors"
+                  >
+                    {link.label}
+                  </button>
+                </li>
+              ))}
             </ul>
           </div>
 
