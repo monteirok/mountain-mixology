@@ -68,7 +68,7 @@
 
 @layer base {
   * {
-    @apply border-border select-none;
+    @apply border-border;
   }
 
   body {
