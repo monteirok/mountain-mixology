@@ -3,17 +3,10 @@
 import { motion } from 'framer-motion'
 
 import BookingForm from '@/components/BookingForm'
-// const highlights = [
-//   'Licensed & insured cocktail professionals',
-//   'Locally sourced, seasonal ingredients',
-//   'Bespoke menu design and event consultation',
-//   'Premium bar setup and equipment included',
-//   'Flexible packages tailored to every celebration',
-// ]
 
 export default function Contact() {
   return (
-    <section id="contact" className="relative overflow-hidden py-24">
+    <section id="contact" className="relative overflow-hidden py-24 bg-[#12181f]">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-[520px] bg-gradient-to-b from-mountain-gold/12 via-transparent to-transparent dark:from-mountain-gold/10" />
       <div className="pointer-events-none absolute -left-1/2 top-24 h-72 w-72 rounded-full bg-mountain-gold/15 blur-3xl dark:bg-mountain-gold/20" />
       <div className="pointer-events-none absolute -right-1/3 bottom-24 h-96 w-96 rounded-full bg-forest/12 blur-3xl dark:bg-forest/20" />
@@ -55,13 +48,6 @@ export default function Contact() {
             <BookingForm />
           </div>
         </motion.div>
-
-        {/* Previous contact section content retained for reference */}
-        {/*
-        <div className="grid gap-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,360px)]">
-          ...
-        </div>
-        */}
       </div>
     </section>
   )

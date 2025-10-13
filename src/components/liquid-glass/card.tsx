@@ -21,7 +21,7 @@ export default function LiquidGlassCard({
   const baseStyles = `
     relative overflow-hidden rounded-2xl border border-white/20
     backdrop-blur-md bg-gradient-to-br from-white/10 to-white/5
-    shadow-xl shadow-black/10 transition-all duration-500 ease-out
+    shadow-xl shadow-[#161616]/10 transition-all duration-500 ease-out
     before:absolute before:inset-0 before:rounded-2xl 
     before:bg-gradient-to-br before:from-white/20 before:via-transparent before:to-transparent
     before:opacity-0 before:transition-opacity before:duration-300
@@ -36,9 +36,9 @@ export default function LiquidGlassCard({
   };
 
   const variantStyles = {
-    default: 'hover:shadow-2xl hover:shadow-black/20 hover:scale-[1.02] hover:before:opacity-100',
+    default: 'hover:shadow-2xl hover:shadow-[#161616]/20 hover:scale-[1.02] hover:before:opacity-100',
     hover: `
-      hover:shadow-2xl hover:shadow-black/30 hover:scale-105 hover:before:opacity-100
+      hover:shadow-2xl hover:shadow-[#161616]/30 hover:scale-105 hover:before:opacity-100
       hover:bg-gradient-to-br hover:from-white/15 hover:to-white/8
       hover:border-white/30 active:scale-100
     `,

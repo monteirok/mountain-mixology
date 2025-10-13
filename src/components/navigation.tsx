@@ -101,10 +101,22 @@ export default function Navigation() {
       }
     };
 
+    const handleClickOutside = (event: Event) => {
+      const target = event.target as HTMLElement;
+      const navElement = navRef.current;
+      
+      // Check if click is outside the navigation element
+      if (navElement && !navElement.contains(target)) {
+        setIsMenuOpen(false);
+      }
+    };
+
     window.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("mousedown", handleClickOutside);
 
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [isMenuOpen]);
 
@@ -165,12 +177,12 @@ export default function Navigation() {
   return (
     <nav
       ref={navRef}
-      className="fixed top-0 z-50 w-full bg-transparent px-4 transition-all duration-500 ease-out"
+      className="fixed top-0 z-50 w-full bg-transparent px-4 transition-all duration-300 ease-out"
     >
       <div
-        className={`container mx-auto px-6 transition-all duration-500 ${
+        className={`container mx-auto px-6 transition-all duration-300 ${
           isGlassActive
-            ? "liquid-glass mobile-liquid mt-3 rounded-3xl px-6 py-3 shadow-xl shadow-black/20 md:mt-4"
+            ? "liquid-glass mt-3 rounded-3xl px-6 py-3 shadow-xl shadow-[#161616]/20 md:mt-4"
             : "py-6"
         }`}
       >
@@ -218,7 +230,7 @@ export default function Navigation() {
               aria-expanded={isMenuOpen}
               aria-controls="mobile-navigation"
               aria-label="Toggle navigation menu"
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white transition-colors duration-300 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mountain-gold focus-visible:ring-offset-2 focus-visible:ring-offset-transparent md:hidden"
+              className="flex h-10 w-10 items-center justify-center rounded-full bg-white/5 text-white transition-colors duration-300 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mountain-gold focus-visible:ring-offset-2 focus-visible:ring-offset-transparent md:hidden"
               initial={false}
               animate={{ rotate: isMenuOpen ? 90 : 0 }}
               transition={{ type: "spring", stiffness: 200, damping: 20 }}
@@ -241,10 +253,10 @@ export default function Navigation() {
               initial={{ opacity: 0, height: 0, y: -12 }}
               animate={{ opacity: 1, height: "auto", y: 0 }}
               exit={{ opacity: 0, height: 0, y: -12 }}
-              transition={{ duration: 0.25, ease: "easeOut" }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
               className="mt-3 md:hidden"
             >
-              <div className="flex flex-col gap-1 overflow-hidden rounded-2xl border border-white/10 bg-white/10 p-3 shadow-xl shadow-black/20 backdrop-blur-2xl">
+              <div className="liquid-glass flex flex-col gap-1 overflow-hidden rounded-2xl p-3 shadow-xl shadow-[#161616]/20">
                 {navLinks.map((link) => (
                   <motion.button
                     key={link.id}

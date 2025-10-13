@@ -12,7 +12,7 @@ export default function Hero() {
 
   return (
     <section
-      className="relative flex min-h-screen items-center bg-black/20 bg-cover bg-center md:bg-fixed"
+      className="relative flex min-h-screen items-center bg-[#161616]/20 bg-cover bg-center md:bg-fixed"
       id="hero"
       style={{
         backgroundImage:
@@ -21,7 +21,7 @@ export default function Hero() {
       }}
     >
       {/* Background Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/20" />
+      <div className="absolute inset-0 bg-gradient-to-r from-[#161616]/80 via-[#161616]/60 to-[#161616]/20" />
 
       {/* HEADING */}
       <div className="relative z-10 mx-auto flex w-full max-w-5xl flex-col items-center gap-10 px-5 py-20 text-center text-white sm:gap-12 sm:px-8 sm:py-24 md:px-12 md:py-28 lg:px-16 lg:py-32">

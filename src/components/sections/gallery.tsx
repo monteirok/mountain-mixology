@@ -134,7 +134,7 @@ export default function Gallery() {
                 className="h-64 w-full object-cover transition-transform duration-500 group-hover:scale-110"
                 sizes="(min-width: 1280px) 20vw, (min-width: 768px) 30vw, 50vw"
               />
-              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+              <div className="absolute inset-0 bg-[#161616]/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                 <Search className="text-white text-2xl" size={32} />
               </div>
             </motion.div>

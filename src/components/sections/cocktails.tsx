@@ -22,7 +22,7 @@ const features = [
 
 export default function Cocktails() {
   return (
-    <section id="cocktails" className="py-20 bg-slate-900 text-white">
+    <section id="cocktails" className="py-20 bg-white dark:bg-charcoal">
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
