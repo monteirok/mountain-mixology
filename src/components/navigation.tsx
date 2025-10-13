@@ -183,22 +183,30 @@ export default function Navigation() {
             >
               <div className="flex flex-col gap-1 overflow-hidden rounded-2xl border border-white/10 bg-white/10 p-3 shadow-xl shadow-black/20 backdrop-blur-2xl">
                 {navLinks.map((link) => (
-                  <motion.button
+                  <motion.a
                     key={link.id}
-                    onClick={() => handleNavClick(link.id)}
+                    href={`#${link.id}`}
+                    onClick={(event) => {
+                      event.preventDefault();
+                      handleNavClick(link.id);
+                    }}
                     className="flex w-full items-center justify-between rounded-xl px-4 py-3 text-sm font-medium text-white/90 transition-colors duration-300 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mountain-gold focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
                     whileTap={{ scale: 0.97 }}
                   >
                     {link.label}
-                  </motion.button>
+                  </motion.a>
                 ))}
-                <motion.button
-                  onClick={() => handleNavClick("contact")}
+                <motion.a
+                  href="#contact"
+                  onClick={(event) => {
+                    event.preventDefault();
+                    handleNavClick("contact");
+                  }}
                   className="mt-2 rounded-xl bg-mountain-gold px-4 py-3 text-sm font-semibold text-charcoal transition-all duration-300 hover:bg-copper focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mountain-gold focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
                   whileTap={{ scale: 0.97 }}
                 >
                   Book Event
-                </motion.button>
+                </motion.a>
               </div>
             </motion.div>
           ) : null}
