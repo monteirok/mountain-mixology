@@ -60,7 +60,7 @@ export async function POST(request: NextRequest) {
     const toAddress =
       process.env.EMAIL_TO ?? "mountainmixologyca@gmail.com";
 
-    const emailSubject = "NEW BOOKING | Mountain Mixology";
+    const emailSubject = `NEW BOOKING REQUEST: ${name}`;
     const summaryLines = [
       `Name: ${name}`,
       `Email: ${email}`,
@@ -82,7 +82,7 @@ export async function POST(request: NextRequest) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: "Bookings <no-reply@mountainmixology.ca>",
+        from: "Mountain Mixology <no-reply@mountainmixology.ca>",
         to: [toAddress],
         subject: emailSubject,
         text: `A new booking request was received.\n\n${summaryLines}\n\nJSON Payload:\n${jsonContent}`,
