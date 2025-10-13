@@ -31,6 +31,10 @@ const initialState: BookingFormState = {
 export default function BookingForm() {
   const [form, setForm] = useState<BookingFormState>(initialState);
   const [status, setStatus] = useState<SubmissionStatus>({ type: "idle" });
+  const labelClass = "flex flex-col gap-2";
+  const labelTextClass = "text-sm font-medium text-charcoal/80 dark:text-white/80";
+  const inputClass =
+    "rounded-lg border border-charcoal/15 bg-white/95 px-3 py-2 text-charcoal placeholder:text-charcoal/40 shadow-sm outline-none transition focus:border-forest focus:ring-2 focus:ring-forest/20 dark:border-white/15 dark:bg-white/10 dark:text-white dark:placeholder:text-white/50";
 
   const handleChange =
     (field: keyof BookingFormState) =>
@@ -76,73 +80,73 @@ export default function BookingForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-        <label className="flex flex-col gap-2">
-          <span className="text-sm font-medium text-white/80">Name *</span>
+        <label className={labelClass}>
+          <span className={labelTextClass}>Name *</span>
           <input
             required
             value={form.name}
             onChange={handleChange("name")}
-            className="rounded-md border border-white/20 bg-white/10 px-3 py-2 text-white outline-none transition focus:border-mountain-gold focus:ring-2 focus:ring-mountain-gold"
+            className={inputClass}
           />
         </label>
 
-        <label className="flex flex-col gap-2">
-          <span className="text-sm font-medium text-white/80">Email *</span>
+        <label className={labelClass}>
+          <span className={labelTextClass}>Email *</span>
           <input
             required
             type="email"
             value={form.email}
             onChange={handleChange("email")}
-            className="rounded-md border border-white/20 bg-white/10 px-3 py-2 text-white outline-none transition focus:border-mountain-gold focus:ring-2 focus:ring-mountain-gold"
+            className={inputClass}
           />
         </label>
 
-        <label className="flex flex-col gap-2">
-          <span className="text-sm font-medium text-white/80">Phone</span>
+        <label className={labelClass}>
+          <span className={labelTextClass}>Phone</span>
           <input
             value={form.phone}
             onChange={handleChange("phone")}
-            className="rounded-md border border-white/20 bg-white/10 px-3 py-2 text-white outline-none transition focus:border-mountain-gold focus:ring-2 focus:ring-mountain-gold"
+            className={inputClass}
           />
         </label>
 
-        <label className="flex flex-col gap-2">
-          <span className="text-sm font-medium text-white/80">Event Date</span>
+        <label className={labelClass}>
+          <span className={labelTextClass}>Event Date</span>
           <input
             type="date"
             value={form.eventDate}
             onChange={handleChange("eventDate")}
-            className="rounded-md border border-white/20 bg-white/10 px-3 py-2 text-white outline-none transition focus:border-mountain-gold focus:ring-2 focus:ring-mountain-gold"
+            className={inputClass}
           />
         </label>
 
-        <label className="flex flex-col gap-2">
-          <span className="text-sm font-medium text-white/80">Guests</span>
+        <label className={labelClass}>
+          <span className={labelTextClass}>Guests</span>
           <input
             value={form.guests}
             onChange={handleChange("guests")}
             placeholder="Approximate number of guests"
-            className="rounded-md border border-white/20 bg-white/10 px-3 py-2 text-white outline-none transition focus:border-mountain-gold focus:ring-2 focus:ring-mountain-gold"
+            className={inputClass}
           />
         </label>
 
-        <label className="flex flex-col gap-2">
-          <span className="text-sm font-medium text-white/80">Venue</span>
+        <label className={labelClass}>
+          <span className={labelTextClass}>Venue</span>
           <input
             value={form.venue}
             onChange={handleChange("venue")}
-            className="rounded-md border border-white/20 bg-white/10 px-3 py-2 text-white outline-none transition focus:border-mountain-gold focus:ring-2 focus:ring-mountain-gold"
+            className={inputClass}
           />
         </label>
       </div>
 
-      <label className="flex flex-col gap-2">
-        <span className="text-sm font-medium text-white/80">Notes</span>
+      <label className={labelClass}>
+        <span className={labelTextClass}>Notes</span>
         <textarea
           rows={4}
           value={form.notes}
           onChange={handleChange("notes")}
-          className="rounded-md border border-white/20 bg-white/10 px-3 py-2 text-white outline-none transition focus:border-mountain-gold focus:ring-2 focus:ring-mountain-gold"
+          className={`${inputClass} resize-none`}
         />
       </label>
 
@@ -155,11 +159,11 @@ export default function BookingForm() {
       </button>
 
       {status.type === "success" ? (
-        <p className="text-sm font-medium text-emerald-300">{status.message}</p>
+        <p className="text-sm font-medium text-emerald-600 dark:text-emerald-300">{status.message}</p>
       ) : null}
 
       {status.type === "error" ? (
-        <p className="text-sm font-medium text-red-400">{status.message}</p>
+        <p className="text-sm font-medium text-red-500 dark:text-red-400">{status.message}</p>
       ) : null}
     </form>
   );
