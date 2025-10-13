@@ -12,7 +12,7 @@ export default function Hero() {
 
   return (
     <section
-      className="relative flex min-h-screen items-center bg-black/20 bg-fixed bg-cover bg-center"
+      className="relative flex min-h-screen items-center bg-black/20 bg-cover bg-center md:bg-fixed"
       id="hero"
       style={{
         backgroundImage:
@@ -24,7 +24,7 @@ export default function Hero() {
       <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/20" />
 
       {/* HEADING */}
-      <div className="flex flex-col items-center gap-12 relative z-10 w-full max-w-6xl mx-auto px-6 md:px-12 lg:px-16 py-32 text-white">
+      <div className="relative z-10 mx-auto flex w-full max-w-5xl flex-col items-center gap-10 px-5 py-20 text-center text-white sm:gap-12 sm:px-8 sm:py-24 md:px-12 md:py-28 lg:px-16 lg:py-32">
         <motion.h1
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
@@ -41,7 +41,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.3 }}
-          className="max-w-2xl text-base leading-relaxed text-slate-200 md:text-lg lg:text-xl"
+          className="max-w-3xl text-base leading-relaxed text-slate-200 sm:text-lg lg:text-xl"
         >
           Premium craft cocktail catering in the heart of the Canadian Rockies.
           Transform your event with our signature mixology experience.
