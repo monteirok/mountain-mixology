@@ -52,7 +52,6 @@ export default function BookingForm() {
       });
 
       const data = await response.json();
-      console.log("Booking response:", data);
 
       if (!response.ok || !data?.ok) {
         const errorMessage = data?.error ?? "Submission failed.";

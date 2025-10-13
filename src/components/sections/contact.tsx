@@ -1,7 +1,8 @@
 'use client'
 
-import BookingForm from '@/components/BookingForm'
 import { motion } from 'framer-motion'
+
+import BookingForm from '@/components/BookingForm'
 // const highlights = [
 //   'Licensed & insured cocktail professionals',
 //   'Locally sourced, seasonal ingredients',
