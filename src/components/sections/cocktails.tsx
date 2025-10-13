@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Leaf, Palette, Award } from "lucide-react";
+import { Leaf, Palette } from "lucide-react";
 
 const features = [
   {
