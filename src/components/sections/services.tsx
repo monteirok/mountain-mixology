@@ -15,7 +15,6 @@ const services = [
     description: "Intimate cocktail experiences for birthdays, anniversaries, and special celebrations in your home or venue.",
     features: [
       "Personalized menu consultation",
-      "Mobile bar setup",
       "Flexible service packages"
     ]
   },
@@ -26,7 +25,6 @@ const services = [
     features: [
       "Custom cocktail menu design",
       "Professional bartending staff",
-      "Premium glassware & setup"
     ]
   },
   {
@@ -36,27 +34,13 @@ const services = [
     features: [
       "Scalable service options",
       "Brand-customized cocktails",
-      "Event coordination support"
     ]
   },
-  // {
-  //   icon: GraduationCap,
-  //   title: "Cocktail Classes",
-  //   description: "Interactive mixology workshops for team building, bachelor parties, and cocktail enthusiasts.",
-  //   features: [
-  //     "Hands-on learning experience",
-  //     "Take-home recipe cards",
-  //     "All ingredients provided"
-  //   ]
-  // },
   {
     icon: Mountain,
     title: "Destination Events",
     description: "Specialized cocktail catering for mountain lodges, ski chalets, and outdoor celebrations.",
     features: [
-      "Weather-adapted service",
-      "Portable bar solutions",
-      "Mountain-themed cocktails"
     ]
   },
   {
@@ -64,7 +48,6 @@ const services = [
     title: "Full Bar Service",
     description: "Complete beverage service including wine, beer, and premium spirits alongside our signature cocktails.",
     features: [
-      "Curated wine selection",
       "Local craft beer options",
       "Premium spirit collection"
     ]

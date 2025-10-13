@@ -1,10 +1,12 @@
 'use client'
 
 import { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import { Menu, X } from "lucide-react";
 
 export default function Navigation() {
   const [isGlassActive, setIsGlassActive] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
@@ -50,6 +52,49 @@ export default function Navigation() {
     };
   }, []);
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!isMenuOpen) {
+      return;
+    }
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsMenuOpen(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isMenuOpen]);
+
+  const navLinks = [
+    { id: "about", label: "About" },
+    { id: "services", label: "Services" },
+    { id: "cocktails", label: "Cocktails" },
+  ] as const;
+
+  const handleNavClick = (sectionId: string) => {
+    scrollToSection(sectionId);
+    setIsMenuOpen(false);
+  };
+
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -70,63 +115,105 @@ export default function Navigation() {
         }`}
       >
         <div className="flex w-full flex-col items-center gap-4 md:flex-row md:items-center md:justify-between md:gap-6">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-          >
-            <button
-              className="flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mountain-gold focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
-              onClick={() => scrollToSection("hero")}
-              aria-label="Go to top of page"
-            >
-              {/* <Image
-                src="/logo.png"
-                alt="Mountain Mixology"
-                width={180}
-                height={60}
-                priority
-                className="h-12 w-auto"
-              /> */}
+          <div className="flex w-full flex-col gap-4 md:flex-row md:items-center md:justify-between md:gap-6">
+            <div className="flex w-full items-center justify-between gap-4 md:w-auto">
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+              >
+                <button
+                  className="flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mountain-gold focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+                  onClick={() => handleNavClick("hero")}
+                  aria-label="Go to top of page"
+                >
+                  {/* <Image
+                    src="/logo.png"
+                    alt="Mountain Mixology"
+                    width={180}
+                    height={60}
+                    priority
+                    className="h-12 w-auto"
+                  /> */}
 
-              {/* <Logo /> */}
-              <span className="font-playfair text-2xl font-bold text-mountain-gold tracking-wide">
-                Mountain Mixology
-              </span>
-            </button>
-          </motion.div>
+                  {/* <Logo /> */}
+                  <span className="font-playfair text-2xl font-bold tracking-wide text-mountain-gold">
+                    Mountain Mixology
+                  </span>
+                </button>
+              </motion.div>
 
-          <div className="flex w-full flex-wrap items-center justify-center gap-2 md:flex-1 md:justify-end md:gap-6">
-            <button
-              onClick={() => scrollToSection("about")}
-              className="appearance-none rounded-full bg-transparent px-3 py-1 text-sm font-medium text-white/80 transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mountain-gold focus-visible:ring-offset-2 focus-visible:ring-offset-transparent md:px-0 md:py-0 md:text-base"
-            >
-              About
-            </button>
-            <button
-              onClick={() => scrollToSection("services")}
-              className="appearance-none rounded-full bg-transparent px-3 py-1 text-sm font-medium text-white/80 transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mountain-gold focus-visible:ring-offset-2 focus-visible:ring-offset-transparent md:px-0 md:py-0 md:text-base"
-            >
-              Services
-            </button>
-            <button
-              onClick={() => scrollToSection("cocktails")}
-              className="appearance-none rounded-full bg-transparent px-3 py-1 text-sm font-medium text-white/80 transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mountain-gold focus-visible:ring-offset-2 focus-visible:ring-offset-transparent md:px-0 md:py-0 md:text-base"
-            >
-              Cocktails
-            </button>
-            {/* <button
-              onClick={() => scrollToSection("gallery")}
-              className="text-white/80 transition-colors duration-300 hover:text-white"
-            >
-              Gallery
-            </button> */}
-            <button
-              onClick={() => scrollToSection("contact")}
-              className="rounded-full bg-mountain-gold px-5 py-2 text-sm font-semibold text-charcoal transition-all duration-300 hover:bg-copper md:px-6"
-            >
-              Book Event
-            </button>
+              <motion.button
+                type="button"
+                onClick={() => setIsMenuOpen((prev) => !prev)}
+                aria-expanded={isMenuOpen}
+                aria-controls="mobile-navigation"
+                aria-label="Toggle navigation menu"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white transition-colors duration-300 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mountain-gold focus-visible:ring-offset-2 focus-visible:ring-offset-transparent md:hidden"
+                initial={false}
+                animate={{ rotate: isMenuOpen ? 90 : 0 }}
+                transition={{ type: "spring", stiffness: 200, damping: 20 }}
+              >
+                <span className="sr-only">Toggle navigation</span>
+                {isMenuOpen ? (
+                  <X className="h-5 w-5" aria-hidden="true" />
+                ) : (
+                  <Menu className="h-5 w-5" aria-hidden="true" />
+                )}
+              </motion.button>
+            </div>
+
+            <div className="hidden w-full flex-1 items-center justify-end gap-6 md:flex">
+              {navLinks.map((link) => (
+                <button
+                  key={link.id}
+                  onClick={() => handleNavClick(link.id)}
+                  className="appearance-none rounded-full bg-transparent px-3 py-1 text-base font-medium text-white/80 transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mountain-gold focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+                >
+                  {link.label}
+                </button>
+              ))}
+              <button
+                onClick={() => handleNavClick("contact")}
+                className="rounded-full bg-mountain-gold px-6 py-2 text-base font-semibold text-charcoal transition-all duration-300 hover:bg-copper"
+              >
+                Book Event
+              </button>
+            </div>
           </div>
+
+          <AnimatePresence initial={false}>
+            {isMenuOpen ? (
+              <motion.div
+                key="mobile-menu"
+                id="mobile-navigation"
+                initial={{ opacity: 0, height: 0, y: -12 }}
+                animate={{ opacity: 1, height: "auto", y: 0 }}
+                exit={{ opacity: 0, height: 0, y: -12 }}
+                transition={{ duration: 0.25, ease: "easeOut" }}
+                className="md:hidden"
+              >
+                <div className="mt-2 flex flex-col gap-1 overflow-hidden rounded-2xl border border-white/10 bg-white/10 p-3 shadow-xl shadow-black/20 backdrop-blur-2xl">
+                  {navLinks.map((link) => (
+                    <motion.button
+                      key={link.id}
+                      onClick={() => handleNavClick(link.id)}
+                      className="flex w-full items-center justify-between rounded-xl px-4 py-3 text-sm font-medium text-white/90 transition-colors duration-300 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mountain-gold focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+                      whileTap={{ scale: 0.97 }}
+                    >
+                      {link.label}
+                    </motion.button>
+                  ))}
+                  <motion.button
+                    onClick={() => handleNavClick("contact")}
+                    className="mt-2 rounded-xl bg-mountain-gold px-4 py-3 text-sm font-semibold text-charcoal transition-all duration-300 hover:bg-copper focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mountain-gold focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+                    whileTap={{ scale: 0.97 }}
+                  >
+                    Book Event
+                  </motion.button>
+                </div>
+              </motion.div>
+            ) : null}
+          </AnimatePresence>
         </div>
       </div>
     </nav>

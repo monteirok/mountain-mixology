@@ -12,11 +12,12 @@ const features = [
     title: "Custom Creations",
     description: "Personalized cocktails designed for your event"
   },
-  {
-    icon: Award,
-    title: "Award-Winning",
-    description: "Recognized mixology techniques and presentation"
-  }
+  // TODO: update or remove the following
+  // {
+  //   icon: Award,
+  //   title: "Award-Winning",
+  //   description: "Recognized mixology techniques and presentation"
+  // }
 ];
 
 export default function Cocktails() {
@@ -74,7 +75,8 @@ export default function Cocktails() {
           ))} */}
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        {/* TODO: <div className="grid md:grid-cols-3 gap-8"> */}
+        <div className="grid md:grid-cols-2 gap-8">
           {features.map((feature, index) => (
             <motion.div
               key={index}
