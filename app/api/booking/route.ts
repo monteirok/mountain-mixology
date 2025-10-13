@@ -61,19 +61,20 @@ export async function POST(request: NextRequest) {
       process.env.EMAIL_TO ?? "mountainmixologyca@gmail.com";
 
     const emailSubject = `NEW BOOKING REQUEST: ${name}`;
-    const summaryLines = [
-      `Name: ${name}`,
-      `Email: ${email}`,
-      phone ? `Phone: ${phone}` : null,
-      eventDate ? `Event Date: ${eventDate}` : null,
-      guests ? `Guests: ${guests}` : null,
-      venue ? `Venue: ${venue}` : null,
-    ]
-      .filter(Boolean)
-      .join("\n");
-
     const jsonContent = JSON.stringify(payload, null, 2);
     const fileName = `booking_${Date.now()}.json`;
+    const humanReadableBody = [
+      "A new booking request was submitted via mountainmixology.ca.",
+      "",
+      `Name: ${name}`,
+      `Email: ${email}`,
+      `Phone: ${phone || "Not provided"}`,
+      `Event Date: ${eventDate || "Not provided"}`,
+      `Guests: ${guests || "Not provided"}`,
+      `Venue: ${venue || "Not provided"}`,
+      `Notes: ${notes || "None provided"}`,
+      `Submitted At: ${payload.submittedAt}`,
+    ].join("\n");
 
     const emailResponse = await fetch("https://api.resend.com/emails", {
       method: "POST",
@@ -85,7 +86,7 @@ export async function POST(request: NextRequest) {
         from: "Mountain Mixology <no-reply@mountainmixology.ca>",
         to: [toAddress],
         subject: emailSubject,
-        text: `A new booking request was received.\n\n${summaryLines}\n\nJSON Payload:\n${jsonContent}`,
+        text: humanReadableBody,
         attachments: [
           {
             filename: fileName,
