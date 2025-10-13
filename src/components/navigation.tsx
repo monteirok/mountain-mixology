@@ -8,6 +8,30 @@ export default function Navigation() {
   const [isGlassActive, setIsGlassActive] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navRef = useRef<HTMLElement | null>(null);
+  const navBarRef = useRef<HTMLDivElement | null>(null);
+
+  // Measures the height of the fixed nav bar without the expanded mobile menu.
+  const getVisibleNavHeight = () => {
+    const navElement = navRef.current;
+    const headerElement = navBarRef.current;
+
+    if (!navElement || !headerElement) {
+      return navElement?.offsetHeight ?? 80; // Fallback height
+    }
+
+    const containerElement = navElement.firstElementChild as HTMLElement | null;
+
+    if (!containerElement) {
+      return headerElement.offsetHeight;
+    }
+
+    const styles = window.getComputedStyle(containerElement);
+    const paddingTop = Number.parseFloat(styles.paddingTop) || 0;
+    const paddingBottom = Number.parseFloat(styles.paddingBottom) || 0;
+
+    // Return the total height including padding
+    return headerElement.offsetHeight + paddingTop + paddingBottom;
+  };
 
   useEffect(() => {
     let heroElement = document.getElementById("hero");
@@ -22,7 +46,7 @@ export default function Navigation() {
 
     const handleScroll = () => {
       const hero = ensureHero();
-      const navHeight = navRef.current?.offsetHeight ?? 0;
+      const navHeight = getVisibleNavHeight();
       const buffer = 24;
 
       if (!hero) {
@@ -94,36 +118,48 @@ export default function Navigation() {
     sectionId: string,
     event?: MouseEvent<HTMLElement>
   ) => {
+    event?.preventDefault();
+    
     const targetHash = `#${sectionId}`;
     const targetUrl = `/${targetHash}`;
     const onHome = window.location.pathname === "/";
-    const element = onHome ? document.getElementById(sectionId) : null;
+    const element = document.getElementById(sectionId);
 
+    // Close mobile menu immediately
     setIsMenuOpen(false);
 
-    if (element) {
-      event?.preventDefault();
+    // Small delay to ensure menu closes before scrolling on mobile
+    const scrollDelay = window.innerWidth < 768 ? 100 : 0;
 
-      const navHeight = navRef.current?.offsetHeight ?? 0;
-      const offset = navHeight + 24;
-      const top =
-        element.getBoundingClientRect().top + window.scrollY - offset;
+    setTimeout(() => {
+      if (element && onHome) {
+        // Calculate offset more reliably
+        const navHeight = getVisibleNavHeight();
+        const offset = navHeight + 32; // Increased buffer for better spacing
+        
+        const elementTop = element.getBoundingClientRect().top + window.scrollY;
+        const targetPosition = elementTop - offset;
 
-      window.history.replaceState(null, "", targetHash);
-      window.scrollTo({
-        top: Math.max(top, 0),
-        behavior: "smooth",
-      });
-      return;
-    }
+        // Update URL hash
+        window.history.replaceState(null, "", targetHash);
+        
+        // Smooth scroll to target position
+        window.scrollTo({
+          top: Math.max(targetPosition, 0),
+          behavior: "smooth",
+        });
+        return;
+      }
 
-    if (!onHome) {
-      event?.preventDefault();
-      window.location.href = targetUrl;
-      return;
-    }
+      // If not on home page or element not found, navigate to home with hash
+      if (!onHome) {
+        window.location.href = targetUrl;
+        return;
+      }
 
-    window.location.hash = targetHash;
+      // Fallback: just set hash
+      window.location.hash = targetHash;
+    }, scrollDelay);
   };
 
   return (
@@ -138,7 +174,10 @@ export default function Navigation() {
             : "py-6"
         }`}
       >
-        <div className="flex w-full items-center justify-between">
+        <div
+          ref={navBarRef}
+          className="flex w-full items-center justify-between"
+        >
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -207,24 +246,24 @@ export default function Navigation() {
             >
               <div className="flex flex-col gap-1 overflow-hidden rounded-2xl border border-white/10 bg-white/10 p-3 shadow-xl shadow-black/20 backdrop-blur-2xl">
                 {navLinks.map((link) => (
-                  <motion.a
+                  <motion.button
                     key={link.id}
-                    href={`/#${link.id}`}
+                    type="button"
                     onClick={(event) => navigateToSection(link.id, event)}
                     className="flex w-full items-center justify-between rounded-xl px-4 py-3 text-sm font-medium text-white/90 transition-colors duration-300 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mountain-gold focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
                     whileTap={{ scale: 0.97 }}
                   >
                     {link.label}
-                  </motion.a>
+                  </motion.button>
                 ))}
-                <motion.a
-                  href="/#contact"
+                <motion.button
+                  type="button"
                   onClick={(event) => navigateToSection("contact", event)}
                   className="mt-2 rounded-xl bg-mountain-gold px-4 py-3 text-sm font-semibold text-charcoal transition-all duration-300 hover:bg-copper focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mountain-gold focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
                   whileTap={{ scale: 0.97 }}
                 >
                   Book Event
-                </motion.a>
+                </motion.button>
               </div>
             </motion.div>
           ) : null}
