@@ -68,11 +68,11 @@ export async function POST(request: NextRequest) {
       "",
       `Name: ${name}`,
       `Email: ${email}`,
-      `Phone: ${phone || "Not provided"}`,
-      `Event Date: ${eventDate || "Not provided"}`,
-      `Guests: ${guests || "Not provided"}`,
-      `Venue: ${venue || "Not provided"}`,
-      `Notes: ${notes || "None provided"}`,
+      `Phone: ${phone ?? "Not provided"}`,
+      `Event Date: ${eventDate ?? "Not provided"}`,
+      `Guests: ${guests ?? "Not provided"}`,
+      `Venue: ${venue ?? "Not provided"}`,
+      `Notes: ${notes ?? "None provided"}`,
       `Submitted At: ${payload.submittedAt}`,
     ].join("\n");
 
