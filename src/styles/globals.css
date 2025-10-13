@@ -237,6 +237,22 @@
     box-shadow: 0 28px 56px rgba(2, 6, 23, 0.58);
   }
 
+  @media (max-width: 767px) {
+    .liquid-glass,
+    .dark .liquid-glass {
+      background: transparent;
+      box-shadow: none;
+      backdrop-filter: none;
+    }
+
+    .liquid-glass::before,
+    .liquid-glass::after,
+    .dark .liquid-glass::before,
+    .dark .liquid-glass::after {
+      display: none;
+    }
+  }
+
   .parallax-bg {
     background-attachment: fixed;
     background-position: center;
