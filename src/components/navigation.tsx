@@ -514,6 +514,7 @@ export default function Navigation() {
           </div>
         </div>
 
+        {/* MOBILE NAVBAR */}
         <AnimatePresence initial={false}>
           {isMenuOpen ? (
             <motion.div
@@ -525,22 +526,28 @@ export default function Navigation() {
               transition={{ duration: 0.2, ease: "easeOut" }}
               className="mt-3 rounded-3xl md:hidden"
             >
-              <div className="flex flex-col gap-1 overflow-hidden rounded-2xl p-3">
-                {navLinks.map((link) => (
-                  <motion.a
-                    key={link.id}
-                    href={`#${link.id}`}
-                    onClick={(event) => navigateToSection(link.id, event)}
-                    className="flex w-full items-center justify-between rounded-xl px-4 py-3 text-sm font-medium text-slate-900/80 transition-colors duration-300 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mountain-gold focus-visible:ring-offset-2 focus-visible:ring-offset-transparent dark:text-white/90"
-                    whileTap={{ scale: 0.97 }}
-                  >
-                    {link.label}
-                  </motion.a>
-                ))}
+              <div className="flex flex-col items-center gap-4 overflow-hidden rounded-2xl p-3">
+                {/* DROPDOWN - NAVLINKS */}
+                <div className="flex flex-col gap-1 w-full">
+                  {navLinks.map((link) => (
+                    <motion.a
+                      key={link.id}
+                      href={`#${link.id}`}
+                      onClick={(event) => navigateToSection(link.id, event)}
+                      className="group flex items-center justify-start focus-visible:outline-none"
+                      whileTap={{ scale: 0.97 }}
+                    >
+                      <div className="w-full rounded-xl px-6 py-3 text-lg font-medium text-slate-900/80 transition-colors duration-300 dark:text-white/90 group-hover:bg-white/10 group-focus-visible:bg-white/10 group-focus-visible:ring-2 group-focus-visible:ring-mountain-gold group-focus-visible:ring-offset-2 group-focus-visible:ring-offset-transparent">
+                        {link.label}
+                      </div>
+                    </motion.a>
+                  ))}
+                </div>
+                {/* DROPDOWN - BOOK EVENT BUTTON */}
                 <motion.a
                   href="#contact"
                   onClick={(event) => navigateToSection("contact", event)}
-                  className="mt-2 rounded-xl bg-mountain-gold px-4 py-3 text-sm font-semibold text-charcoal transition-all duration-300 hover:bg-copper focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mountain-gold focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+                  className="bg-mountain-gold w-full text-charcoal px-8 py-3 rounded-xl text-lg font-semibold transition-all duration-300 hover-lift shadow-lg"
                   whileTap={{ scale: 0.97 }}
                 >
                   Book Event
