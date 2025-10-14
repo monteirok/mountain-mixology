@@ -450,7 +450,7 @@ export default function Navigation() {
     >
       <div
         className={`container mx-auto px-6 transition-all duration-200 ${
-          isGlassActive
+          isGlassActive || isMenuOpen
             ? "liquid-glass-nav mt-3 rounded-3xl px-6 py-3 md:mt-4"
             : "rounded-3xl border-0 bg-transparent py-6 md:py-7 shadow-none"
         }`}
@@ -480,7 +480,7 @@ export default function Navigation() {
                 <button
                   key={link.id}
                   onClick={(event) => navigateToSection(link.id, event)}
-                  className="appearance-none rounded-full bg-transparent px-3 py-1 text-base font-medium text-slate-900/80 transition-colors duration-300 hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mountain-gold focus-visible:ring-offset-2 focus-visible:ring-offset-transparent dark:text-white/80 dark:hover:text-white"
+                  className="appearance-none rounded-full bg-transparent px-3 py-1 text-base font-medium text-[#161616] transition-colors duration-300 hover:text-[#161616] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mountain-gold focus-visible:ring-offset-2 focus-visible:ring-offset-transparent dark:text-white/80 dark:hover:text-white"
                 >
                   {link.label}
                 </button>
