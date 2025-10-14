@@ -537,7 +537,7 @@ export default function Navigation() {
                       className="group flex items-center justify-start focus-visible:outline-none"
                       whileTap={{ scale: 0.97 }}
                     >
-                      <div className="w-full rounded-xl px-6 py-3 text-lg font-medium text-slate-900/80 transition-colors duration-300 dark:text-white/90 group-hover:bg-white/10 group-focus-visible:bg-white/10 group-focus-visible:ring-2 group-focus-visible:ring-mountain-gold group-focus-visible:ring-offset-2 group-focus-visible:ring-offset-transparent">
+                      <div className="w-full rounded-xl px-6 py-3 font-medium text-slate-900/80 transition-colors duration-300 dark:text-white/90 group-hover:bg-white/10 group-focus-visible:bg-white/10 group-focus-visible:ring-2 group-focus-visible:ring-mountain-gold group-focus-visible:ring-offset-2 group-focus-visible:ring-offset-transparent">
                         {link.label}
                       </div>
                     </motion.a>
@@ -547,7 +547,7 @@ export default function Navigation() {
                 <motion.a
                   href="#contact"
                   onClick={(event) => navigateToSection("contact", event)}
-                  className="bg-mountain-gold w-full text-charcoal px-8 py-3 rounded-xl text-lg font-semibold transition-all duration-300 hover-lift shadow-lg"
+                  className="bg-mountain-gold w-full text-charcoal px-8 py-3 rounded-xl font-semibold transition-all duration-300 hover-lift shadow-lg"
                   whileTap={{ scale: 0.97 }}
                 >
                   Book Event
