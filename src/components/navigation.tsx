@@ -523,9 +523,9 @@ export default function Navigation() {
               animate={{ opacity: 1, height: "auto", y: 0 }}
               exit={{ opacity: 0, height: 0, y: -12 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
-              className="mt-3 md:hidden"
+              className="mt-3 rounded-3xl md:hidden"
             >
-              <div className="flex flex-col gap-1 overflow-hidden rounded-2xl p-3">
+              <div className="liquid-glass-nav-panel flex flex-col gap-1 overflow-hidden rounded-2xl p-3">
                 {navLinks.map((link) => (
                   <motion.a
                     key={link.id}
