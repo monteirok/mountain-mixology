@@ -22,7 +22,7 @@ const features = [
 
 export default function Cocktails() {
   return (
-    <section id="cocktails" className="py-20 bg-white dark:bg-charcoal">
+    <section id="cocktails" className="py-20 bg-section-cocktails transition-colors duration-500">
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -31,7 +31,7 @@ export default function Cocktails() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-playfair font-bold mb-6">
+          <h2 className="text-4xl md:text-5xl font-playfair font-bold text-forest dark:text-mountain-gold mb-6">
             Our Signature Cocktails
           </h2>
           <p className="text-xl max-w-3xl mx-auto leading-relaxed opacity-90">

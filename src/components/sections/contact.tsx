@@ -6,7 +6,7 @@ import BookingForm from '@/components/BookingForm'
 
 export default function Contact() {
   return (
-    <section id="contact" className="relative overflow-hidden py-24 bg-[#12181f]">
+    <section id="contact" className="relative overflow-hidden py-24 bg-section-contact transition-colors duration-500">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-[520px] bg-gradient-to-b from-mountain-gold/12 via-transparent to-transparent dark:from-mountain-gold/10" />
       <div className="pointer-events-none absolute -left-1/2 top-24 h-72 w-72 rounded-full bg-mountain-gold/15 blur-3xl dark:bg-mountain-gold/20" />
       <div className="pointer-events-none absolute -right-1/3 bottom-24 h-96 w-96 rounded-full bg-forest/12 blur-3xl dark:bg-forest/20" />

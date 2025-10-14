@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 export default function About() {
   return (
-    <section id="about" className="py-20 bg-white dark:bg-charcoal">
+    <section id="about" className="py-20 bg-section-about transition-colors duration-500">
       <div className="container mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <motion.div
@@ -29,7 +29,6 @@ export default function About() {
               that are as beautiful as they are delicious.
             </p>
 
-            {/* TODO: Update back to "grid-cols-3" */}
             <div className="grid grid-cols-2 gap-8 text-center">
               {/* TODO: Update # of events catered with real data */}
               {/* <motion.div

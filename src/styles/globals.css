@@ -33,6 +33,12 @@
   --cream: hsl(45, 29%, 97%);
   --copper: hsl(30, 50%, 40%); /* Darker copper for better contrast */
   --ice-blue: hsl(174, 42%, 92%);
+  --section-bg-hero: #0f141a;
+  --section-bg-about: #ffffff;
+  --section-bg-services: #f5f7fb;
+  --section-bg-cocktails: #ffffff;
+  --section-bg-contact: #f5f7fb;
+  --section-bg-footer: #1f2933;
 }
 
 .dark {
@@ -59,11 +65,17 @@
 
   /* Custom Mountain Mixology Dark Colors */
   --forest: hsl(148, 42%, 35%);
-  --mountain-gold: hsl(45, 86%, 65%); /* Brighter for dark mode contrast */
+  --mountain-gold: #e4af11; /* Updated dark mode gold */
   --charcoal: hsl(210, 24%, 8%);
   --cream: hsl(45, 29%, 15%);
   --copper: hsl(30, 50%, 58%); /* Brighter copper for dark mode */
   --ice-blue: hsl(174, 42%, 25%);
+  --section-bg-hero: #0a1018;
+  --section-bg-about: #1f2933;
+  --section-bg-services: #12181f;
+  --section-bg-cocktails: #1f2933;
+  --section-bg-contact: #12181f;
+  --section-bg-footer: #161616;
 }
 
 @layer base {
@@ -238,6 +250,130 @@
     box-shadow: 0 32px 64px rgba(2, 6, 23, 0.7);
   }
 
+  .liquid-glass-nav {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.38) 0%,
+      rgba(255, 255, 255, 0.18) 46%,
+      rgba(255, 255, 255, 0.08) 100%
+    );
+    border: none;
+    backdrop-filter: blur(28px) saturate(160%);
+    box-shadow: 0 16px 40px rgba(15, 23, 42, 0.12);
+    transition: background 0.3s ease, border-color 0.3s ease,
+      box-shadow 0.3s ease, opacity 0.3s ease;
+  }
+
+  .liquid-glass-nav::before,
+  .liquid-glass-nav::after {
+    content: "";
+    position: absolute;
+    inset: -120%;
+    pointer-events: none;
+    opacity: 0.55;
+    mix-blend-mode: screen;
+    animation: liquid-flow 14s linear infinite;
+  }
+
+  .liquid-glass-nav::before {
+    background: radial-gradient(
+      circle at 30% 30%,
+      rgba(234, 179, 8, 0.45) 0%,
+      rgba(234, 179, 8, 0.2) 35%,
+      transparent 70%
+    );
+  }
+
+  .liquid-glass-nav::after {
+    background: radial-gradient(
+      circle at 70% 70%,
+      rgba(56, 189, 248, 0.4) 0%,
+      rgba(147, 197, 253, 0.2) 40%,
+      transparent 75%
+    );
+    animation-direction: reverse;
+    animation-duration: 18s;
+  }
+
+  .dark .liquid-glass-nav {
+    background: linear-gradient(
+      135deg,
+      rgba(15, 23, 42, 0.68) 0%,
+      rgba(15, 23, 42, 0.45) 50%,
+      rgba(15, 23, 42, 0.38) 100%
+    );
+    border: none;
+    box-shadow: 0 20px 52px rgba(4, 9, 20, 0.45);
+  }
+
+  .dark .liquid-glass-nav::before {
+    background: radial-gradient(
+      circle at 20% 30%,
+      rgba(234, 179, 8, 0.35) 0%,
+      rgba(234, 179, 8, 0.18) 32%,
+      transparent 70%
+    );
+  }
+
+  .dark .liquid-glass-nav::after {
+    background: radial-gradient(
+      circle at 70% 80%,
+      rgba(59, 130, 246, 0.3) 0%,
+      rgba(165, 180, 252, 0.18) 42%,
+      transparent 75%
+    );
+  }
+
+  .liquid-glass-nav-panel {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(
+      160deg,
+      rgba(255, 255, 255, 0.35) 0%,
+      rgba(255, 255, 255, 0.15) 60%,
+      rgba(255, 255, 255, 0.08) 100%
+    );
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(24px) saturate(150%);
+    box-shadow: 0 28px 64px rgba(15, 23, 42, 0.22);
+  }
+
+  .liquid-glass-nav-panel::before {
+    content: "";
+    position: absolute;
+    inset: -140% -110% -110%;
+    background: radial-gradient(
+      circle at 15% 20%,
+      rgba(234, 179, 8, 0.35) 0%,
+      rgba(234, 179, 8, 0.18) 30%,
+      transparent 65%
+    );
+    opacity: 0.65;
+    animation: liquid-flow 18s linear infinite;
+  }
+
+  .dark .liquid-glass-nav-panel {
+    background: linear-gradient(
+      160deg,
+      rgba(15, 23, 42, 0.7) 0%,
+      rgba(15, 23, 42, 0.5) 60%,
+      rgba(15, 23, 42, 0.42) 100%
+    );
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 32px 72px rgba(2, 6, 23, 0.55);
+  }
+
+  .dark .liquid-glass-nav-panel::before {
+    background: radial-gradient(
+      circle at 15% 20%,
+      rgba(234, 179, 8, 0.28) 0%,
+      rgba(234, 179, 8, 0.16) 32%,
+      transparent 65%
+    );
+  }
+
   @media (max-width: 767px) {
     .liquid-glass {
       background: rgba(15, 23, 42, 0.85);
@@ -327,6 +463,22 @@
 
   .bg-ice-blue {
     background-color: var(--ice-blue);
+  }
+
+  .bg-section-about {
+    background-color: var(--section-bg-about);
+  }
+
+  .bg-section-services {
+    background-color: var(--section-bg-services);
+  }
+
+  .bg-section-cocktails {
+    background-color: var(--section-bg-cocktails);
+  }
+
+  .bg-section-contact {
+    background-color: var(--section-bg-contact);
   }
 
   .border-forest {
