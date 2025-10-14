@@ -123,7 +123,7 @@ export default function Services() {
             <p className="text-lg mb-6 text-charcoal dark:text-white">Let's discuss how we can make your celebration extraordinary.</p>
             <button
               onClick={() => scrollToSection("contact")}
-              className="bg-mountain-gold hover:bg-copper text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 hover-lift shadow-lg"
+              className="bg-mountain-gold hover:bg-copper text-charcoal px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 hover-lift shadow-lg"
             >
               Get Custom Quote
             </button>

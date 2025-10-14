@@ -468,7 +468,7 @@ export default function Navigation() {
               onClick={(event) => navigateToSection("hero", event)}
               aria-label="Go to top of page"
             >
-              <span className="font-playfair text-2xl font-bold tracking-wide text-mountain-gold">
+              <span className="font-playfair text-3xl font-black tracking-wide text-mountain-gold">
                 Mountain Mixology
               </span>
             </button>
@@ -480,14 +480,14 @@ export default function Navigation() {
                 <button
                   key={link.id}
                   onClick={(event) => navigateToSection(link.id, event)}
-                  className="appearance-none rounded-full bg-transparent px-3 py-1 text-base font-medium text-[#161616] transition-colors duration-300 hover:text-[#161616] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mountain-gold focus-visible:ring-offset-2 focus-visible:ring-offset-transparent dark:text-white/80 dark:hover:text-white"
+                  className="appearance-none rounded-full bg-transparent px-3 py-1 text-lg font-medium text-[#161616] transition-colors duration-300 hover:text-[#161616] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mountain-gold focus-visible:ring-offset-2 focus-visible:ring-offset-transparent dark:text-white/80 dark:hover:text-white"
                 >
                   {link.label}
                 </button>
               ))}
               <button
                 onClick={(event) => navigateToSection("contact", event)}
-                className="rounded-full bg-mountain-gold px-6 py-2 text-base font-semibold text-charcoal transition-all duration-300 hover:bg-copper"
+                className="rounded-full bg-mountain-gold px-6 py-2 text-lg font-semibold text-charcoal transition-all duration-300 hover:bg-copper"
               >
                 Book Event
               </button>
@@ -499,7 +499,7 @@ export default function Navigation() {
               aria-expanded={isMenuOpen}
               aria-controls="mobile-navigation"
               aria-label="Toggle navigation menu"
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-white/5 text-white transition-colors duration-300 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mountain-gold focus-visible:ring-offset-2 focus-visible:ring-offset-transparent md:hidden"
+              className="flex h-10 w-10 items-center justify-center rounded-full bg-neutral-800/5 dark:bg-white/5 text-charcoal dark:text-white transition-colors duration-300 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mountain-gold focus-visible:ring-offset-2 focus-visible:ring-offset-transparent md:hidden"
               initial={false}
               animate={{ rotate: isMenuOpen ? 90 : 0 }}
               transition={{ type: "spring", stiffness: 200, damping: 20 }}
@@ -528,7 +528,7 @@ export default function Navigation() {
             >
               <div className="flex flex-col items-center gap-4 overflow-hidden rounded-2xl p-3">
                 {/* DROPDOWN - NAVLINKS */}
-                <div className="flex flex-col gap-1 w-full">
+                <div className="flex w-full flex-col gap-1">
                   {navLinks.map((link) => (
                     <motion.a
                       key={link.id}
@@ -537,7 +537,7 @@ export default function Navigation() {
                       className="group flex items-center justify-start focus-visible:outline-none"
                       whileTap={{ scale: 0.97 }}
                     >
-                      <div className="w-full rounded-xl px-6 py-3 font-medium text-slate-900/80 transition-colors duration-300 dark:text-white/90 group-hover:bg-white/10 group-focus-visible:bg-white/10 group-focus-visible:ring-2 group-focus-visible:ring-mountain-gold group-focus-visible:ring-offset-2 group-focus-visible:ring-offset-transparent">
+                      <div className="w-full rounded-xl px-6 py-3 font-medium text-[#161616] transition-colors duration-300 group-hover:bg-neutral-900/5 group-focus-visible:bg-neutral-900/5 group-focus-visible:ring-2 group-focus-visible:ring-mountain-gold group-focus-visible:ring-offset-2 group-focus-visible:ring-offset-transparent dark:text-white/90 dark:group-hover:bg-white/10 dark:group-focus-visible:bg-white/10">
                         {link.label}
                       </div>
                     </motion.a>
@@ -547,7 +547,7 @@ export default function Navigation() {
                 <motion.a
                   href="#contact"
                   onClick={(event) => navigateToSection("contact", event)}
-                  className="bg-mountain-gold w-full text-charcoal px-8 py-3 rounded-xl font-semibold transition-all duration-300 hover-lift shadow-lg"
+                  className="bg-mountain-gold w-full text-charcoal text-lg px-6 py-3 rounded-2xl font-semibold transition-all duration-300 hover-lift shadow-lg"
                   whileTap={{ scale: 0.97 }}
                 >
                   Book Event
