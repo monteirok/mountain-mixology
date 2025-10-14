@@ -298,6 +298,28 @@
     animation-duration: 18s;
   }
 
+  @media (max-width: 767px) {
+    .liquid-glass-nav {
+      background: none;
+      box-shadow: none;
+    }
+
+    .dark .liquid-glass-nav {
+      background: none;
+      box-shadow: none;
+    }
+
+    .liquid-glass-nav::before,
+    .liquid-glass-nav::after {
+      display: none;
+    }
+
+    .dark .liquid-glass-nav::before,
+    .dark .liquid-glass-nav::after {
+      display: none;
+    }
+  }
+
   .dark .liquid-glass-nav {
     background: linear-gradient(
       135deg,
