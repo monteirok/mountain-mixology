@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 export default function About() {
   return (
-    <section id="about" className="py-20 bg-section-about transition-colors duration-500">
+    <section id="about" className="py-20 bg-white dark:bg-[#192129] transition-colors duration-500">
       <div className="container mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <motion.div
@@ -29,18 +29,7 @@ export default function About() {
               that are as beautiful as they are delicious.
             </p>
 
-            <div className="grid grid-cols-2 gap-8 text-center">
-              {/* TODO: Update # of events catered with real data */}
-              {/* <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                viewport={{ once: true }}
-                className="glass-button p-4 rounded-xl"
-              >
-                <div className="text-3xl font-bold text-mountain-gold mb-2">200+</div>
-                <div className="text-sm uppercase tracking-wider text-charcoal dark:text-white">Events Catered</div>
-              </motion.div> */}
+            <div className="grid grid-cols-1 gap-8 w-fit mx-auto text-center">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -48,18 +37,8 @@ export default function About() {
                 viewport={{ once: true }}
                 className="glass-button p-4 rounded-xl"
               >
-                <div className="text-3xl font-bold text-mountain-gold mb-2">5</div>
+                <div className="text-3xl font-bold text-mountain-gold mb-2">5+</div>
                 <div className="text-sm uppercase tracking-wider text-charcoal dark:text-white">Years Experience</div>
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.6 }}
-                viewport={{ once: true }}
-                className="glass-button p-4 rounded-xl"
-              >
-                <div className="text-3xl font-bold text-mountain-gold mb-2">50+</div>
-                <div className="text-sm uppercase tracking-wider text-charcoal dark:text-white">Signature Cocktails</div>
               </motion.div>
             </div>
           </motion.div>
@@ -72,7 +51,7 @@ export default function About() {
             className="glass-card p-4"
           >
             <Image
-              src="https://images.unsplash.com/photo-1551538827-9c037cb4f32a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
+              src="/images/cocktails/classic-old-fashion.png"
               alt="Professional mixologist crafting premium cocktails"
               width={800}
               height={600}

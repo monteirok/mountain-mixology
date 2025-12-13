@@ -5,8 +5,8 @@ import {
   Home, 
   Mountain, 
   Utensils,
-  Check
 } from "lucide-react";
+import BookEventButton from "../BookEventButton";
 
 const services = [
   {
@@ -96,15 +96,7 @@ export default function Services() {
                     <service.icon className="text-mountain-gold text-2xl" size={32} />
                   </div>
                   <h3 className="text-2xl font-playfair font-semibold mb-4 text-charcoal dark:text-white">{service.title}</h3>
-                  <p className="mb-6 leading-relaxed text-charcoal dark:text-white">{service.description}</p>
-                  <ul className="space-y-2 text-sm">
-                    {service.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-center text-charcoal dark:text-white">
-                        <Check className="text-mountain-gold mr-2" size={16} />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
+                  <p className="leading-relaxed text-charcoal dark:text-white">{service.description}</p>
                 </div>
               </div>
             </motion.div>
@@ -121,12 +113,10 @@ export default function Services() {
           <div className="glass-card p-8">
             <h3 className="text-2xl font-playfair font-semibold mb-4 text-charcoal dark:text-white">Ready to Plan Your Event?</h3>
             <p className="text-lg mb-6 text-charcoal dark:text-white">Let's discuss how we can make your celebration extraordinary.</p>
-            <button
+            <BookEventButton
               onClick={() => scrollToSection("contact")}
-              className="bg-mountain-gold hover:bg-copper text-charcoal px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 hover-lift shadow-lg"
-            >
-              Get Custom Quote
-            </button>
+              className="px-8 py-4 rounded-full text-lg"
+            />
           </div>
         </motion.div>
       </div>

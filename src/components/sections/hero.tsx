@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from "framer-motion";
+import BookEventButton from "../BookEventButton";
 
 export default function Hero() {
   const scrollToSection = (sectionId: string) => {
@@ -54,12 +55,9 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.6 }}
         >
-          <button
+          <BookEventButton
             onClick={() => scrollToSection("contact")}
-            className="hover-lift rounded-full bg-mountain-gold px-8 py-4 text-lg font-semibold text-charcoal transition-all duration-300 hover:bg-copper"
-          >
-            Book Your Event
-          </button>
+          />
           <button
             onClick={() => scrollToSection("services")}
             className="rounded-full bg-white/10 px-8 py-4 text-lg font-semibold text-white backdrop-blur transition-colors duration-300 hover:bg-white/20"

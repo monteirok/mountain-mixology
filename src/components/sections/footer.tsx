@@ -1,9 +1,9 @@
-import { Instagram } from "lucide-react";
+import { useState, MouseEvent } from "react";
+import { Instagram, Check, MapPin, Mail } from "lucide-react";
 
 const quickLinks = [
   { id: "about", label: "About Us" },
   { id: "services", label: "Services" },
-  { id: "cocktails", label: "Our Cocktails" },
   { id: "contact", label: "Book Event" },
 ] as const;
 
@@ -43,6 +43,28 @@ export default function Footer() {
     window.location.hash = targetHash;
   };
 
+  const [copied, setCopied] = useState(false);
+
+  const handleEmailClick = async (e: MouseEvent<HTMLAnchorElement>) => {
+    // Check if mobile (using 768px as breakpoint, same as navigation)
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+
+    if (!isMobile) {
+      e.preventDefault();
+      try {
+        await navigator.clipboard.writeText("bookings@mountainmixology.ca");
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      } catch (err) {
+        console.error("Failed to copy email:", err);
+        // Fallback to mailto if copy fails
+        window.location.href = "mailto:bookings@mountainmixology.ca";
+      }
+    }
+  };
+
+
+
   return (
     <footer className="bg-charcoal dark:bg-[#161616] text-white py-16">
       <div className="container mx-auto px-6">
@@ -58,28 +80,18 @@ export default function Footer() {
               Premium craft cocktail catering in the heart of the Canadian Rockies.
               Elevating your celebrations with exceptional service and unforgettable drinks.
             </p>
-            <div className="flex space-x-4">
-              <a href="https://instagram.com/mountain.mixology" target="_blank" rel="noreferrer" className="text-mountain-gold hover:text-white transition-colors">
-                <Instagram size={24} />
-              </a>
-              {/* <a href="#" className="text-mountain-gold hover:text-white transition-colors">
-                <Facebook size={24} />
-              </a>
-              <a href="#" className="text-mountain-gold hover:text-white transition-colors">
-                <Linkedin size={24} />
-              </a> */}
-            </div>
+
           </div>
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
+            <h4 className="mb-2 text-lg font-bold">Quick Links</h4>
             <ul className="space-y-2 opacity-80">
               {quickLinks.map((link) => (
                 <li key={link.id}>
                   <button
                     onClick={() => scrollToSection(link.id)}
-                    className="hover:text-mountain-gold transition-colors"
+                    className="text-sm font-light hover:text-mountain-gold transition-colors"
                   >
                     {link.label}
                   </button>
@@ -90,30 +102,30 @@ export default function Footer() {
 
           {/* Services */}
           <div>
-            <h4 className="text-lg font-semibold mb-4">Services</h4>
+            <h4 className="mb-2 text-lg font-bold">Services</h4>
             <ul className="space-y-2 opacity-80">
               <li>
-                <a href="#" className="hover:text-mountain-gold transition-colors">
+                <a href="#" className="text-sm font-light hover:text-mountain-gold transition-colors">
                   Wedding Cocktails
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-mountain-gold transition-colors">
+                <a href="#" className="text-sm font-light hover:text-mountain-gold transition-colors">
                   Corporate Events
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-mountain-gold transition-colors">
+                <a href="#" className="text-sm font-light hover:text-mountain-gold transition-colors">
                   Private Parties
                 </a>
               </li>
               {/* <li>
-                <a href="#" className="hover:text-mountain-gold transition-colors">
+                <a href="#" className="text-sm font-light hover:text-mountain-gold transition-colors">
                   Cocktail Classes
                 </a>
               </li> */}
               <li>
-                <a href="#" className="hover:text-mountain-gold transition-colors">
+                <a href="#" className="text-sm font-light hover:text-mountain-gold transition-colors">
                   Full Bar Service
                 </a>
               </li>
@@ -122,29 +134,42 @@ export default function Footer() {
 
           {/* Contact Info */}
           <div>
-            <h4 className="text-lg font-semibold mb-4">Contact</h4>
-            <div className="space-y-3 opacity-80">
-              <div>
-                <p className="font-medium">Service Area:</p>
-                <p>Canmore, Banff, Calgary & Rockies</p>
+            <h4 className="mb-2 text-lg font-bold">Contact</h4>
+            <div className="space-y-3 opacity-80 ml-1">
+              <div className="flex items-center gap-3">
+                <Instagram className="w-5 h-5 text-mountain-gold shrink-0" />
+                <a 
+                  href="https://instagram.com/mountain.mixology" 
+                  target="_blank" 
+                  rel="noreferrer" 
+                  className="text-sm font-light hover:text-mountain-gold transition-colors"
+                >
+                  @mountain.mixology
+                </a>
               </div>
-              {/* <div>
-                <p className="font-medium">Phone:</p>
-                <a
-                  href="tel:+1-403-555-0123"
-                  className="hover:text-mountain-gold transition-colors"
-                >
-                  (403) 555-0123
-                </a>
-              </div> */}
-              <div>
-                <p className="font-medium">Email:</p>
-                <a
-                  href="mailto:mountainmixologyca@gmail.com"
-                  className="hover:text-mountain-gold transition-colors"
-                >
-                  mountainmixologyca@gmail.com
-                </a>
+              <div className="flex items-center gap-3">
+                <Mail className="w-5 h-5 text-mountain-gold shrink-0" />
+                <div className="flex flex-col">
+                  <div className="flex items-center gap-2">
+                    <a 
+                      href="mailto:bookings@mountainmixology.ca" 
+                      onClick={handleEmailClick}
+                      className="text-sm font-light hover:text-mountain-gold transition-colors"
+                    >
+                      bookings@mountainmixology.ca
+                    </a>
+                    {copied && (
+                      <span className="text-xs text-green-500 flex items-center animate-in fade-in slide-in-from-left-1 duration-300">
+                        <Check size={12} className="mr-1" />
+                        Copied!
+                      </span>
+                    )}
+                  </div>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <MapPin className="w-5 h-5 text-mountain-gold shrink-0" />
+                <p className="text-sm font-light leading-relaxed">Canmore, Banff, Calgary & surrounding areas</p>
               </div>
             </div>
           </div>

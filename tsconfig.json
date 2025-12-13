@@ -16,7 +16,6 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    
     // Enhanced strict mode settings for 2025 security
     "noImplicitAny": true,
     "noImplicitReturns": true,
@@ -50,7 +49,6 @@
     ".next/types/**/*.ts"
   ],
   "exclude": [
-    "node_modules",
-    "mcp-servers/**/*"
+    "node_modules"
   ]
 }
