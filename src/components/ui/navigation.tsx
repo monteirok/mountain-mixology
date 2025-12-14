@@ -202,7 +202,7 @@ export default function Navigation() {
               onClick={(event) => navigateToSection("hero", event)}
               aria-label="Go to top of page"
             >
-              <span className="font-playfair text-3xl font-black tracking-wide text-mountain-gold">
+              <span className="font-playfair text-2xl md:text-3xl font-black tracking-wide text-mountain-gold">
                 Mountain Mixology
               </span>
             </button>
@@ -221,7 +221,6 @@ export default function Navigation() {
               ))}
               <BookEventButton
                 onClick={(event) => navigateToSection("contact", event)}
-                className="rounded-full px-6 py-2 text-lg"
               >
                 Book Event
               </BookEventButton>
@@ -249,44 +248,48 @@ export default function Navigation() {
         </div>
 
         {/* MOBILE NAVBAR */}
-        <AnimatePresence initial={false}>
-          {isMenuOpen ? (
+        <AnimatePresence>
+          {isMenuOpen && (
             <motion.div
               key="mobile-menu"
               id="mobile-navigation"
-              initial={{ opacity: 0, height: 0, y: -12 }}
-              animate={{ opacity: 1, height: "auto", y: 0 }}
-              exit={{ opacity: 0, height: 0, y: -12 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-              className="mt-3 rounded-3xl lg:hidden"
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3, ease: [0.23, 1, 0.32, 1] }}
+              className="lg:hidden"
             >
-              <div className="flex flex-col items-center gap-4 overflow-hidden rounded-2xl p-3">
-                {/* DROPDOWN - NAVLINKS */}
-                <div className="flex w-full flex-col gap-1">
-                  {navLinks.map((link) => (
+              <div className="flex flex-col gap-8 px-2 pb-6 pt-8">
+                <div className="flex flex-col gap-5">
+                  {navLinks.map((link, i) => (
                     <motion.a
                       key={link.id}
                       href={`#${link.id}`}
                       onClick={(event) => navigateToSection(link.id, event)}
-                      className="group flex items-center justify-start focus-visible:outline-none"
-                      whileTap={{ scale: 0.97 }}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.1 + i * 0.1, duration: 0.4, ease: "easeOut" }}
+                      className="text-2xl font-semibold tracking-tight text-neutral-900 indent-3 dark:text-white hover:text-mountain-gold transition-colors"
                     >
-                      <div className="w-full rounded-xl px-6 py-3 font-medium text-[#161616] transition-colors duration-300 group-hover:bg-neutral-900/5 group-focus-visible:bg-neutral-900/5 group-focus-visible:ring-2 group-focus-visible:ring-mountain-gold group-focus-visible:ring-offset-2 group-focus-visible:ring-offset-transparent dark:text-white/90 dark:group-hover:bg-white/10 dark:group-focus-visible:bg-white/10">
-                        {link.label}
-                      </div>
+                      {link.label}
                     </motion.a>
                   ))}
                 </div>
-                {/* DROPDOWN - BOOK EVENT BUTTON */}
-                <BookEventButton
-                  onClick={(event) => navigateToSection("contact", event)}
-                  className="w-full rounded-2xl px-6 py-3 text-lg"
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3, duration: 0.4 }}
                 >
-                  Book Event
-                </BookEventButton>
+                  <BookEventButton
+                    onClick={(event) => navigateToSection("contact", event)}
+                    className="self-start rounded-full px-6 py-3 text-xl font-semibold shadow-sm"
+                  >
+                    Book Event
+                  </BookEventButton>
+                </motion.div>
               </div>
             </motion.div>
-          ) : null}
+          )}
         </AnimatePresence>
       </div>
     </nav>

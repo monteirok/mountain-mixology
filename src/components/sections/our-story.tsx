@@ -38,9 +38,9 @@ export default function OurStory() {
                 <p>
                   Born from the pristine waters and rugged peaks of Canmore, Mountain Mixology is more than a service—it's an experience. We blend the wild spirit of the Rockies with the refined elegance of modern mixology.
                 </p>
-                <p>
+                {/* <p>
                   Every cocktail is a story, poured into a glass. We believe in the magic of gathering, the warmth of a toast, and the lingering memory of a perfectly balanced flavor profile.
-                </p>
+                </p> */}
               </div>
             </div>
           </motion.div>

@@ -16,30 +16,6 @@ export default function Contact() {
 
       <div className="container relative z-10 mx-auto max-w-6xl px-6">
         <motion.div
-          className="mb-20 text-center"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <div className="flex items-center justify-center gap-4 mb-6">
-            <span className="h-px w-12 bg-mountain-gold" />
-            <span className="text-sm font-bold tracking-widest text-mountain-gold uppercase">
-              Get in Touch
-            </span>
-            <span className="h-px w-12 bg-mountain-gold" />
-          </div>
-
-          <h2 className="mb-6 text-4xl font-playfair font-bold text-forest dark:text-white md:text-5xl lg:text-6xl">
-            Book Your <span className="text-mountain-gold italic">Event</span>
-          </h2>
-          <p className="mx-auto max-w-2xl text-lg leading-relaxed text-charcoal/80 dark:text-white/80 font-light">
-            Share your vision and let us know the details. We{"'"}ll respond with availability, curated cocktail concepts,
-            and the next steps to shape an unforgettable celebration.
-          </p>
-        </motion.div>
-
-        <motion.div
           className="mx-auto max-w-4xl relative"
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}

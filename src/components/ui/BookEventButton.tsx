@@ -14,10 +14,10 @@ export default function BookEventButton({
   variant = "primary",
   ...props 
 }: BookEventButtonProps) {
-  const baseStyles = "rounded-full px-8 py-4 text-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0";
+  const baseStyles = "rounded-full px-2 py-3 text-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0";
   
   const variants = {
-    primary: "bg-mountain-gold text-charcoal hover:bg-[#b68c0e]",
+    primary: "bg-mountain-gold text-lg text-charcoal hover:bg-[#b68c0e]",
     secondary: "bg-white/10 text-white backdrop-blur hover:bg-white/20 border border-white/10",
     white: "bg-white text-forest hover:bg-mountain-gold hover:text-white shadow-xl hover:shadow-2xl",
     glass: "bg-white/10 backdrop-blur-md border border-white/10 text-white hover:bg-white/20 hover:scale-105"

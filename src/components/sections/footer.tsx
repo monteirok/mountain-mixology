@@ -90,12 +90,9 @@ export default function Footer() {
               </span>
             </button>
           </motion.div>
-            <p className="text-white/80 font-light leading-relaxed max-w-md">
-              Premium craft cocktail catering in the heart of the Canadian Rockies. Elevating your celebrations with exceptional service and unforgettable drinks.
-            </p>
             
             <div className="space-y-6">
-              <div className="flex gap-6 justify-center lg:justify-start">
+              <div className="flex gap-6 justify-start">
                 <a
                   href="https://instagram.com/mountain.mixology"
                   target="_blank"
@@ -165,10 +162,6 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="flex flex-col md:flex-row justify-between items-center text-xs text-white/40">
           <p>&copy; 2025 Mountain Mixology. All rights reserved.</p>
-          <div className="flex gap-8 mt-4 md:mt-0">
-            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
-          </div>
         </div>
 
       </div>
