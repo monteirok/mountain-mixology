@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 
-import BookEventButton from "../BookEventButton";
+import BookEventButton from "../ui/BookEventButton";
 
 export default function Hero() {
   const scrollToSection = (sectionId: string) => {
@@ -45,8 +45,7 @@ export default function Hero() {
           transition={{ duration: 1, delay: 0.3 }}
           className="max-w-3xl text-base leading-relaxed text-slate-200 sm:text-lg lg:text-xl"
         >
-          Premium craft cocktail catering in the heart of the Canadian Rockies.
-          Elevating your celebrations with exceptional service and unforgettable drinks.
+          Premium craft cocktail catering in the heart of the Canadian Rockies. Elevating your celebrations with exceptional service and unforgettable drinks.
         </motion.p>
 
         {/* BUTTONS (x2) */}

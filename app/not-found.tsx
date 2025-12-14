@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import BookEventButton from '@/components/BookEventButton'
+import BookEventButton from '@/components/ui/BookEventButton'
 
 export default function NotFound() {
   return (

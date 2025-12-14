@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 
-import BookingForm from '@/components/BookingForm'
+import BookingForm from '@/components/ui/BookingForm'
 
 export default function Contact() {
   return (

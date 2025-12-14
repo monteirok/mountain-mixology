@@ -2,7 +2,7 @@
 
 import { ThemeProvider } from '@/components/theme-provider'
 import { TooltipProvider } from '@/components/ui/tooltip'
-import Navigation from "@/components/navigation";
+import Navigation from "@/components/ui/navigation";
 import Hero from "@/components/sections/hero";
 import OurStory from "@/components/sections/our-story";
 import Services from "@/components/sections/services";
