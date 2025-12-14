@@ -3,6 +3,7 @@
 import { MouseEvent, useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
+
 import BookEventButton from "./BookEventButton";
 
 export default function Navigation() {

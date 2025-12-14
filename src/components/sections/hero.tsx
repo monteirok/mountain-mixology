@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from "framer-motion";
+
 import BookEventButton from "../BookEventButton";
 
 export default function Hero() {
