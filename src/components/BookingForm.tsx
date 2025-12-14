@@ -1,6 +1,7 @@
 'use client'
 
 import { FormEvent, useState } from "react";
+import { CheckCircle, AlertCircle } from "lucide-react";
 
 import BookEventButton from "./BookEventButton";
 
@@ -67,7 +68,7 @@ export default function BookingForm() {
 
       setStatus({
         type: "success",
-        message: "Thanks! We received your booking request.",
+        message: "Thank you! Your booking request has been received. We will be in touch shortly.",
       });
       setForm(initialState);
     } catch (error) {
@@ -86,8 +87,11 @@ export default function BookingForm() {
           <span className={labelTextClass}>Name *</span>
           <input
             required
+            pattern="[A-Za-z\s]+"
+            title="Please enter a valid name (letters only)"
             value={form.name}
             onChange={handleChange("name")}
+            placeholder="Jane Doe"
             className={inputClass}
           />
         </label>
@@ -99,6 +103,7 @@ export default function BookingForm() {
             type="email"
             value={form.email}
             onChange={handleChange("email")}
+            placeholder="me@yourdomain.com"
             className={inputClass}
           />
         </label>
@@ -106,15 +111,20 @@ export default function BookingForm() {
         <label className={labelClass}>
           <span className={labelTextClass}>Phone</span>
           <input
+            type="tel"
+            pattern="[0-9+\-\(\)\s]*"
+            title="Please enter a valid phone number"
             value={form.phone}
             onChange={handleChange("phone")}
+            placeholder="(555) 123-4567"
             className={inputClass}
           />
         </label>
 
         <label className={labelClass}>
-          <span className={labelTextClass}>Event Date</span>
+          <span className={labelTextClass}>Event Date *</span>
           <input
+            required
             type="date"
             value={form.eventDate}
             onChange={handleChange("eventDate")}
@@ -125,6 +135,8 @@ export default function BookingForm() {
         <label className={labelClass}>
           <span className={labelTextClass}>Guests</span>
           <input
+            type="number"
+            min="1"
             value={form.guests}
             onChange={handleChange("guests")}
             placeholder="Approximate number of guests"
@@ -137,35 +149,46 @@ export default function BookingForm() {
           <input
             value={form.venue}
             onChange={handleChange("venue")}
+            placeholder="e.g. Private Residence, Hotel Name"
             className={inputClass}
           />
         </label>
       </div>
 
       <label className={labelClass}>
-        <span className={labelTextClass}>Notes</span>
+        <span className={labelTextClass}>Notes *</span>
         <textarea
+          required
           rows={4}
           value={form.notes}
           onChange={handleChange("notes")}
+          placeholder="Tell us more about your event..."
           className={`${inputClass} resize-none`}
         />
       </label>
 
-      <BookEventButton
-        type="submit"
-        disabled={status.type === "submitting"}
-        className="inline-flex items-center justify-center rounded-full bg-mountain-gold px-6 py-3 font-semibold text-charcoal transition hover:bg-copper disabled:cursor-not-allowed disabled:opacity-70 text-base"
-      >
-        {status.type === "submitting" ? "Submitting..." : "Submit Booking"}
-      </BookEventButton>
+      <div className="flex justify-center">
+        <BookEventButton
+          type="submit"
+          disabled={status.type === "submitting"}
+          className="inline-flex items-center justify-center rounded-full bg-mountain-gold mt-4 px-6 py-3 font-semibold text-charcoal transition hover:bg-copper disabled:cursor-not-allowed disabled:opacity-70 text-base"
+        >
+          {status.type === "submitting" ? "Submitting..." : "Submit Booking"}
+        </BookEventButton>
+      </div>
 
       {status.type === "success" ? (
-        <p className="text-sm font-medium text-emerald-600 dark:text-emerald-300">{status.message}</p>
+        <div className="flex items-center gap-3 rounded-xl bg-emerald-500/10 p-4 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400">
+          <CheckCircle className="h-5 w-5 shrink-0" />
+          <p className="text-sm font-medium">{status.message}</p>
+        </div>
       ) : null}
 
       {status.type === "error" ? (
-        <p className="text-sm font-medium text-red-500 dark:text-red-400">{status.message}</p>
+        <div className="flex items-center gap-3 rounded-xl bg-red-500/10 p-4 border border-red-500/20 text-red-600 dark:text-red-400">
+          <AlertCircle className="h-5 w-5 shrink-0" />
+          <p className="text-sm font-medium">{status.message}</p>
+        </div>
       ) : null}
     </form>
   );

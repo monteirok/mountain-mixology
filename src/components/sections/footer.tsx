@@ -1,5 +1,6 @@
 import { useState, MouseEvent } from "react";
-import { Instagram, Check, MapPin, Mail } from "lucide-react";
+import { Instagram, MapPin, Mail, ArrowUpRight } from "lucide-react";
+import { motion } from "framer-motion";
 
 const quickLinks = [
   { id: "about", label: "Our Story" },
@@ -46,7 +47,6 @@ export default function Footer() {
   const [copied, setCopied] = useState(false);
 
   const handleEmailClick = async (e: MouseEvent<HTMLAnchorElement>) => {
-    // Check if mobile (using 768px as breakpoint, same as navigation)
     const isMobile = window.matchMedia("(max-width: 768px)").matches;
 
     if (!isMobile) {
@@ -57,129 +57,107 @@ export default function Footer() {
         setTimeout(() => setCopied(false), 2000);
       } catch (err) {
         console.error("Failed to copy email:", err);
-        // Fallback to mailto if copy fails
         window.location.href = "mailto:bookings@mountainmixology.ca";
       }
     }
   };
 
-
-
   return (
-    <footer className="bg-charcoal dark:bg-[#161616] text-white py-16">
-      <div className="container mx-auto px-6">
-        <div className="grid md:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr] gap-8 mb-12">
-          {/* Company Info */}
-          <div>
-            <button onClick={() => scrollToSection("hero")}>
-              <h3 className="text-2xl font-playfair font-bold mb-4 text-mountain-gold">Mountain Mixology</h3>
-            </button>
-            <p className="mb-4 text-sm font-light opacity-80 leading-relaxed">
-              Premium craft cocktail catering in the heart of the Canadian Rockies.
-              Elevating your celebrations with exceptional service and unforgettable drinks.
-            </p>
-          </div>
+    <footer className="relative bg-[#0a0a0a] text-white overflow-hidden py-8">
+      {/* Liquid Background Elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-mountain-gold/5 rounded-full blur-[100px] mix-blend-screen animate-blob" />
+        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-forest/10 rounded-full blur-[100px] mix-blend-screen animate-blob animation-delay-2000" />
+      </div>
 
-          {/* Quick Links */}
-          <div>
-            <h4 className="mb-2 text-lg font-bold">Quick Links</h4>
-            <ul className="space-y-2 opacity-80">
-              {quickLinks.map((link) => (
-                <li key={link.id}>
-                  <button
-                    onClick={() => scrollToSection(link.id)}
-                    className="text-sm font-light hover:text-mountain-gold transition-colors"
-                  >
-                    {link.label}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Services */}
-          <div>
-            <h4 className="mb-2 text-lg font-bold">Services</h4>
-            <ul className="space-y-2 opacity-80">
-              <li>
-                <span className="text-sm font-light">
-                  Wedding Cocktails
-                </span>
-              </li>
-              <li>
-                <span className="text-sm font-light">
-                  Corporate Events
-                </span>
-              </li>
-              <li>
-                <span className="text-sm font-light">
-                  Private Parties
-                </span>
-              </li>
-              {/* <li>
-                <span className="text-sm font-light">
-                  Cocktail Classes
-                </span>
-              </li> */}
-              <li>
-                <span className="text-sm font-light">
-                  Full Bar Service
-                </span>
-              </li>
-            </ul>
-          </div>
-
-          {/* Contact Info */}
-          <div>
-            <h4 className="mb-2 text-lg font-bold">Contact</h4>
-            <div className="space-y-3 opacity-80 ml-1">
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-4 mb-4">
+          
+          {/* 1. Brand Card (Left) */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="lg:col-span-8 bg-white/5 backdrop-blur-xl border border-white/10 rounded-[2rem] p-6 flex flex-col justify-center gap-4 items-center text-center group hover:bg-white/10 transition-colors duration-500"
+          >
+            <div className="flex flex-col items-center">
+              <h2 className="text-xl font-playfair font-bold text-mountain-gold mb-2">Mountain Mixology</h2>
+              <p className="text-white/60 font-light text-sm leading-relaxed max-w-2xl">
+                Premium craft cocktail catering in the heart of the Canadian Rockies. Elevating your celebrations with exceptional service.
+              </p>
+            </div>
+            
+            <div className="flex flex-col md:flex-row gap-3 w-full items-center justify-center border-t border-white/5 pt-4 text-left">
               <div className="flex items-center gap-3">
-                <Instagram className="w-5 h-5 text-mountain-gold shrink-0" />
-                <a href="https://instagram.com/mountain.mixology" className="text-sm font-light hover:text-mountain-gold transition-colors" rel="noreferrer" target="_blank">@mountain.mixology</a>
-              </div>
-              <div className="flex items-center gap-3">
-                <Mail className="w-5 h-5 text-mountain-gold shrink-0" />
-                <div className="flex flex-col">
-                  <div className="flex items-center gap-2">
-                    <a 
-                      href="mailto:bookings@mountainmixology.ca" 
-                      onClick={handleEmailClick}
-                      className="text-sm font-light hover:text-mountain-gold transition-colors"
-                    >
-                      bookings@mountainmixology.ca
-                    </a>
-                    {copied && (
-                      <span className="text-xs text-green-500 flex items-center animate-in fade-in slide-in-from-left-1 duration-300">
-                        <Check size={12} className="mr-1" />
-                        Copied!
-                      </span>
-                    )}
-                  </div>
+                <div className="w-10 h-10 rounded-full bg-mountain-gold/10 flex items-center justify-center shrink-0">
+                  <MapPin className="w-4 h-4 text-mountain-gold" />
+                </div>
+                <div>
+                  <h4 className="text-sm font-bold tracking-widest uppercase text-mountain-gold mb-0.5">Locate Us</h4>
+                  <p className="text-white/80 font-light text-sm">Canmore, Banff, Calgary, & Surrounding Areas</p>
                 </div>
               </div>
-              <div className="flex gap-3">
-                <MapPin className="w-5 h-5 text-mountain-gold shrink-0" />
-                <p className="text-sm font-light leading-relaxed">Canmore, Banff, Calgary & surrounding areas</p>
-              </div>
             </div>
-          </div>
+          </motion.div>
+
+          {/* 2. Quick Links Card (Right) */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="lg:col-span-4 bg-white/5 backdrop-blur-xl border border-white/10 rounded-[2rem] p-6 flex flex-col justify-between gap-4 group hover:bg-white/10 transition-colors duration-500"
+          >
+            <div>
+              <h4 className="text-sm font-bold tracking-widest uppercase text-mountain-gold mb-3">Quick Links</h4>
+              <ul className="space-y-1.5">
+                {quickLinks.map((link) => (
+                  <li key={link.id}>
+                    <button
+                      onClick={() => scrollToSection(link.id)}
+                      className="group/link flex items-center justify-between w-full text-sm font-light text-white/80 hover:text-white transition-colors py-1 border-b border-white/10"
+                    >
+                      <span>{link.label}</span>
+                      <ArrowUpRight className="w-3 h-3 opacity-0 -translate-x-2 group-hover/link:opacity-100 group-hover/link:translate-x-0 transition-all duration-300" />
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="flex justify-center gap-3 border-t border-white/5 pt-4">
+              <a 
+                href="https://instagram.com/mountain.mixology" 
+                target="_blank" 
+                rel="noreferrer"
+                className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all duration-300"
+              >
+                <Instagram className="w-3.5 h-3.5" />
+              </a>
+              <a 
+                href="mailto:bookings@mountainmixology.ca"
+                onClick={handleEmailClick}
+                className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all duration-300 relative"
+              >
+                <Mail className="w-3.5 h-3.5" />
+                {copied && (
+                  <span className="absolute -top-8 left-1/2 -translate-x-1/2 text-[10px] bg-white text-black px-2 py-0.5 rounded whitespace-nowrap">
+                    Copied!
+                  </span>
+                )}
+              </a>
+            </div>
+          </motion.div>
+
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-white/20 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <div className="text-center md:text-left mb-4 md:mb-0 opacity-80">
-            <p>&copy; 2025 Mountain Mixology. All rights reserved.</p>
-          </div>
-          <div className="flex space-x-6 text-sm opacity-80">
-            <a href="#" className="hover:text-mountain-gold transition-colors">
-              Privacy Policy
-            </a>
-            <a href="#" className="hover:text-mountain-gold transition-colors">
-              Terms of Service
-            </a>
-            <a href="#" className="hover:text-mountain-gold transition-colors">
-              Liquor License
-            </a>
+        <div className="flex flex-col md:flex-row justify-between items-center px-2 text-[10px] text-white/30 font-light uppercase tracking-wider">
+          <p>&copy; 2025 Mountain Mixology.</p>
+          <div className="flex gap-4 mt-2 md:mt-0">
+            <a href="#" className="hover:text-white transition-colors">Privacy</a>
+            <a href="#" className="hover:text-white transition-colors">Terms</a>
+            <a href="#" className="hover:text-white transition-colors">License</a>
           </div>
         </div>
       </div>

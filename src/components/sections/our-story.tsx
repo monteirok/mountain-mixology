@@ -64,14 +64,7 @@ export default function OurStory() {
                 sizes="(min-width: 768px) 50vw, 100vw"
               />
               
-              {/* Glass Overlay on Image */}
-              <div className="absolute bottom-0 left-0 w-full p-8 z-20">
-                <div className="glass-card p-6 rounded-2xl border border-white/20 bg-white/10 backdrop-blur-md">
-                  <p className="text-white/90 font-playfair italic text-xl">
-                    "Where nature meets refinement."
-                  </p>
-                </div>
-              </div>
+
             </div>
 
             {/* Floating Elements */}
