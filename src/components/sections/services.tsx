@@ -5,6 +5,7 @@ import {
   Mountain, 
   Utensils,
 } from "lucide-react";
+import Image from "next/image";
 
 
 
@@ -43,7 +44,7 @@ export default function Services() {
 
 
   return (
-    <section id="services" className="relative overflow-hidden py-32 bg-neutral dark:bg-[#171e24] transition-colors duration-500">
+    <section id="services" className="relative overflow-hidden py-20 bg-neutral dark:bg-[#171e24] transition-colors duration-500">
       {/* Liquid Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 left-1/4 w-[800px] h-[800px] bg-mountain-gold/10 rounded-full blur-[120px] mix-blend-multiply dark:mix-blend-screen animate-blob" />
@@ -118,6 +119,14 @@ export default function Services() {
             </motion.div>
           ))}
         </div>
+        <Image
+          src="/images/cocktails/classic-old-fashion.png"
+          alt="Professional mixologist crafting premium cocktails"
+          width={800}
+          height={600}
+          className="w-full h-auto mt-20 rounded-xl object-cover transform group-hover:scale-105 transition-transform duration-1000"
+          sizes="(min-width: 768px) 50vw, 100vw"
+        />
       </div>
     </section>
   );

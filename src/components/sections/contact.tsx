@@ -6,7 +6,7 @@ import BookingForm from '@/components/ui/BookingForm'
 
 export default function Contact() {
   return (
-    <section id="contact" className="py-32 bg-white dark:bg-[#101519] transition-colors duration-500 relative overflow-hidden">
+    <section id="contact" className="py-16 bg-white dark:bg-[#101519] transition-colors duration-500 relative overflow-hidden">
       {/* Liquid Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 right-1/4 w-[800px] h-[800px] bg-mountain-gold/10 rounded-full blur-[120px] mix-blend-multiply dark:mix-blend-screen animate-blob" />
@@ -15,6 +15,13 @@ export default function Contact() {
       </div>
 
       <div className="container relative z-10 mx-auto max-w-6xl px-6">
+        <div className="flex items-center justify-center gap-4 mb-8">
+          <span className="h-px w-12 bg-mountain-gold" />
+          <span className="text-sm font-bold tracking-widest text-mountain-gold uppercase">
+            Book Event
+          </span>
+          <span className="h-px w-12 bg-mountain-gold" />
+        </div>
         <motion.div
           className="mx-auto max-w-4xl relative"
           initial={{ opacity: 0, y: 24 }}

@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 export default function OurStory() {
   return (
-    <section id="about" className="py-32 bg-white dark:bg-[#101519] transition-colors duration-500 relative overflow-hidden">
+    <section id="about" className="py-20 bg-white dark:bg-[#101519] transition-colors duration-500 relative overflow-hidden">
       {/* Liquid Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 left-1/4 w-[800px] h-[800px] bg-mountain-gold/10 rounded-full blur-[120px] mix-blend-multiply dark:mix-blend-screen animate-blob" />
