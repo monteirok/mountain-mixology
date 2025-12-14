@@ -125,7 +125,7 @@ export default function Navigation() {
   }, [isMenuOpen]);
 
   const navLinks = [
-    { id: "about", label: "Our Story" },
+    // { id: "about", label: "Our Story" },
     { id: "services", label: "Services" },
   ] as const;
 

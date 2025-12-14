@@ -6,7 +6,7 @@ import BookingForm from '@/components/ui/BookingForm'
 
 export default function Contact() {
   return (
-    <section id="contact" className="py-16 bg-white dark:bg-[#101519] transition-colors duration-500 relative overflow-hidden">
+    <section id="contact" className="py-16 bg-neutral-200 dark:bg-[#101519] transition-colors duration-500 relative overflow-hidden">
       {/* Liquid Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 right-1/4 w-[800px] h-[800px] bg-mountain-gold/10 rounded-full blur-[120px] mix-blend-multiply dark:mix-blend-screen animate-blob" />

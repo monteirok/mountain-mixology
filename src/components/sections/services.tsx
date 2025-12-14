@@ -44,13 +44,9 @@ export default function Services() {
 
 
   return (
-    <section id="services" className="relative overflow-hidden py-20 bg-neutral dark:bg-[#171e24] transition-colors duration-500">
-      {/* Liquid Background Elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 left-1/4 w-[800px] h-[800px] bg-mountain-gold/10 rounded-full blur-[120px] mix-blend-multiply dark:mix-blend-screen animate-blob" />
-        <div className="absolute bottom-0 right-1/4 w-[800px] h-[800px] bg-forest/10 dark:bg-mountain-gold/5 rounded-full blur-[120px] mix-blend-multiply dark:mix-blend-screen animate-blob animation-delay-2000" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-500/5 rounded-full blur-[100px] mix-blend-multiply dark:mix-blend-screen animate-blob animation-delay-4000" />
-      </div>
+    <section id="services" className="relative min-h-screen py-12 md:py-20 flex items-center justify-center overflow-hidden bg-neutral-100 dark:bg-[#161616] transition-colors duration-500">
+      {/* Background Image */}
+
 
       <div className="container mx-auto px-6 relative z-10">
         <motion.div
@@ -58,7 +54,7 @@ export default function Services() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
           viewport={{ once: true }}
-          className="text-center mb-20"
+          className="text-center mb-10 md:mb-24"
         >
           <div className="flex items-center justify-center gap-4 mb-6">
             <span className="h-px w-12 bg-mountain-gold" />
@@ -68,47 +64,60 @@ export default function Services() {
             <span className="h-px w-12 bg-mountain-gold" />
           </div>
           
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-playfair font-bold text-forest dark:text-white mb-6 leading-tight">
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-playfair font-bold text-forest dark:text-white mb-6 leading-tight drop-shadow-lg">
             Premium Catering <span className="text-mountain-gold italic">Services</span>
           </h2>
-          <p className="text-lg md:text-xl max-w-2xl mx-auto leading-relaxed text-charcoal/80 dark:text-white/80 font-light">
+          <p className="text-lg md:text-xl max-w-2xl mx-auto leading-relaxed text-charcoal/80 dark:text-white/90 font-light drop-shadow-md">
             From intimate cocktail parties to grand celebrations, we provide comprehensive
             beverage services tailored to your vision and venue.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 gap-6 md:gap-8 lg:gap-x-[32rem] lg:gap-y-12 max-w-7xl mx-auto relative">
+          {/* Background Image Centered in Grid - Desktop Only */}
+          <div className="hidden md:flex absolute inset-0 items-center justify-center pointer-events-none -z-10">
+            <div className="relative w-full max-w-5xl h-[50vh] md:h-[70vh]">
+              <Image
+                src="/images/cocktails/classic-old-fashion.png"
+                alt="Classic Old Fashioned Cocktail"
+                fill
+                className="object-contain object-center opacity-80"
+                priority
+                quality={100}
+              />
+              {/* Blending Overlays */}
+              <div className="absolute inset-0 bg-gradient-to-t from-neutral-100 via-transparent to-neutral-100 dark:from-[#161616] dark:via-transparent dark:to-[#161616]" />
+              <div className="absolute inset-0 bg-gradient-to-r from-neutral-100 via-transparent to-neutral-100 dark:from-[#161616] dark:via-transparent dark:to-[#161616]" />
+            </div>
+          </div>
           {services.map((service, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
+              initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: index * 0.1 }}
               viewport={{ once: true }}
               className="group"
             >
-              <div className="h-full p-8 rounded-[2rem] bg-white/50 dark:bg-white/5 border border-white/20 backdrop-blur-xl hover:bg-white/60 dark:hover:bg-white/10 transition-all duration-500 hover:shadow-2xl hover:shadow-mountain-gold/10 relative overflow-hidden group-hover:-translate-y-2">
-                {/* Liquid Gradient Overlay on Hover */}
-                <div className="absolute inset-0 bg-gradient-to-br from-mountain-gold/0 via-transparent to-transparent group-hover:from-mountain-gold/5 transition-all duration-700" />
-                
+              <div className="h-full p-6 md:p-8 rounded-[2rem] bg-white dark:bg-black/40 backdrop-blur-md border border-neutral-200 dark:border-white/10 hover:bg-white/80 dark:hover:bg-black/50 hover:border-mountain-gold/30 transition-all duration-500 hover:shadow-2xl hover:shadow-mountain-gold/5 relative overflow-hidden group-hover:-translate-y-1">
                 <div className="relative z-10">
-                  <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-white to-neutral-100 dark:from-white/10 dark:to-white/5 shadow-lg border border-white/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
-                    <service.icon className="text-mountain-gold" size={28} />
+                  <div className="w-14 h-14 rounded-xl bg-white dark:bg-white/10 border border-neutral-200 dark:border-white/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
+                    <service.icon className="text-mountain-gold" size={24} />
                   </div>
                   
-                  <h3 className="text-xl md:text-2xl font-playfair font-bold mb-3 text-charcoal dark:text-white group-hover:text-mountain-gold transition-colors duration-300">
+                  <h3 className="text-xl font-playfair font-bold mb-3 text-charcoal dark:text-white group-hover:text-mountain-gold transition-colors duration-300">
                     {service.title}
                   </h3>
                   
-                  <p className="text-base leading-relaxed text-charcoal/80 dark:text-white/80 mb-6 font-light">
+                  <p className="text-sm leading-relaxed text-charcoal/80 dark:text-white/80 mb-6 font-light">
                     {service.description}
                   </p>
 
                   {service.features.length > 0 && (
-                    <ul className="space-y-3">
+                    <ul className="space-y-2">
                       {service.features.map((feature, idx) => (
-                        <li key={idx} className="flex items-center gap-3 text-sm font-medium text-charcoal/70 dark:text-white/70">
-                          <span className="w-1.5 h-1.5 rounded-full bg-mountain-gold" />
+                        <li key={idx} className="flex items-center gap-3 text-xs font-medium text-charcoal/70 dark:text-white/70">
+                          <span className="w-1 h-1 rounded-full bg-mountain-gold" />
                           {feature}
                         </li>
                       ))}
@@ -118,15 +127,25 @@ export default function Services() {
               </div>
             </motion.div>
           ))}
+
+          {/* Mobile Image Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="block md:hidden relative h-80 rounded-[2rem] overflow-hidden shadow-2xl"
+          >
+            <Image
+              src="/images/cocktails/classic-old-fashion.png"
+              alt="Classic Old Fashioned Cocktail"
+              fill
+              className="object-cover object-center"
+              quality={100}
+            />
+            <div className="absolute inset-0 border border-neutral-200 dark:border-white/10 rounded-[2rem] pointer-events-none" />
+          </motion.div>
         </div>
-        <Image
-          src="/images/cocktails/classic-old-fashion.png"
-          alt="Professional mixologist crafting premium cocktails"
-          width={800}
-          height={600}
-          className="w-full h-auto mt-20 rounded-xl object-cover transform group-hover:scale-105 transition-transform duration-1000"
-          sizes="(min-width: 768px) 50vw, 100vw"
-        />
       </div>
     </section>
   );

@@ -132,9 +132,9 @@ export default function Footer() {
             <div className="space-y-6">
               <h4 className="text-[1.1rem] font-bold text-white">Quick Links</h4>
               <ul className="space-y-4 text-sm text-white/60">
-                <li>
+                {/* <li>
                   <button onClick={(e) => navigateToSection('about', e)} className="hover:text-white transition-colors">Our Story</button>
-                </li>
+                </li> */}
                 <li>
                   <button onClick={(e) => navigateToSection('services', e)} className="hover:text-white transition-colors">Services</button>
                 </li>
