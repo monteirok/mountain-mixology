@@ -7,7 +7,7 @@ import { Analytics } from "@vercel/analytics/next"
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Mountain Mixology',
+  title: 'Mountain Mixology | Cocktail Catering',
   description: 'Premium cocktail experiences in the mountains',
   icons: {
     icon: '/images/branding/favicon.ico',
