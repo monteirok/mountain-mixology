@@ -46,7 +46,7 @@ export default function Hero() {
           className="max-w-3xl text-base leading-relaxed text-slate-200 sm:text-lg lg:text-xl"
         >
           Premium craft cocktail catering in the heart of the Canadian Rockies.
-          Transform your event with our signature mixology experience.
+          Elevating your celebrations with exceptional service and unforgettable drinks.
         </motion.p>
 
         {/* BUTTONS (x2) */}
@@ -58,13 +58,15 @@ export default function Hero() {
         >
           <BookEventButton
             onClick={() => scrollToSection("contact")}
-          />
-          <button
+          >
+            Book Event
+          </BookEventButton>
+          <BookEventButton
             onClick={() => scrollToSection("services")}
-            className="rounded-full bg-white/10 px-8 py-4 text-lg font-semibold text-white backdrop-blur transition-colors duration-300 hover:bg-white/20"
+            className="inline-flex items-center justify-center rounded-full px-6 py-3 text-white border border-white/25 bg-white/10 backdrop-blur-xl hover:bg-white/15 transition"
           >
             View Services
-          </button>
+          </BookEventButton>
         </motion.div>
       </div>
     </section>

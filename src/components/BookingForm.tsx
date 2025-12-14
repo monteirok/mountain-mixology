@@ -2,6 +2,8 @@
 
 import { FormEvent, useState } from "react";
 
+import BookEventButton from "./BookEventButton";
+
 type BookingFormState = {
   name: string;
   email: string;
@@ -150,13 +152,13 @@ export default function BookingForm() {
         />
       </label>
 
-      <button
+      <BookEventButton
         type="submit"
         disabled={status.type === "submitting"}
-        className="inline-flex items-center justify-center rounded-full bg-mountain-gold px-6 py-3 font-semibold text-charcoal transition hover:bg-copper disabled:cursor-not-allowed disabled:opacity-70"
+        className="inline-flex items-center justify-center rounded-full bg-mountain-gold px-6 py-3 font-semibold text-charcoal transition hover:bg-copper disabled:cursor-not-allowed disabled:opacity-70 text-base"
       >
         {status.type === "submitting" ? "Submitting..." : "Submit Booking"}
-      </button>
+      </BookEventButton>
 
       {status.type === "success" ? (
         <p className="text-sm font-medium text-emerald-600 dark:text-emerald-300">{status.message}</p>

@@ -2,7 +2,7 @@ import { useState, MouseEvent } from "react";
 import { Instagram, Check, MapPin, Mail } from "lucide-react";
 
 const quickLinks = [
-  { id: "about", label: "About Us" },
+  { id: "about", label: "Our Story" },
   { id: "services", label: "Services" },
   { id: "contact", label: "Book Event" },
 ] as const;
@@ -68,19 +68,16 @@ export default function Footer() {
   return (
     <footer className="bg-charcoal dark:bg-[#161616] text-white py-16">
       <div className="container mx-auto px-6">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+        <div className="grid md:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr] gap-8 mb-12">
           {/* Company Info */}
           <div>
-          <button
-                  onClick={() => scrollToSection("hero")}
-                >
-                  <h3 className="text-2xl font-playfair font-bold mb-4 text-mountain-gold">Mountain Mixology</h3>
-                </button>
-            <p className="mb-4 opacity-80 leading-relaxed">
+            <button onClick={() => scrollToSection("hero")}>
+              <h3 className="text-2xl font-playfair font-bold mb-4 text-mountain-gold">Mountain Mixology</h3>
+            </button>
+            <p className="mb-4 text-sm font-light opacity-80 leading-relaxed">
               Premium craft cocktail catering in the heart of the Canadian Rockies.
               Elevating your celebrations with exceptional service and unforgettable drinks.
             </p>
-
           </div>
 
           {/* Quick Links */}
@@ -105,29 +102,29 @@ export default function Footer() {
             <h4 className="mb-2 text-lg font-bold">Services</h4>
             <ul className="space-y-2 opacity-80">
               <li>
-                <a href="#" className="text-sm font-light hover:text-mountain-gold transition-colors">
+                <span className="text-sm font-light">
                   Wedding Cocktails
-                </a>
+                </span>
               </li>
               <li>
-                <a href="#" className="text-sm font-light hover:text-mountain-gold transition-colors">
+                <span className="text-sm font-light">
                   Corporate Events
-                </a>
+                </span>
               </li>
               <li>
-                <a href="#" className="text-sm font-light hover:text-mountain-gold transition-colors">
+                <span className="text-sm font-light">
                   Private Parties
-                </a>
+                </span>
               </li>
               {/* <li>
-                <a href="#" className="text-sm font-light hover:text-mountain-gold transition-colors">
+                <span className="text-sm font-light">
                   Cocktail Classes
-                </a>
+                </span>
               </li> */}
               <li>
-                <a href="#" className="text-sm font-light hover:text-mountain-gold transition-colors">
+                <span className="text-sm font-light">
                   Full Bar Service
-                </a>
+                </span>
               </li>
             </ul>
           </div>
@@ -138,14 +135,7 @@ export default function Footer() {
             <div className="space-y-3 opacity-80 ml-1">
               <div className="flex items-center gap-3">
                 <Instagram className="w-5 h-5 text-mountain-gold shrink-0" />
-                <a 
-                  href="https://instagram.com/mountain.mixology" 
-                  target="_blank" 
-                  rel="noreferrer" 
-                  className="text-sm font-light hover:text-mountain-gold transition-colors"
-                >
-                  @mountain.mixology
-                </a>
+                <a href="https://instagram.com/mountain.mixology" className="text-sm font-light hover:text-mountain-gold transition-colors" rel="noreferrer" target="_blank">@mountain.mixology</a>
               </div>
               <div className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-mountain-gold shrink-0" />
@@ -167,7 +157,7 @@ export default function Footer() {
                   </div>
                 </div>
               </div>
-              <div className="flex items-center gap-3">
+              <div className="flex gap-3">
                 <MapPin className="w-5 h-5 text-mountain-gold shrink-0" />
                 <p className="text-sm font-light leading-relaxed">Canmore, Banff, Calgary & surrounding areas</p>
               </div>

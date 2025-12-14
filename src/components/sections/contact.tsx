@@ -6,41 +6,53 @@ import BookingForm from '@/components/BookingForm'
 
 export default function Contact() {
   return (
-    <section id="contact" className="relative overflow-hidden py-24 bg-white dark:bg-[#192129] transition-colors duration-500">
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-[520px] bg-gradient-to-b from-mountain-gold/12 via-transparent to-transparent dark:from-mountain-gold/10" />
-      <div className="pointer-events-none absolute -left-1/2 top-24 h-72 w-72 rounded-full bg-mountain-gold/15 blur-3xl dark:bg-mountain-gold/20" />
-      <div className="pointer-events-none absolute -right-1/3 bottom-24 h-96 w-96 rounded-full bg-forest/12 blur-3xl dark:bg-forest/20" />
+    <section id="contact" className="py-32 bg-white dark:bg-[#101519] transition-colors duration-500 relative overflow-hidden">
+      {/* Liquid Background Elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-0 right-1/4 w-[800px] h-[800px] bg-mountain-gold/10 rounded-full blur-[120px] mix-blend-multiply dark:mix-blend-screen animate-blob" />
+        <div className="absolute bottom-0 left-1/4 w-[800px] h-[800px] bg-forest/10 dark:bg-mountain-gold/5 rounded-full blur-[120px] mix-blend-multiply dark:mix-blend-screen animate-blob animation-delay-2000" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-500/5 rounded-full blur-[100px] mix-blend-multiply dark:mix-blend-screen animate-blob animation-delay-4000" />
+      </div>
 
       <div className="container relative z-10 mx-auto max-w-6xl px-6">
         <motion.div
-          className="mb-16 text-center"
+          className="mb-20 text-center"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="mb-5 text-4xl font-playfair font-bold text-forest dark:text-mountain-gold md:text-5xl">
-            Book Your Event
+          <div className="flex items-center justify-center gap-4 mb-6">
+            <span className="h-px w-12 bg-mountain-gold" />
+            <span className="text-sm font-bold tracking-widest text-mountain-gold uppercase">
+              Get in Touch
+            </span>
+            <span className="h-px w-12 bg-mountain-gold" />
+          </div>
+
+          <h2 className="mb-6 text-4xl font-playfair font-bold text-forest dark:text-white md:text-5xl lg:text-6xl">
+            Book Your <span className="text-mountain-gold italic">Event</span>
           </h2>
-          <p className="mx-auto max-w-3xl text-lg leading-relaxed text-charcoal/80 dark:text-white/70 md:text-xl">
+          <p className="mx-auto max-w-2xl text-lg leading-relaxed text-charcoal/80 dark:text-white/80 font-light">
             Share your vision and let us know the details. We{"'"}ll respond with availability, curated cocktail concepts,
             and the next steps to shape an unforgettable celebration.
           </p>
         </motion.div>
 
         <motion.div
-          className="mx-auto max-w-4xl"
+          className="mx-auto max-w-4xl relative"
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <div className="rounded-[32px] border border-white/40 bg-white/85 px-8 py-10 shadow-[0_26px_70px_rgba(15,23,42,0.18)] backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/80 dark:shadow-[0_30px_80px_rgba(2,6,23,0.55)]">
-            <div className="mb-8 space-y-3 text-center">
+          <div className="absolute -inset-4 bg-white/30 dark:bg-white/5 rounded-[3rem] blur-2xl -z-10" />
+          <div className="glass-card p-8 md:p-12 rounded-[2.5rem] border border-white/20 bg-white/40 dark:bg-white/5 backdrop-blur-xl shadow-2xl">
+            <div className="mb-10 space-y-3 text-center">
               <h3 className="text-3xl font-playfair font-semibold text-charcoal dark:text-white">
                 Submit a Booking Request
               </h3>
-              <p className="text-base text-charcoal/70 dark:text-white/70">
+              <p className="text-base text-charcoal/70 dark:text-white/70 font-light">
                 Share your event details and we{"'"}ll follow up with availability, curated cocktail concepts, and next steps.
               </p>
             </div>

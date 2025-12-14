@@ -1,8 +1,10 @@
 node_modules
+.npm-cache
 dist
 .DS_Store
 server/public
 vite.config.ts.*
+tsconfig.tsbuildinfo
 *.tar.gz
 .vscode
 .next

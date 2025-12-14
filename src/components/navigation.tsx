@@ -82,7 +82,7 @@ export default function Navigation() {
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth >= 768) {
+      if (window.innerWidth >= 1024) {
         setIsMenuOpen(false);
       }
     };
@@ -125,7 +125,7 @@ export default function Navigation() {
   }, [isMenuOpen]);
 
   const navLinks = [
-    { id: "about", label: "About" },
+    { id: "about", label: "Our Story" },
     { id: "services", label: "Services" },
   ] as const;
 
@@ -144,7 +144,7 @@ export default function Navigation() {
     setIsMenuOpen(false);
 
     // Small delay to ensure menu closes before scrolling on mobile
-    const scrollDelay = window.innerWidth < 768 ? 100 : 0;
+    const scrollDelay = window.innerWidth < 1024 ? 100 : 0;
 
     setTimeout(() => {
       if (element && onHome) {
@@ -209,7 +209,7 @@ export default function Navigation() {
           </motion.div>
 
           <div className="flex items-center gap-6">
-            <div className="hidden items-center gap-6 md:flex">
+            <div className="hidden items-center gap-6 lg:flex">
               {navLinks.map((link) => (
                 <button
                   key={link.id}
@@ -222,7 +222,9 @@ export default function Navigation() {
               <BookEventButton
                 onClick={(event) => navigateToSection("contact", event)}
                 className="rounded-full px-6 py-2 text-lg"
-              />
+              >
+                Book Event
+              </BookEventButton>
             </div>
 
             <motion.button
@@ -231,7 +233,7 @@ export default function Navigation() {
               aria-expanded={isMenuOpen}
               aria-controls="mobile-navigation"
               aria-label="Toggle navigation menu"
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-neutral-800/5 dark:bg-white/5 text-charcoal dark:text-white transition-colors duration-300 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mountain-gold focus-visible:ring-offset-2 focus-visible:ring-offset-transparent md:hidden"
+              className="flex h-10 w-10 items-center justify-center rounded-full bg-neutral-800/5 dark:bg-white/5 text-charcoal dark:text-white transition-colors duration-300 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mountain-gold focus-visible:ring-offset-2 focus-visible:ring-offset-transparent lg:hidden"
               initial={false}
               animate={{ rotate: isMenuOpen ? 90 : 0 }}
               transition={{ type: "spring", stiffness: 200, damping: 20 }}
@@ -256,7 +258,7 @@ export default function Navigation() {
               animate={{ opacity: 1, height: "auto", y: 0 }}
               exit={{ opacity: 0, height: 0, y: -12 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
-              className="mt-3 rounded-3xl md:hidden"
+              className="mt-3 rounded-3xl lg:hidden"
             >
               <div className="flex flex-col items-center gap-4 overflow-hidden rounded-2xl p-3">
                 {/* DROPDOWN - NAVLINKS */}
@@ -279,7 +281,9 @@ export default function Navigation() {
                 <BookEventButton
                   onClick={(event) => navigateToSection("contact", event)}
                   className="w-full rounded-2xl px-6 py-3 text-lg"
-                />
+                >
+                  Book Event
+                </BookEventButton>
               </div>
             </motion.div>
           ) : null}

@@ -1,33 +1,33 @@
-# MountMix - Mountain-Inspired Cocktail Lounge
+# Mountain Mixology
 
-A modern, elegant website for a mountain-themed cocktail lounge, built with React, TypeScript, and Vite.
+A modern, elegant website for a mountain-themed cocktail lounge, built with Next.js, TypeScript, and Tailwind CSS.
 
 ## 🏔️ Overview
 
-MountMix is a sophisticated web application showcasing a mountain-inspired cocktail lounge. The website features a modern, responsive design with smooth animations and an elegant user interface that reflects the premium nature of the establishment.
+Mountain Mixology is a sophisticated web application showcasing a mountain-inspired cocktail lounge. The website features a modern, responsive design with smooth animations and an elegant user interface that reflects the premium nature of the establishment.
 
 ## 🛠️ Tech Stack
 
-- **Frontend Framework:** React with TypeScript
-- **Build Tool:** Vite
+- **Framework:** Next.js 15 (App Router)
+- **Language:** TypeScript
 - **Styling:** Tailwind CSS
 - **Animations:** Framer Motion
-- **Icons:** Lucide Icons
-- **UI Components:** Custom components with shadcn/ui
+- **Icons:** Lucide React
+- **UI Components:** shadcn/ui
 
 ## 🚀 Getting Started
 
 ### Prerequisites
 
-- Node.js (v16 or higher)
+- Node.js (v18 or higher)
 - npm or yarn
 
 ### Installation
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/mountmix-vite.git
-   cd mountmix-vite
+   git clone https://github.com/monteirok/mountain-mixology.git
+   cd mountain-mixology
    ```
 
 2. Install dependencies:
@@ -44,20 +44,20 @@ MountMix is a sophisticated web application showcasing a mountain-inspired cockt
    yarn dev
    ```
 
-4. Open your browser and visit `http://localhost:5173`
+4. Open your browser and visit `http://localhost:3000`
 
 ## 📁 Project Structure
 
 ```
-mountmix-vite/
-├── client/
-│   ├── src/
-│   │   ├── components/
-│   │   │   ├── sections/     # Main page sections
-│   │   │   └── ui/          # Reusable UI components
-│   │   ├── styles/          # Global styles
-│   │   └── App.tsx          # Main application component
-│   └── public/              # Static assets
+mountain-mixology/
+├── app/                 # Next.js App Router pages and layouts
+├── public/              # Static assets
+├── src/
+│   ├── components/      # React components
+│   │   ├── sections/    # Main page sections (Hero, About, etc.)
+│   │   └── ui/          # Reusable UI components (shadcn/ui)
+│   ├── lib/             # Utility functions
+│   └── styles/          # Global styles
 ├── package.json
 └── README.md
 ```
@@ -74,31 +74,17 @@ mountmix-vite/
 
 ## 🛠️ Development
 
-
 ### Available Scripts
 
 - `npm run dev` - Start development server
 - `npm run build` - Build for production
-- `npm run preview` - Preview production build
+- `npm run start` - Start production server
 - `npm run lint` - Run ESLint
-- `npm run type-check` - Run TypeScript type checking
-
-
-
-
-- Follow TypeScript best practices
-- Use functional components with hooks
-- Implement proper type definitions
-- Follow the established component structure
-- Use Tailwind CSS for styling
+- `npm run check` - Run TypeScript type checking
 
 ## 📝 Environment Variables
 
-Create a `.env` file in the root directory with the following variables:
-
-```env
-VITE_API_URL=your_api_url_here
-```
+Create a `.env` file in the root directory with necessary environment variables as needed.
 
 ## 🤝 Contributing
 
@@ -108,16 +94,8 @@ VITE_API_URL=your_api_url_here
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 👥 Authors
-
-- Your Name - Initial work
-
 ## 🙏 Acknowledgments
 
 - Images from Unsplash
 - Icons from Lucide
-- UI components inspired by shadcn/ui 
+- UI components inspired by shadcn/ui
