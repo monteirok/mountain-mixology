@@ -1,5 +1,5 @@
 import { useState, MouseEvent } from "react";
-import { Instagram, Mail, MapPin, Check } from "lucide-react";
+import { Instagram, Mail, Check } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Footer() {
@@ -72,10 +72,10 @@ export default function Footer() {
       <div className="container mx-auto px-6">
         
         {/* Top Section */}
-        <div className="flex flex-col lg:flex-row justify-between gap-16">
+        <div className="flex flex-col lg:flex-row justify-between items-center lg:items-start text-center lg:text-left gap-8 md:gap-16">
           
           {/* Left: Description & Socials */}
-          <div className="lg:w-1/3 space-y-8">
+          <div className="lg:w-1/3 space-y-8 flex flex-col items-center lg:items-start">
             <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -92,7 +92,7 @@ export default function Footer() {
           </motion.div>
             
             <div className="space-y-6">
-              <div className="flex gap-6 justify-start">
+              <div className="flex gap-6 justify-center lg:justify-start">
                 <a
                   href="https://instagram.com/mountain.mixology"
                   target="_blank"
@@ -126,15 +126,12 @@ export default function Footer() {
           </div>
 
           {/* Right: Links Columns */}
-          <div className="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-12 lg:pl-24">
+          <div className="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 lg:pl-24 w-full">
             
             {/* Column 1: Quick Links */}
-            <div className="space-y-6">
+            <div className="space-y-6 flex flex-col items-center lg:items-start">
               <h4 className="text-[1.1rem] font-bold text-white">Quick Links</h4>
-              <ul className="space-y-4 text-sm text-white/60">
-                {/* <li>
-                  <button onClick={(e) => navigateToSection('about', e)} className="hover:text-white transition-colors">Our Story</button>
-                </li> */}
+              <ul className="space-y-4 text-sm text-white/60 flex flex-col items-center lg:items-start">
                 <li>
                   <button onClick={(e) => navigateToSection('services', e)} className="hover:text-white transition-colors">Services</button>
                 </li>
@@ -144,11 +141,9 @@ export default function Footer() {
               </ul>
             </div>
 
-            {/* Column 2: Service Area */}
-            <div className="space-y-6">
+            <div className="space-y-6 flex flex-col items-center lg:items-start">
               <h4 className="text-[1.1rem] font-bold text-white">Service Area</h4>
-              <div className="flex items-start gap-2 text-sm text-white/60">
-                <MapPin className="w-4 h-4 mt-0.5 shrink-0 text-white" />
+              <div className="flex flex-col md:flex-row items-center lg:items-start gap-2 text-sm text-white/60">
                 <p>Canmore, Banff, Calgary, and surrounding areas.</p>
               </div>
             </div>
@@ -160,7 +155,7 @@ export default function Footer() {
         <div className="relative w-full h-px my-[3rem] bg-gradient-to-r from-transparent via-white/20 to-transparent" />
 
         {/* Bottom Bar */}
-        <div className="flex flex-col md:flex-row justify-between items-center text-xs text-white/40">
+        <div className="flex flex-col md:flex-row justify-center items-center text-xs text-white/40">
           <p>&copy; 2025 Mountain Mixology. All rights reserved.</p>
         </div>
 

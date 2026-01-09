@@ -81,10 +81,11 @@ export async function POST(request: NextRequest) {
     .container {
       max-width: 600px;
       margin: 20px auto;
-      background: #ffffff;
+      background: #f1f5f9;
       border-radius: 12px;
       overflow: hidden;
       box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      border: 1px solid #000000;
     }
     .header {
       background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
@@ -99,7 +100,7 @@ export async function POST(request: NextRequest) {
       letter-spacing: -0.025em;
     }
     .content {
-      padding: 24px 32px;
+      padding: 32px 40px;
     }
     .intro {
       font-size: 15px;
@@ -108,10 +109,10 @@ export async function POST(request: NextRequest) {
     }
     .details-grid {
       display: grid;
-      gap: 16px;
-      background: #f1f5f9;
-      padding: 20px;
-      border-radius: 10px;
+      gap: 24px;
+      background: transparent;
+      padding: 0;
+      border-radius: 0;
     }
     .detail-item {
       margin-bottom: 4px;
@@ -132,13 +133,18 @@ export async function POST(request: NextRequest) {
       font-size: 15px;
       font-weight: 500;
       color: #0f172a;
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 8px;
+      padding: 10px 14px;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      display: block;
+      margin-top: 4px;
     }
     .notes-box {
-      margin-top: 20px;
-      padding: 16px;
-      background: #ffffff;
-      border-left: 4px solid #3b82f6;
-      border-radius: 4px;
+      margin-top: 32px;
+      padding: 0;
+      background: transparent;
+      border: none;
     }
     .footer {
       padding: 16px;
@@ -171,36 +177,37 @@ export async function POST(request: NextRequest) {
         
         <div class="detail-item">
           <span class="label">Phone Number</span>
-          <div class="value">${phone ?? "N/A"}</div>
+          <div class="value">${phone || "N/A"}</div>
         </div>
         
         <div class="detail-item">
           <span class="label">Event Date</span>
-          <div class="value">${eventDate ?? "N/A"}</div>
+          <div class="value">${eventDate || "N/A"}</div>
         </div>
         
         <div class="detail-item">
           <span class="label">Guest Count</span>
-          <div class="value">${guests ?? "N/A"}</div>
+          <div class="value">${guests || "N/A"}</div>
         </div>
         
         <div class="detail-item">
           <span class="label">Venue</span>
-          <div class="value">${venue ?? "N/A"}</div>
+          <div class="value">${venue || "N/A"}</div>
         </div>
       </div>
 
       ${notes ? `
       <div class="notes-box">
         <span class="label">Client Notes</span>
-        <div class="value">${notes}</div>
+        <div class="value">${notes || "N/A"}</div>
       </div>
       ` : ""}
     </div>
     <div class="footer">
       Submitted on ${new Date(payload.submittedAt).toLocaleString('en-US', {
       dateStyle: 'long',
-      timeStyle: 'short'
+      timeStyle: 'short',
+      timeZone: 'America/Edmonton'
     })}
     </div>
   </div>

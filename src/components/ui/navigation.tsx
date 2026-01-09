@@ -268,7 +268,7 @@ export default function Navigation() {
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 0.1 + i * 0.1, duration: 0.4, ease: "easeOut" }}
-                      className="text-2xl font-semibold tracking-tight text-neutral-900 indent-3 dark:text-white hover:text-mountain-gold transition-colors"
+                      className="text-xl font-semibold tracking-tight text-neutral-900 indent-3 dark:text-white hover:text-mountain-gold transition-colors"
                     >
                       {link.label}
                     </motion.a>

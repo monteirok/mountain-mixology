@@ -73,7 +73,7 @@ export default function Services() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-6 md:gap-8 lg:gap-x-[32rem] lg:gap-y-12 max-w-7xl mx-auto relative">
+        <div className="grid md:grid-cols-2 gap-6 md:gap-8 lg:gap-x-40 lg:gap-y-12 max-w-7xl mx-auto relative">
           {/* Background Image Centered in Grid - Desktop Only */}
           <div className="hidden md:flex absolute inset-0 items-center justify-center pointer-events-none -z-10">
             <div className="relative w-full max-w-5xl h-[50vh] md:h-[70vh]">
