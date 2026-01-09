@@ -171,22 +171,22 @@ export async function POST(request: NextRequest) {
         
         <div class="detail-item">
           <span class="label">Phone Number</span>
-          <div class="value">${phone || "N/A"}</div>
+          <div class="value">${phone ?? "N/A"}</div>
         </div>
         
         <div class="detail-item">
           <span class="label">Event Date</span>
-          <div class="value">${eventDate || "N/A"}</div>
+          <div class="value">${eventDate ?? "N/A"}</div>
         </div>
         
         <div class="detail-item">
           <span class="label">Guest Count</span>
-          <div class="value">${guests || "N/A"}</div>
+          <div class="value">${guests ?? "N/A"}</div>
         </div>
         
         <div class="detail-item">
           <span class="label">Venue</span>
-          <div class="value">${venue || "N/A"}</div>
+          <div class="value">${venue ?? "N/A"}</div>
         </div>
       </div>
 

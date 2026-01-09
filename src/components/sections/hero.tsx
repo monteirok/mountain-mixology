@@ -1,5 +1,6 @@
 'use client'
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 
 import BookEventButton from "../ui/BookEventButton";
@@ -14,14 +15,19 @@ export default function Hero() {
 
   return (
     <section
-      className="relative flex min-h-screen items-center bg-[#161616]/20 bg-cover bg-center md:bg-fixed"
+      className="relative flex min-h-screen items-center overflow-hidden"
       id="hero"
-      style={{
-        backgroundImage:
-          "url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080')",
-        backgroundPosition: "center top",
-      }}
     >
+      {/* Background Image */}
+      <Image
+        src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080"
+        alt="Mountain landscape with cocktails"
+        fill
+        priority
+        className="object-cover object-top md:bg-fixed"
+        sizes="100vw"
+        quality={90}
+      />
       {/* Background Overlay */}
       <div className="absolute inset-0 bg-gradient-to-r from-[#161616]/80 via-[#161616]/60 to-[#161616]/20" />
 
